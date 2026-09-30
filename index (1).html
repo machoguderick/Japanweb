@@ -1,0 +1,1909 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>TixNest Japan — コンサート・スポーツ・フェス チケット</title>
+<style>
+  :root{
+    --bg:#08080f;
+    --surface:#12121d;
+    --surface-2:#1a1a29;
+    --surface-3:#222235;
+    --border:rgba(255,255,255,.09);
+    --border-strong:rgba(255,255,255,.18);
+    --text:#f6f6fb;
+    --muted:#9a9ab2;
+    --accent:#8b5cf6;
+    --accent-2:#ec4899;
+    --radius:14px;
+    --serif:"Times New Roman", Times, "Liberation Serif", "Nimbus Roman", Georgia, serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{
+    font-family:var(--serif);
+    background:var(--bg);color:var(--text);min-height:100vh;
+    font-size:16px;line-height:1.5;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden;
+    display:flex;flex-direction:column;
+  }
+  button,input,select{font-family:var(--serif);color:inherit}
+  button{cursor:pointer;border:none;background:none}
+  ::selection{background:rgba(139,92,246,.4)}
+  ::-webkit-scrollbar{width:10px;height:10px}
+  ::-webkit-scrollbar-thumb{background:rgba(255,255,255,.14);border-radius:10px;border:2px solid var(--bg)}
+
+  .ic{width:1em;height:1em;display:inline-block;vertical-align:-.14em;flex-shrink:0;pointer-events:none}
+
+  /* Header */
+  header{
+    position:sticky;top:0;z-index:60;
+    background:rgba(8,8,15,.94);
+    border-bottom:1px solid var(--border);
+  }
+  .header-inner{max-width:1360px;margin:0 auto;padding:13px 22px;display:flex;align-items:center;gap:16px}
+  .logo{display:flex;align-items:center;gap:9px;font-weight:700;font-size:20px;flex-shrink:0;user-select:none}
+  .logo-mark{
+    width:30px;height:30px;border-radius:9px;
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    display:grid;place-items:center;font-size:16px;color:#fff;
+  }
+  .logo span{background:linear-gradient(100deg,#fff,#c4b5fd);-webkit-background-clip:text;background-clip:text;color:transparent}
+  nav.main-nav{display:flex;gap:2px;margin-left:4px}
+  nav.main-nav button{padding:8px 12px;border-radius:8px;font-size:15px;color:var(--muted);transition:.18s}
+  nav.main-nav button:hover{color:var(--text);background:rgba(255,255,255,.06)}
+  nav.main-nav button.active{color:var(--text);background:rgba(139,92,246,.18)}
+  .header-search{flex:1;max-width:330px;margin-left:auto;position:relative}
+  .header-search input{
+    width:100%;padding:9px 14px 9px 34px;border-radius:10px;
+    background:var(--surface-2);border:1px solid var(--border);
+    font-size:15px;outline:none;transition:.2s;
+  }
+  .header-search input:focus{border-color:rgba(139,92,246,.65);background:var(--surface-3)}
+  .header-search input::placeholder{color:#6c6c85}
+  .header-search .s-icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);font-size:15px;opacity:.5;pointer-events:none;color:#9a9ab2}
+  .cart-btn{
+    display:flex;align-items:center;gap:7px;
+    padding:9px 14px;border-radius:10px;font-size:15px;
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    color:#fff;transition:.2s;flex-shrink:0;
+  }
+  .cart-btn:hover{filter:brightness(1.08)}
+  .cart-btn .cart-count{background:rgba(0,0,0,.35);border-radius:20px;padding:0 7px;font-size:13px;min-width:19px;text-align:center}
+
+  /* Banner */
+  .tg-banner{
+    background:linear-gradient(90deg,rgba(34,158,217,.14),rgba(139,92,246,.14));
+    border-bottom:1px solid rgba(34,158,217,.24);
+    padding:8px 20px;text-align:center;font-size:14px;color:#bae6fd;
+    display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;
+  }
+  .tg-banner b{color:#fff}
+  .tg-banner .tg-handle{
+    background:rgba(34,158,217,.22);border:1px solid rgba(34,158,217,.4);
+    padding:1px 9px;border-radius:100px;font-size:13.5px;color:#e0f2fe;
+    font-family:"Courier New",monospace;
+  }
+
+  /* Hero */
+  .hero{position:relative;padding:60px 22px 44px;text-align:center;overflow:hidden;
+    background:
+      radial-gradient(ellipse 60% 70% at 35% 25%, rgba(139,92,246,.28), transparent 70%),
+      radial-gradient(ellipse 55% 65% at 68% 20%, rgba(236,72,153,.20), transparent 70%);
+  }
+  .hero-inner{position:relative;max-width:880px;margin:0 auto}
+  .hero-badge{
+    display:inline-flex;align-items:center;gap:8px;font-size:14px;
+    padding:5px 14px;border-radius:100px;margin-bottom:20px;
+    background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.3);color:#c4b5fd;
+  }
+  .hero-badge .dot{width:6px;height:6px;border-radius:50%;background:#22c55e}
+  .hero h1{font-size:clamp(30px,5.4vw,54px);line-height:1.08;font-weight:700;margin-bottom:16px}
+  .hero h1 em{font-style:italic;background:linear-gradient(100deg,#a78bfa,#ec4899 55%,#f97316);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p{color:var(--muted);font-size:clamp(15px,1.7vw,18px);max-width:580px;margin:0 auto 30px;line-height:1.6}
+
+  .hero-cta{
+    display:flex;align-items:center;gap:8px;padding:7px;
+    border-radius:16px;background:var(--surface);
+    border:1px solid var(--border-strong);
+    max-width:520px;margin:0 auto;
+  }
+  .cta-field{flex:1;display:flex;align-items:center;gap:9px;padding:8px 12px;min-width:0;color:var(--muted);font-size:15px}
+  .cta-field select{width:100%;background:none;border:none;outline:none;font-size:15px;cursor:pointer;color:var(--text);min-width:0}
+  .cta-field select option{background:#1a1a29;color:#fff}
+  .search-go{
+    padding:12px 24px;border-radius:12px;font-size:15px;color:#fff;flex-shrink:0;
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    transition:.2s;display:inline-flex;align-items:center;gap:8px;
+  }
+  .search-go:hover{filter:brightness(1.1)}
+
+  /* ========================================================
+     INDUSTRY INSIGHTS  (NEW)
+     ======================================================== */
+  .insights{
+    max-width:1360px;margin:0 auto;padding:8px 22px 46px;width:100%;
+  }
+  .insights-head{text-align:center;max-width:800px;margin:0 auto 32px}
+  .insights-tag{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:13px;padding:5px 14px;border-radius:100px;margin-bottom:16px;
+    background:rgba(34,158,217,.12);border:1px solid rgba(34,158,217,.3);color:#7dd3fc;
+  }
+  .insights-tag .ic{color:#7dd3fc}
+  .insights-head h2{
+    font-size:clamp(24px,3.4vw,34px);font-weight:700;line-height:1.2;
+    margin-bottom:12px;letter-spacing:-.3px;
+  }
+  .insights-head h2 em{
+    font-style:italic;
+    background:linear-gradient(100deg,#a78bfa,#ec4899);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .insights-head p{color:var(--muted);font-size:clamp(14px,1.6vw,16px);line-height:1.7}
+
+  .insights-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px;
+  }
+  .insight-card{
+    background:var(--surface);border:1px solid var(--border);border-radius:16px;
+    padding:22px 20px 20px;display:flex;flex-direction:column;gap:14px;
+    transition:border-color .18s, background .18s;
+  }
+  .insight-card:hover{border-color:var(--border-strong);background:var(--surface-2)}
+  .insight-head{display:flex;align-items:center;gap:11px}
+  .insight-icon{
+    width:38px;height:38px;border-radius:10px;flex-shrink:0;
+    display:grid;place-items:center;font-size:17px;color:#fff;
+  }
+  .insight-icon.i1{background:linear-gradient(135deg,#8b5cf6,#ec4899)}
+  .insight-icon.i2{background:linear-gradient(135deg,#0891b2,#8b5cf6)}
+  .insight-icon.i3{background:linear-gradient(135deg,#f59e0b,#dc2626)}
+  .insight-icon.i4{background:linear-gradient(135deg,#ec4899,#f59e0b)}
+  .insight-head h3{font-size:17px;font-weight:700;line-height:1.25;letter-spacing:-.2px}
+
+  .insight-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+  .insight-list li{
+    display:flex;gap:9px;font-size:14px;line-height:1.58;color:var(--muted);
+  }
+  .insight-list li .ic{color:#a78bfa;font-size:14px;margin-top:4px;flex-shrink:0}
+  .insight-list li b{color:var(--text);font-weight:700}
+  .insight-list li .era{
+    display:inline-block;font-size:11.5px;letter-spacing:.4px;
+    padding:1px 6px;border-radius:4px;margin-right:5px;font-weight:700;
+    text-transform:uppercase;vertical-align:1px;
+  }
+  .era.past{background:rgba(148,163,184,.18);color:#cbd5e1}
+  .era.now{background:rgba(139,92,246,.22);color:#c4b5fd}
+  .era.next{background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff}
+
+  .insight-stat{
+    margin-top:auto;padding-top:14px;border-top:1px solid var(--border);
+    display:flex;align-items:baseline;gap:10px;
+  }
+  .insight-stat .num{
+    font-size:27px;font-weight:700;line-height:1;
+    background:linear-gradient(100deg,#a78bfa,#ec4899);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .insight-stat .lbl{font-size:12.5px;color:var(--muted);line-height:1.4}
+
+  .insights-foot{
+    margin-top:20px;padding:16px 20px;border-radius:14px;
+    background:linear-gradient(135deg,rgba(139,92,246,.08),rgba(34,158,217,.06));
+    border:1px solid rgba(139,92,246,.22);
+    display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+    font-size:13.5px;color:#cbd5e1;line-height:1.6;
+  }
+  .insights-foot .ic{color:#a78bfa;font-size:16px;flex-shrink:0}
+  .insights-foot b{color:#fff}
+
+  /* Categories */
+  .cats{
+    max-width:1360px;margin:0 auto;padding:0 22px 6px;width:100%;
+    display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;
+    border-top:1px solid var(--border);padding-top:28px;
+  }
+  .cats::-webkit-scrollbar{display:none}
+  .cat{
+    display:flex;align-items:center;gap:7px;padding:9px 16px;border-radius:100px;
+    background:var(--surface);border:1px solid var(--border);
+    font-size:15px;color:var(--muted);white-space:nowrap;transition:.18s;
+  }
+  .cat .ic{font-size:15px}
+  .cat:hover{color:var(--text);border-color:var(--border-strong)}
+  .cat.active{
+    background:linear-gradient(135deg,rgba(139,92,246,.9),rgba(236,72,153,.9));
+    color:#fff;border-color:transparent;
+  }
+
+  /* Toolbar */
+  .toolbar{max-width:1360px;margin:24px auto 0;padding:0 22px;width:100%;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .toolbar h2{font-size:21px;font-weight:700}
+  .result-count{font-size:15px;color:var(--muted)}
+  .toolbar .spacer{flex:1}
+  .sort-wrap{position:relative}
+  .sort-wrap select{
+    appearance:none;-webkit-appearance:none;
+    padding:8px 32px 8px 13px;border-radius:9px;
+    background:var(--surface-2);border:1px solid var(--border);
+    font-size:14.5px;cursor:pointer;outline:none;
+  }
+  .sort-wrap::after{content:"▾";position:absolute;right:12px;top:50%;transform:translateY(-50%);pointer-events:none;opacity:.5;font-size:11px}
+
+  /* Grid */
+  .grid{
+    max-width:1360px;margin:0 auto;padding:20px 22px 130px;width:100%;
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(248px,1fr));gap:20px;
+  }
+  .card{
+    background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    overflow:hidden;cursor:pointer;transition:transform .18s, border-color .18s;
+    display:flex;flex-direction:column;
+    content-visibility:auto;
+    contain-intrinsic-size:320px;
+    contain:layout style paint;
+  }
+  .card:hover{transform:translateY(-4px);border-color:var(--border-strong)}
+  .poster{position:relative;aspect-ratio:4/3;overflow:hidden;background:#1e1b4b}
+  .poster-art{position:absolute;inset:0}
+  .poster-art svg{width:100%;height:100%;display:block}
+  .poster::after{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(to bottom,rgba(0,0,0,.28) 0%,transparent 32%,transparent 58%,rgba(0,0,0,.66) 100%);
+  }
+  .date-badge{
+    position:absolute;top:10px;left:10px;z-index:3;
+    background:rgba(255,255,255,.96);color:#111;border-radius:9px;
+    padding:5px 9px;text-align:center;line-height:1;
+  }
+  .date-badge span{display:block;font-size:11px;font-weight:700;letter-spacing:.6px;color:#c81e4a}
+  .date-badge strong{display:block;font-size:18px;font-weight:700;margin-top:1px}
+  .cat-chip{
+    position:absolute;top:10px;right:10px;z-index:3;
+    display:inline-flex;align-items:center;gap:5px;
+    font-size:12.5px;padding:4px 9px;border-radius:100px;color:#fff;
+    background:rgba(0,0,0,.48);
+    border:1px solid rgba(255,255,255,.22);
+  }
+  .hot-chip{
+    position:absolute;top:44px;right:10px;z-index:3;
+    display:inline-flex;align-items:center;gap:4px;
+    font-size:11px;letter-spacing:.5px;text-transform:uppercase;
+    padding:3px 8px;border-radius:100px;color:#fff;
+    background:linear-gradient(135deg,#f97316,#ef4444);
+  }
+  .hot-chip .ic{font-size:11px}
+  .poster-sub{
+    position:absolute;bottom:9px;left:12px;right:12px;z-index:3;
+    font-size:13.5px;font-style:italic;
+    color:rgba(255,255,255,.95);text-shadow:0 2px 10px rgba(0,0,0,.8);
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  }
+  .card-body{padding:13px 14px 14px;display:flex;flex-direction:column;flex:1;gap:5px}
+  .card-body h3{
+    font-size:16px;font-weight:700;line-height:1.3;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+    min-height:42px;
+  }
+  .venue,.when{
+    font-size:14px;color:var(--muted);
+    display:flex;align-items:center;gap:6px;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  }
+  .venue .ic,.when .ic{color:#7c7c96}
+  .card-foot{
+    margin-top:auto;padding-top:11px;display:flex;align-items:center;justify-content:space-between;gap:8px;
+    border-top:1px solid var(--border);
+  }
+  .price{
+    display:flex;flex-direction:column;line-height:1.15;min-width:0;
+    cursor:default;user-select:none;-webkit-user-select:none;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .price span{font-size:11.5px;color:#7c7c96;text-transform:uppercase;letter-spacing:.6px}
+  .price strong{font-size:18px;font-weight:700}
+
+  .btn-buy{
+    display:inline-flex;align-items:center;gap:5px;
+    padding:8px 12px;border-radius:9px;font-size:14px;color:#fff;
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    transition:.18s;white-space:nowrap;
+  }
+  .btn-buy:hover{filter:brightness(1.12)}
+  .btn-buy .ic{font-size:14px}
+  .btn-ghost{
+    display:inline-flex;align-items:center;gap:6px;
+    padding:9px 14px;border-radius:9px;font-size:14px;
+    background:var(--surface-2);border:1px solid var(--border);color:var(--muted);transition:.18s;
+  }
+  .btn-ghost:hover{color:#fff;border-color:var(--border-strong);background:var(--surface-3)}
+
+  .empty{grid-column:1/-1;text-align:center;padding:70px 20px;color:var(--muted)}
+  .empty .big{font-size:44px;margin-bottom:14px;opacity:.4;color:#6c6c85}
+  .empty h3{color:var(--text);font-size:20px;margin-bottom:8px}
+  .empty p{font-size:15px}
+
+  /* Backdrop */
+  .backdrop{
+    position:fixed;inset:0;background:rgba(4,4,10,.78);
+    opacity:0;pointer-events:none;transition:opacity .22s;z-index:100;
+  }
+  .backdrop.open{opacity:1;pointer-events:auto}
+
+  /* Modals */
+  .modal-wrap{
+    position:fixed;inset:0;z-index:110;display:grid;place-items:center;padding:20px;
+    opacity:0;pointer-events:none;transition:opacity .22s;
+  }
+  .modal-wrap.open{opacity:1;pointer-events:auto}
+  .modal{
+    width:100%;max-width:800px;max-height:92vh;overflow-y:auto;
+    background:var(--surface);border:1px solid var(--border-strong);border-radius:20px;
+    display:flex;flex-direction:column;
+  }
+  .modal-hero{
+    position:relative;padding:32px 26px 28px;overflow:hidden;flex-shrink:0;min-height:200px;
+    display:flex;align-items:flex-end;
+  }
+  .m-art{position:absolute;inset:0}
+  .m-art svg{width:100%;height:100%;display:block}
+  .modal-hero::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(to top,rgba(18,18,29,.97) 0%,rgba(18,18,29,.42) 55%,rgba(18,18,29,.22) 100%);
+  }
+  .modal-hero .m-info{position:relative;z-index:2;max-width:80%}
+  .modal-hero .m-tag{
+    display:inline-flex;align-items:center;gap:6px;
+    font-size:13px;padding:4px 11px;border-radius:100px;
+    background:rgba(0,0,0,.48);color:#fff;
+    border:1px solid rgba(255,255,255,.28);margin-bottom:12px;
+  }
+  .modal-hero h2{font-size:clamp(22px,3.2vw,30px);font-weight:700;line-height:1.15;margin-bottom:6px;text-shadow:0 3px 16px rgba(0,0,0,.55)}
+  .modal-hero .m-sub{font-size:15px;font-style:italic;color:rgba(255,255,255,.92)}
+  .modal-close{
+    position:absolute;top:12px;right:12px;z-index:5;
+    width:34px;height:34px;border-radius:50%;display:grid;place-items:center;
+    background:rgba(0,0,0,.55);color:#fff;font-size:16px;
+    border:1px solid rgba(255,255,255,.2);transition:.2s;
+  }
+  .modal-close:hover{background:rgba(0,0,0,.85);transform:rotate(90deg)}
+
+  .modal-body{padding:22px 26px 6px}
+  .meta-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:14px;
+    padding-bottom:20px;border-bottom:1px solid var(--border);
+  }
+  .meta-item{display:flex;gap:10px;align-items:flex-start}
+  .meta-item .mi{color:#a78bfa;font-size:17px;line-height:1.25}
+  .meta-item .ml{font-size:12px;text-transform:uppercase;letter-spacing:.6px;color:#7c7c96;margin-bottom:2px}
+  .meta-item .mv{font-size:14.5px;line-height:1.4}
+  .desc{font-size:15px;line-height:1.68;color:var(--muted);padding:18px 0 4px}
+
+  .sellers{
+    margin-top:18px;padding:15px 17px;border-radius:12px;
+    background:rgba(34,158,217,.07);border:1px solid rgba(34,158,217,.22);
+  }
+  .sellers h6{
+    font-size:12.5px;text-transform:uppercase;letter-spacing:.7px;color:#7dd3fc;
+    margin-bottom:10px;display:flex;align-items:center;gap:7px;
+  }
+  .seller-row{display:flex;gap:10px;font-size:14px;line-height:1.6;margin-bottom:6px;flex-wrap:wrap}
+  .seller-row:last-child{margin-bottom:0}
+  .seller-row .lbl{color:#7c7c96;min-width:130px;flex-shrink:0}
+  .seller-row .val{color:#cbd5e1}
+  .seller-tag{
+    display:inline-block;padding:1px 8px;border-radius:5px;font-size:13.5px;
+    background:rgba(255,255,255,.07);border:1px solid var(--border);margin:2px 4px 2px 0;color:#e2e8f0;
+  }
+
+  .section-title{
+    font-size:14.5px;letter-spacing:.5px;text-transform:uppercase;
+    color:#a5a5bd;margin:22px 0 13px;display:flex;align-items:center;gap:9px;
+  }
+  .section-title::after{content:"";flex:1;height:1px;background:var(--border)}
+
+  .tier{
+    display:flex;align-items:center;gap:12px;padding:13px 14px;border-radius:12px;
+    background:var(--surface-2);border:1px solid var(--border);margin-bottom:9px;transition:.18s;
+  }
+  .tier:hover{border-color:var(--border-strong);background:var(--surface-3)}
+  .tier.selected{border-color:rgba(139,92,246,.65);background:rgba(139,92,246,.1)}
+  .tier-info{flex:1;min-width:0}
+  .tier-name{font-size:15px;font-weight:700;margin-bottom:2px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .tier-badge{font-size:11px;letter-spacing:.5px;text-transform:uppercase;padding:2px 7px;border-radius:5px}
+  .tier-badge.reg{background:rgba(148,163,184,.2);color:#cbd5e1}
+  .tier-badge.vip{background:rgba(139,92,246,.25);color:#c4b5fd}
+  .tier-badge.vvip{background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff}
+  .tier-note{font-size:13px;color:#7c7c96}
+  .tier-note.low{color:#fb923c}
+  .tier-price{
+    font-size:16.5px;font-weight:700;white-space:nowrap;
+    cursor:default;user-select:none;-webkit-user-select:none;
+    -webkit-tap-highlight-color:transparent;
+  }
+
+  .stepper{
+    display:flex;align-items:center;gap:1px;background:var(--bg);
+    border-radius:8px;padding:3px;border:1px solid var(--border);flex-shrink:0;
+  }
+  .stepper button{
+    width:27px;height:27px;border-radius:6px;display:grid;place-items:center;
+    font-size:16px;color:var(--muted);transition:.15s;line-height:1;
+  }
+  .stepper button:hover:not(:disabled){background:rgba(255,255,255,.1);color:#fff}
+  .stepper button:disabled{opacity:.25;cursor:not-allowed}
+  .stepper .qty{width:24px;text-align:center;font-size:15px;font-variant-numeric:tabular-nums}
+
+  .live-total{
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+    margin-top:16px;padding:14px 16px;border-radius:12px;
+    background:linear-gradient(135deg,rgba(139,92,246,.13),rgba(236,72,153,.09));
+    border:1px solid rgba(139,92,246,.3);
+  }
+  .live-total .lt-label{font-size:13px;text-transform:uppercase;letter-spacing:.6px;color:#c4b5fd}
+  .live-total .lt-value{font-size:22px;font-weight:700;line-height:1.1}
+  .live-total .lt-sub{font-size:13px;color:var(--muted);margin-top:1px}
+
+  .modal-footer{
+    position:sticky;bottom:0;margin-top:20px;
+    padding:14px 26px;background:rgba(18,18,29,.98);
+    border-top:1px solid var(--border);
+    display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  }
+  .total-box .tl{font-size:12px;text-transform:uppercase;letter-spacing:.6px;color:#7c7c96}
+  .total-box .tv{font-size:23px;font-weight:700}
+  .total-box .tn{font-size:13px;color:var(--muted);margin-top:1px}
+  .footer-actions{display:flex;gap:9px;flex-wrap:wrap}
+
+  /* Drawer */
+  .drawer{
+    position:fixed;top:0;right:0;bottom:0;width:min(410px,100%);z-index:120;
+    background:var(--surface);border-left:1px solid var(--border-strong);
+    display:flex;flex-direction:column;
+    transform:translateX(102%);transition:transform .28s cubic-bezier(.2,.8,.3,1);
+  }
+  .drawer.open{transform:none}
+  .drawer-head{padding:18px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+  .drawer-head h3{font-size:18px;font-weight:700;display:flex;align-items:center;gap:9px}
+  .drawer-head .pill{font-size:13px;background:rgba(139,92,246,.2);color:#c4b5fd;padding:2px 9px;border-radius:100px}
+  .icon-btn{
+    width:34px;height:34px;border-radius:8px;display:grid;place-items:center;
+    color:var(--muted);font-size:17px;transition:.18s;
+  }
+  .icon-btn:hover{background:rgba(255,255,255,.08);color:#fff}
+  .drawer-body{flex:1;overflow-y:auto;padding:16px 20px;-webkit-overflow-scrolling:touch}
+  .cart-item{display:flex;gap:12px;padding:13px 0;border-bottom:1px solid var(--border)}
+  .ci-poster{
+    width:54px;height:54px;border-radius:10px;flex-shrink:0;
+    display:grid;place-items:center;font-size:24px;color:#fff;
+  }
+  .ci-poster .ic{width:24px;height:24px}
+  .ci-info{flex:1;min-width:0}
+  .ci-title{font-size:14.5px;font-weight:700;line-height:1.3;margin-bottom:3px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .ci-tier{font-size:13px;color:#a78bfa;margin-bottom:2px}
+  .ci-meta{font-size:12.5px;color:#7c7c96}
+  .ci-right{display:flex;flex-direction:column;align-items:flex-end;justify-content:space-between;gap:7px;flex-shrink:0}
+  .ci-price{font-size:14.5px;font-weight:700}
+  .ci-remove{font-size:12.5px;color:#7c7c96;transition:.15s;display:inline-flex;align-items:center;gap:4px}
+  .ci-remove:hover{color:#f87171}
+  .cart-empty{text-align:center;padding:60px 20px;color:var(--muted)}
+  .cart-empty .big{font-size:38px;margin-bottom:12px;opacity:.4;color:#6c6c85}
+  .cart-empty h4{color:var(--text);font-size:17px;margin-bottom:6px}
+  .cart-empty p{font-size:14.5px;line-height:1.6}
+  .drawer-foot{padding:18px 20px 22px;border-top:1px solid var(--border);background:var(--surface-2);flex-shrink:0}
+  .sum-row{display:flex;justify-content:space-between;font-size:14.5px;color:var(--muted);margin-bottom:8px}
+  .sum-row.total{
+    font-size:19px;color:var(--text);
+    padding-top:11px;margin-top:11px;border-top:1px solid var(--border);margin-bottom:14px;
+  }
+  .checkout-btn{
+    width:100%;padding:15px;border-radius:12px;font-size:16px;color:#fff;
+    background:linear-gradient(135deg,#229ED9,#1d8ec4);transition:.18s;
+    display:flex;align-items:center;justify-content:center;gap:9px;
+    font-weight:700;
+  }
+  .checkout-btn:hover{filter:brightness(1.1)}
+  .checkout-btn:disabled{opacity:.35;cursor:not-allowed;filter:none}
+  .secure-note{text-align:center;font-size:13px;color:#6c6c85;margin-top:11px;line-height:1.5}
+
+  /* Sticky basket bar */
+  .basket-bar{
+    position:fixed;left:0;right:0;bottom:0;z-index:95;
+    background:rgba(18,18,29,.98);
+    border-top:1px solid var(--border-strong);
+    padding:11px 22px calc(11px + env(safe-area-inset-bottom));
+    transform:translateY(110%);
+    transition:transform .28s cubic-bezier(.2,.8,.3,1);
+  }
+  .basket-bar.show{transform:none}
+  .basket-inner{max-width:1360px;margin:0 auto;display:flex;align-items:center;gap:16px}
+  .basket-icon{
+    width:42px;height:42px;border-radius:11px;flex-shrink:0;
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    display:grid;place-items:center;font-size:19px;color:#fff;position:relative;
+  }
+  .basket-icon .bubble{
+    position:absolute;top:-5px;right:-5px;
+    background:#229ED9;color:#fff;border-radius:100px;
+    font-size:11px;font-weight:700;min-width:19px;height:19px;
+    display:grid;place-items:center;padding:0 5px;
+    border:2px solid var(--surface);
+  }
+  .basket-summary{flex:1;min-width:0}
+  .basket-count{font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px}
+  .basket-total{font-size:22px;font-weight:700;line-height:1.15}
+  .basket-items{font-size:13px;color:var(--muted);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .basket-actions{display:flex;gap:9px;flex-shrink:0}
+  .basket-open{
+    padding:11px 22px;border-radius:10px;font-size:15px;color:#fff;font-weight:700;
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));transition:.18s;
+    display:inline-flex;align-items:center;gap:8px;
+  }
+  .basket-open:hover{filter:brightness(1.1)}
+
+  /* Toast */
+  .toast-stack{
+    position:fixed;bottom:90px;left:50%;transform:translateX(-50%);z-index:200;
+    display:flex;flex-direction:column;gap:9px;align-items:center;
+    pointer-events:none;width:max-content;max-width:92vw;
+    transition:bottom .3s;
+  }
+  .toast-stack.raised{bottom:130px}
+  .toast{
+    padding:11px 18px;border-radius:11px;font-size:14.5px;
+    background:rgba(26,26,41,.98);border:1px solid var(--border-strong);
+    display:flex;align-items:center;gap:9px;
+    animation:toastIn .3s cubic-bezier(.2,.9,.3,1);
+  }
+  .toast .ic{font-size:16px;color:#a78bfa}
+  .toast.ok .ic{color:#22c55e}
+  .toast.warn .ic{color:#fb923c}
+  @keyframes toastIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  .toast.out{animation:toastOut .25s forwards}
+  @keyframes toastOut{to{opacity:0;transform:translateY(-6px)}}
+
+  /* Footer */
+  footer{border-top:1px solid var(--border);background:var(--surface);padding:40px 22px 30px;margin-top:auto}
+  .foot-inner{max-width:1360px;margin:0 auto;display:flex;flex-wrap:wrap;gap:28px;justify-content:space-between;align-items:flex-start}
+  .foot-brand{max-width:300px}
+  .foot-brand p{font-size:14px;color:var(--muted);line-height:1.7;margin-top:12px}
+  .foot-cols{display:flex;gap:52px;flex-wrap:wrap}
+  .foot-col h5{font-size:13px;text-transform:uppercase;letter-spacing:.8px;color:#7c7c96;margin-bottom:12px}
+  .foot-col a{display:block;font-size:14.5px;color:var(--muted);text-decoration:none;margin-bottom:8px;transition:.15s;cursor:pointer}
+  .foot-col a:hover{color:var(--text)}
+  .foot-bottom{
+    max-width:1360px;margin:30px auto 0;padding-top:20px;border-top:1px solid var(--border);
+    font-size:13.5px;color:#6c6c85;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+  }
+
+  /* Responsive */
+  @media (max-width:1024px){
+    .header-search{max-width:230px}
+    nav.main-nav button{padding:8px 10px;font-size:14.5px}
+  }
+  @media (max-width:900px){
+    nav.main-nav{display:none}
+    .header-search{max-width:none}
+  }
+  @media (max-width:640px){
+    body{font-size:15px}
+    .header-inner{padding:11px 14px;gap:10px}
+    .logo span{display:none}
+    .cart-btn .lbl{display:none}
+    .cart-btn{padding:9px 11px}
+    .hero{padding:40px 14px 30px}
+    .hero-badge{font-size:13px;padding:4px 12px}
+    .hero p{margin-bottom:22px}
+    .hero-cta{flex-direction:column;align-items:stretch;gap:0;padding:8px;border-radius:14px;max-width:100%}
+    .cta-field{padding:11px 10px;border-bottom:1px solid var(--border)}
+    .search-go{width:100%;justify-content:center;padding:13px}
+
+    /* Insights responsive */
+    .insights{padding:4px 14px 34px}
+    .insights-head{margin-bottom:24px}
+    .insights-head h2{font-size:22px}
+    .insights-grid{gap:12px}
+    .insight-card{padding:18px 16px}
+    .insight-head h3{font-size:16px}
+    .insight-list li{font-size:13.5px}
+    .insight-stat .num{font-size:24px}
+
+    .cats{padding:0 14px 6px;gap:7px;padding-top:22px}
+    .cat{padding:8px 13px;font-size:14px}
+    .toolbar{padding:0 14px;margin-top:20px;gap:9px}
+    .toolbar h2{font-size:18px}
+    .result-count{font-size:13.5px;width:100%}
+    .toolbar .spacer{display:none}
+    .sort-wrap{width:100%}
+    .sort-wrap select{width:100%}
+    .grid{padding:16px 14px 140px;gap:12px;grid-template-columns:repeat(2,1fr)}
+    .card-body{padding:10px 11px 11px;gap:4px}
+    .card-body h3{font-size:14.5px;min-height:38px}
+    .venue,.when{font-size:12.5px;gap:4px}
+    .poster-sub{font-size:11.5px;bottom:7px;left:9px;right:9px}
+    .date-badge{padding:4px 7px;top:8px;left:8px}
+    .date-badge span{font-size:10px}
+    .date-badge strong{font-size:15px}
+    .cat-chip{top:8px;right:8px;font-size:11px;padding:3px 7px;gap:4px}
+    .hot-chip{top:36px;right:8px;font-size:10px;padding:2px 6px}
+    .card-foot{padding-top:9px;gap:6px}
+    .price span{font-size:10.5px}
+    .price strong{font-size:15.5px}
+    .btn-buy{padding:7px 9px;font-size:13px;gap:4px}
+    .btn-buy .ic{font-size:13px}
+    .modal-wrap{padding:0;align-items:flex-end}
+    .modal{max-height:94vh;border-radius:18px 18px 0 0;max-width:100%}
+    .modal-hero{padding:22px 18px 20px;min-height:170px}
+    .modal-hero .m-info{max-width:100%}
+    .modal-hero h2{font-size:21px}
+    .modal-body{padding:18px 18px 6px}
+    .modal-footer{padding:13px 18px}
+    .footer-actions{width:100%}
+    .footer-actions .btn-buy,.footer-actions .btn-ghost{flex:1;justify-content:center}
+    .meta-grid{grid-template-columns:1fr 1fr;gap:12px}
+    .tier{padding:11px 12px;gap:9px}
+    .tier-name{font-size:14px}
+    .tier-price{font-size:15px}
+    .stepper button{width:25px;height:25px}
+    .stepper .qty{width:22px;font-size:14px}
+    .live-total{padding:12px 13px;margin-top:14px}
+    .live-total .lt-value{font-size:20px}
+    .drawer{width:100%}
+    .foot-cols{gap:30px}
+    .foot-bottom{font-size:12.5px}
+    .basket-bar{padding:9px 14px calc(9px + env(safe-area-inset-bottom))}
+    .basket-inner{gap:11px}
+    .basket-icon{width:38px;height:38px;font-size:17px;border-radius:10px}
+    .basket-total{font-size:19px}
+    .basket-count{font-size:11.5px}
+    .basket-items{display:none}
+    .basket-open{padding:10px 16px;font-size:14.5px;gap:6px}
+    .toast-stack{bottom:80px}
+    .toast-stack.raised{bottom:110px}
+  }
+  @media (max-width:380px){
+    .grid{grid-template-columns:1fr}
+    .card-body h3{font-size:16px;min-height:0}
+    .meta-grid{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">
+      <div class="logo-mark">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v1.2a2.3 2.3 0 0 0 0 4.6V16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-1.2a2.3 2.3 0 0 0 0-4.6Z"/><path d="M14.5 7v10" stroke-dasharray="2 2"/></svg>
+      </div>
+      <span>TixNest Japan</span>
+    </div>
+    <nav class="main-nav" id="mainNav">
+      <button data-cat="all" class="active">すべて</button>
+      <button data-cat="concert">コンサート</button>
+      <button data-cat="festival">フェス</button>
+      <button data-cat="sports">スポーツ</button>
+      <button data-cat="party">パーティー</button>
+    </nav>
+    <div class="header-search">
+      <span class="s-icon">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.8"/><path d="m20 20-3.7-3.7"/></svg>
+      </span>
+      <input type="text" id="headerSearch" placeholder="アーティスト、会場で検索…" autocomplete="off">
+    </div>
+    <button class="cart-btn" id="cartBtn">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9.5" cy="20" r="1.3"/><circle cx="17.5" cy="20" r="1.3"/><path d="M2.8 3.5h2.3l2.4 11.6a1.7 1.7 0 0 0 1.7 1.4h8.5a1.7 1.7 0 0 0 1.7-1.35L21.2 7.2H6"/></svg>
+      <span class="lbl">バスケット</span>
+      <span class="cart-count" id="cartCount">0</span>
+    </button>
+  </div>
+</header>
+
+<div class="tg-banner">
+  <span>ご注文はバスケット内で完了します —</span>
+  <span class="tg-handle">@skywacher126</span>
+</div>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge"><span class="dot"></span> 2026年 東京・大阪・全国ツアー情報</div>
+    <h1>最高の<em>夜</em>を、<br>ここから。</h1>
+    <p>東京ドーム、さいたまスーパーアリーナ、幕張メッセ。人気アーティストのコンサートから夏フェス、プロ野球、クラブイベントまで。</p>
+    <div class="hero-cta">
+      <div class="cta-field">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6.8-6-6.8-10.8a6.8 6.8 0 1 1 13.6 0C18.8 15 12 21 12 21Z"/><circle cx="12" cy="10.2" r="2.6"/></svg>
+        <select id="cityFilter"><option value="all">すべての都市</option></select>
+      </div>
+      <button class="search-go" id="heroGo">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v1.2a2.3 2.3 0 0 0 0 4.6V16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-1.2a2.3 2.3 0 0 0 0-4.6Z"/><path d="M14.5 7v10" stroke-dasharray="2 2"/></svg>
+        チケットを探す
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     INDUSTRY INSIGHTS (NEW — placed before event list)
+     ===================================================== -->
+<section class="insights">
+  <div class="insights-head">
+    <span class="insights-tag">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5 13.7 8.3 18.5 10 13.7 11.7 12 16.5 10.3 11.7 5.5 10 10.3 8.3Z"/></svg>
+      業界インサイト 2026
+    </span>
+    <h2>チケット・ライブイベント業界の<em>動向</em></h2>
+    <p>テクノロジー、観客の嗜好の変化、動的価格戦略が、コンサート・スポーツ・ナイトライフ市場を急速に変えています。</p>
+  </div>
+
+  <div class="insights-grid">
+
+    <!-- Card 1: Evolution of Live Events -->
+    <article class="insight-card">
+      <div class="insight-head">
+        <div class="insight-icon i1">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17 L9 10 L13 14 L21 6"/><path d="M15 6h6v6"/></svg>
+        </div>
+        <h3>ライブイベントの進化</h3>
+      </div>
+      <ul class="insight-list">
+        <li>
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/></svg>
+          <span><span class="era past">過去</span>パンデミック後の反動で会場収益は過去最高を記録。巨大スタジアムツアーへの高需要が続く一方、<b>「ファンフレーション」</b>によるコスト上昇で消費者疲れも。</span>
+        </li>
+        <li>
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/></svg>
+          <span><span class="era now">現在</span>伝統的な複数日フェスより<b>クラブナイトや小規模ライブが高成長</b>。航空券と同じ動的・アルゴリズム価格戦略がライブスポーツと大型コンサートで普及。</span>
+        </li>
+        <li>
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/></svg>
+          <span><span class="era next">未来</span><b>予約の70%以上がモバイルファースト</b>。バーチャル・ハイブリッドチケット、AIパーソナライズ推薦、二次市場の転売防止機能が成長領域。</span>
+        </li>
+      </ul>
+      <div class="insight-stat">
+        <span class="num">70%+</span>
+        <span class="lbl">の予約がモバイル経由<br>（モバイルファースト時代）</span>
+      </div>
+    </article>
+
+    <!-- Card 2: Concerts & Music Festivals -->
+    <article class="insight-card">
+      <div class="insight-head">
+        <div class="insight-icon i2">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5.5l10-2V16"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></svg>
+        </div>
+        <h3>コンサート＆音楽フェス</h3>
+      </div>
+      <ul class="insight-list">
+        <li>
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/></svg>
+          <span>世界需要は<b>スタジアム／アリーナのポップ、ラップ、エレクトロニック</b>に集中。大型ツアーが市場を牽引。</span>
+        </li>
+        <li>
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/></svg>
+          <span>ファンは基本入場料より<b>体験型チケット</b>（VIPパス、早期入場、限定グッズ）を優先。</span>
+        </li>
+        <li>
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/></svg>
+          <span>一次販売は <b>Ticketmaster・Eventbrite・AXS</b> が支配。二次市場の <b>StubHub・SeatGeek・Vivid Seats</b> は動的マークアップで厳しく規制。</span>
+        </li>
+      </ul>
+      <div class="insight-stat">
+        <span class="num">VIP</span>
+        <span class="lbl">体験型チケット需要が<br>基本入場を上回る成長</span>
+      </div>
+    </article>
+
+    <!-- Card 3: Sports Events -->
+    <article class="insight-card">
+      <div class="insight-head">
+        <div class="insight-icon i3">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4h10v4.5a5 5 0 0 1-10 0Z"/><path d="M7 5.5H4.5V7a3.5 3.5 0 0 0 3.5 3.5M17 5.5h2.5V7a3.5 3.5 0 0 1-3.5 3.5"/><path d="M12 13.5V17M9 20.5h6"/></svg>
+        </div>
+        <h3>スポーツイベント</h3>
+      </div>
+      <ul class="insight-list">
+        <li>
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/></svg>
+          <span><b>デジタル専用チケット</b>（NFC、QRコード、モバイルウォレット）がスポーツ観戦収益の<b>約75%</b>を占める。</span>
+        </li>
+        <li>
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/></svg>
+          <span>チーム公式アプリが<b>チケット＋会場F&amp;B＋交通割引</b>をバンドルした統合体験を提供。</span>
+        </li>
+        <li>
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/></svg>
+          <span>ファンエンゲージメントは試合当日だけでなく<b>年間を通じたデジタル接点</b>へ拡大。</span>
+        </li>
+      </ul>
+      <div class="insight-stat">
+        <span class="num">75%</span>
+        <span class="lbl">スポーツ観戦収益のうち<br>デジタル専用チケット比率</span>
+      </div>
+    </article>
+
+    <!-- Card 4: Parties & Nightlife -->
+    <article class="insight-card">
+      <div class="insight-head">
+        <div class="insight-icon i4">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20 L9 10 L19 14 Z"/><path d="M12 4v4M18 6l-2 3M6 8l2 3"/></svg>
+        </div>
+        <h3>パーティー＆ナイトライフ</h3>
+      </div>
+      <ul class="insight-list">
+        <li>
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/></svg>
+          <span><b>マイクロイベント、ポップアップパーティー、テーマナイト</b>がソーシャルリンクとローカル発見アプリ経由で急成長。</span>
+        </li>
+        <li>
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/></svg>
+          <span><b>Resident Advisor、Dice、Eventbrite</b> などのキュレーション型プラットフォームが、静的なナイトライフルーティンを凌駕。</span>
+        </li>
+        <li>
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/></svg>
+          <span>「行きつけのクラブ」より<b>その夜限りの体験</b>へ。SNS発の限定イベントが予約を独占。</span>
+        </li>
+      </ul>
+      <div class="insight-stat">
+        <span class="num">DICE</span>
+        <span class="lbl">キュレーション型アプリが<br>静的ナイトライフを代替</span>
+      </div>
+    </article>
+
+  </div>
+
+  <div class="insights-foot">
+    <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5 13.7 8.3 18.5 10 13.7 11.7 12 16.5 10.3 11.7 5.5 10 10.3 8.3Z"/></svg>
+    <span><b>総括：</b>ライブイベント市場は「規模」から「体験」へ。モバイルファースト、動的価格、デジタル専用チケット、AI推薦、転売防止——これらが次の10年を定義します。</span>
+  </div>
+</section>
+
+<div class="cats" id="catStrip">
+  <button class="cat active" data-cat="all"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5 13.7 8.3 18.5 10 13.7 11.7 12 16.5 10.3 11.7 5.5 10 10.3 8.3Z"/></svg>すべて</button>
+  <button class="cat" data-cat="concert"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5.5l10-2V16"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></svg>コンサート</button>
+  <button class="cat" data-cat="festival"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5 3 20h18Z"/><path d="M12 3.5V20"/></svg>フェス</button>
+  <button class="cat" data-cat="sports"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4h10v4.5a5 5 0 0 1-10 0Z"/><path d="M7 5.5H4.5V7a3.5 3.5 0 0 0 3.5 3.5M17 5.5h2.5V7a3.5 3.5 0 0 1-3.5 3.5"/><path d="M12 13.5V17M9 20.5h6"/></svg>スポーツ</button>
+  <button class="cat" data-cat="party"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20 L9 10 L19 14 Z"/><path d="M12 4v4M18 6l-2 3M6 8l2 3"/></svg>パーティー</button>
+</div>
+
+<div class="toolbar">
+  <h2 id="sectionTitle">すべてのイベント</h2>
+  <span class="result-count" id="resultCount"></span>
+  <div class="spacer"></div>
+  <div class="sort-wrap">
+    <select id="sortSelect">
+      <option value="date">日付順（早い順）</option>
+      <option value="price-asc">価格が安い順</option>
+      <option value="price-desc">価格が高い順</option>
+      <option value="name">名前順</option>
+    </select>
+  </div>
+</div>
+
+<main class="grid" id="eventGrid"></main>
+
+<footer>
+  <div class="foot-inner">
+    <div class="foot-brand">
+      <div class="logo">
+        <div class="logo-mark">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v1.2a2.3 2.3 0 0 0 0 4.6V16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-1.2a2.3 2.3 0 0 0 0-4.6Z"/></svg>
+        </div>
+        <span>TixNest Japan</span>
+      </div>
+      <p>日本全国のコンサート、フェス、スポーツ、パーティーチケットを簡単に検索・購入。ご注文はTelegram <b style="color:#7dd3fc">@skywacher126</b> にて確認されます。</p>
+    </div>
+    <div class="foot-cols">
+      <div class="foot-col">
+        <h5>カテゴリー</h5>
+        <a data-cat="concert">コンサート</a>
+        <a data-cat="festival">フェス</a>
+        <a data-cat="sports">スポーツ</a>
+        <a data-cat="party">パーティー</a>
+      </div>
+      <div class="foot-col">
+        <h5>サポート</h5>
+        <a>ヘルプセンター</a>
+        <a>返金ポリシー</a>
+        <a>お問い合わせ</a>
+        <a>アクセシビリティ</a>
+      </div>
+      <div class="foot-col">
+        <h5>会社情報</h5>
+        <a>会社概要</a>
+        <a>採用情報</a>
+        <a>プレスリリース</a>
+        <a>パートナー</a>
+      </div>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 TixNest Japan. All rights reserved.</span>
+    <span>チケットのご注文はTelegramにて確認されます。</span>
+  </div>
+</footer>
+
+<div class="modal-wrap" id="eventModal">
+  <div class="modal" id="eventModalContent"></div>
+</div>
+
+<div class="backdrop" id="drawerBackdrop"></div>
+<aside class="drawer" id="cartDrawer">
+  <div class="drawer-head">
+    <h3>
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9.5" cy="20" r="1.3"/><circle cx="17.5" cy="20" r="1.3"/><path d="M2.8 3.5h2.3l2.4 11.6a1.7 1.7 0 0 0 1.7 1.4h8.5a1.7 1.7 0 0 0 1.7-1.35L21.2 7.2H6"/></svg>
+      バスケット
+      <span class="pill" id="drawerCount">0枚</span>
+    </h3>
+    <button class="icon-btn" id="closeDrawer" aria-label="閉じる">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 6.5 17.5 17.5M17.5 6.5 6.5 17.5"/></svg>
+    </button>
+  </div>
+  <div class="drawer-body" id="cartItems"></div>
+  <div class="drawer-foot" id="cartFoot"></div>
+</aside>
+
+<div class="basket-bar" id="basketBar">
+  <div class="basket-inner">
+    <div class="basket-icon">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9.5" cy="20" r="1.3"/><circle cx="17.5" cy="20" r="1.3"/><path d="M2.8 3.5h2.3l2.4 11.6a1.7 1.7 0 0 0 1.7 1.4h8.5a1.7 1.7 0 0 0 1.7-1.35L21.2 7.2H6"/></svg>
+      <span class="bubble" id="basketBubble">0</span>
+    </div>
+    <div class="basket-summary">
+      <div class="basket-count" id="basketCount">バスケットは空です</div>
+      <div class="basket-total" id="basketTotal">¥0</div>
+      <div class="basket-items" id="basketItems"></div>
+    </div>
+    <div class="basket-actions">
+      <button class="basket-open" id="basketOpenBtn">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="3"/></svg>
+        <span>バスケットを開く</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="toast-stack" id="toastStack"></div>
+
+<script>
+/* =========================================================
+   CONFIG
+   ========================================================= */
+const TG_USER = 'skywacher126';
+const TG_URL  = 'https://t.me/' + TG_USER;
+
+/* =========================================================
+   ICON PATHS
+   ========================================================= */
+const ICON_PATHS = {
+  ticket:'<path d="M4 9a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v1.2a2.3 2.3 0 0 0 0 4.6V16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-1.2a2.3 2.3 0 0 0 0-4.6Z"/>',
+  music:'<path d="M9 18V5.5l10-2V16"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/>',
+  trophy:'<path d="M7 4h10v4.5a5 5 0 0 1-10 0Z"/><path d="M7 5.5H4.5V7a3.5 3.5 0 0 0 3.5 3.5M17 5.5h2.5V7a3.5 3.5 0 0 1-3.5 3.5"/><path d="M12 13.5V17M9 20.5h6"/>',
+  theater:'<path d="M3.5 4.5h8v5a4 4 0 0 1-8 0Z"/><path d="M12.5 8.5h8v5a4 4 0 0 1-8 0Z"/>',
+  mic:'<rect x="9" y="2.5" width="6" height="11" rx="3"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v3"/>',
+  tent:'<path d="M12 3.5 3 20h18Z"/><path d="M12 3.5V20"/>',
+  sparkles:'<path d="M12 3.5 13.7 8.3 18.5 10 13.7 11.7 12 16.5 10.3 11.7 5.5 10 10.3 8.3Z"/>',
+  bolt:'<path d="M13.5 2.5 5 13.5h5.5L9.5 21.5 19 10.5h-5.8Z"/>',
+  pin:'<path d="M12 21s-6.8-6-6.8-10.8a6.8 6.8 0 1 1 13.6 0C18.8 15 12 21 12 21Z"/><circle cx="12" cy="10.2" r="2.6"/>',
+  calendar:'<rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3.5v3M16 3.5v3"/>',
+  seats:'<path d="M15.5 20v-1.4a4 4 0 0 0-4-4h-4a4 4 0 0 0-4 4V20"/><circle cx="9.5" cy="7.5" r="3.5"/><path d="M17 13.6a4 4 0 0 1 3.5 4V20"/>',
+  cart:'<circle cx="9.5" cy="20" r="1.3"/><circle cx="17.5" cy="20" r="1.3"/><path d="M2.8 3.5h2.3l2.4 11.6a1.7 1.7 0 0 0 1.7 1.4h8.5a1.7 1.7 0 0 0 1.7-1.35L21.2 7.2H6"/>',
+  search:'<circle cx="11" cy="11" r="6.8"/><path d="m20 20-3.7-3.7"/>',
+  close:'<path d="M6.5 6.5 17.5 17.5M17.5 6.5 6.5 17.5"/>',
+  check:'<path d="m5 12.5 4.6 4.6L19 7"/>',
+  send:'<path d="M21.6 3.4 2.9 10.5a.6.6 0 0 0 .03 1.13l4.6 1.5 1.75 5.2a.6.6 0 0 0 1.02.2l2.5-2.7 4.6 3.4a.6.6 0 0 0 .95-.33L22.6 4.3a.6.6 0 0 0-1-.9Z"/>',
+  trash:'<path d="M4 6.5h16M9.5 6.5V4.8A1.3 1.3 0 0 1 10.8 3.5h2.4a1.3 1.3 0 0 1 1.3 1.3v1.7"/><path d="M6.5 6.5 7.6 19.4a1.8 1.8 0 0 0 1.8 1.6h5.2a1.8 1.8 0 0 0 1.8-1.6L17.5 6.5"/>',
+  eye:'<path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="3"/>',
+  party:'<path d="M5 20 L9 10 L19 14 Z"/><path d="M12 4v4M18 6l-2 3M6 8l2 3"/>'
+};
+
+function ic(name){
+  return '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
+       + 'stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+       + (ICON_PATHS[name] || '') + '</svg>';
+}
+
+const CATEGORY_META = {
+  concert:  { label:'コンサート', icon:'music' },
+  festival: { label:'フェス',     icon:'tent' },
+  sports:   { label:'スポーツ',   icon:'trophy' },
+  party:    { label:'パーティー', icon:'party' }
+};
+
+/* =========================================================
+   JAPANESE ARTWORK
+   ========================================================= */
+const posterCache = new Map();
+
+function buildArt(e, u){
+  const t = e.art;
+  if (t === 'sakura'){
+    let petals = '';
+    for (let i = 0; i < 12; i++){
+      const x = 30 + i * 31, y = 40 + (i % 4) * 22;
+      petals += `<ellipse cx="${x}" cy="${y}" rx="5" ry="3" fill="#fda4af" opacity="${0.4 + (i%3)*0.15}" transform="rotate(${i*30} ${x} ${y})"/>`;
+    }
+    return `<svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs><linearGradient id="g${u}" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#4c1d95"/><stop offset="0.55" stop-color="#be185d"/><stop offset="1" stop-color="#fda4af"/>
+      </linearGradient></defs>
+      <rect width="400" height="300" fill="url(#g${u})"/>
+      ${petals}
+      <path d="M0 240 Q100 200 200 240 T400 240 L400 300 L0 300Z" fill="#1e1b4b" opacity="0.8"/>
+      <circle cx="200" cy="130" r="50" fill="#fef3c7" opacity="0.9"/>
+      <path d="M0 270 Q100 240 200 270 T400 270 L400 300 L0 300Z" fill="#0f0a1e" opacity="0.9"/>
+    </svg>`;
+  }
+  if (t === 'neon'){
+    return `<svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <rect width="400" height="300" fill="#07070f"/>
+      <rect x="40" y="60" width="320" height="3" fill="#22d3ee" opacity="0.8"/>
+      <rect x="40" y="100" width="240" height="3" fill="#ec4899" opacity="0.8"/>
+      <rect x="40" y="140" width="300" height="3" fill="#8b5cf6" opacity="0.8"/>
+      <rect x="40" y="180" width="200" height="3" fill="#22d3ee" opacity="0.6"/>
+      <rect x="40" y="220" width="280" height="3" fill="#ec4899" opacity="0.6"/>
+      <circle cx="200" cy="150" r="70" fill="none" stroke="#8b5cf6" stroke-width="2" opacity="0.4"/>
+      <circle cx="200" cy="150" r="110" fill="none" stroke="#22d3ee" stroke-width="1" opacity="0.25"/>
+    </svg>`;
+  }
+  if (t === 'fuji'){
+    return `<svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs><linearGradient id="g${u}" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#1e1b4b"/><stop offset="0.4" stop-color="#312e81"/><stop offset="1" stop-color="#f59e0b"/>
+      </linearGradient></defs>
+      <rect width="400" height="300" fill="url(#g${u})"/>
+      <circle cx="300" cy="80" r="30" fill="#fef3c7" opacity="0.9"/>
+      <path d="M0 220 L120 100 L200 180 L280 120 L400 200 L400 300 L0 300Z" fill="#1e293b" opacity="0.9"/>
+      <path d="M120 100 L160 150 L200 120 L240 160 L280 120 L320 160 L400 200 L400 300 L0 300 L0 220Z" fill="#0f172a"/>
+      <path d="M140 130 L160 150 L180 135 L200 155 L220 140 L240 160 L260 145 L280 165" fill="none" stroke="#fef3c7" stroke-width="3" opacity="0.7"/>
+      <path d="M0 260 Q100 230 200 260 T400 260 L400 300 L0 300Z" fill="#120a2e" opacity="0.95"/>
+    </svg>`;
+  }
+  if (t === 'torii'){
+    return `<svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs><linearGradient id="g${u}" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#0f172a"/><stop offset="1" stop-color="#7c2d12"/>
+      </linearGradient></defs>
+      <rect width="400" height="300" fill="url(#g${u})"/>
+      <circle cx="200" cy="120" r="55" fill="#fbbf24" opacity="0.85"/>
+      <g fill="#ef4444" opacity="0.9">
+        <rect x="100" y="90" width="200" height="12" rx="3"/>
+        <rect x="90" y="80" width="220" height="8" rx="2"/>
+        <rect x="120" y="102" width="14" height="100" rx="2"/>
+        <rect x="266" y="102" width="14" height="100" rx="2"/>
+        <rect x="110" y="130" width="180" height="7" rx="2"/>
+      </g>
+      <path d="M0 240 Q100 215 200 240 T400 240 L400 300 L0 300Z" fill="#1e1b4b" opacity="0.9"/>
+    </svg>`;
+  }
+  if (t === 'stadium'){
+    return `<svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="g${u}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b1220"/><stop offset="1" stop-color="#1e1b4b"/></linearGradient>
+        <linearGradient id="h${u}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#15803d"/><stop offset="1" stop-color="#052e16"/></linearGradient>
+      </defs>
+      <rect width="400" height="300" fill="url(#g${u})"/>
+      <circle cx="60" cy="34" r="4" fill="#fef9c3"/><circle cx="340" cy="34" r="4" fill="#fef9c3"/>
+      <ellipse cx="200" cy="204" rx="230" ry="94" fill="#7f1d1d" opacity="0.6"/>
+      <rect x="30" y="172" width="340" height="118" rx="4" fill="url(#h${u})"/>
+      <g stroke="#fff" stroke-width="1.2" opacity="0.25">
+        <line x1="100" y1="172" x2="100" y2="290"/><line x1="170" y1="172" x2="170" y2="290"/>
+        <line x1="240" y1="172" x2="240" y2="290"/><line x1="310" y1="172" x2="310" y2="290"/>
+      </g>
+      <rect x="30" y="172" width="24" height="118" fill="#991b1b" opacity="0.9"/>
+      <rect x="346" y="172" width="24" height="118" fill="#facc15" opacity="0.85"/>
+    </svg>`;
+  }
+  return `<svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <defs><linearGradient id="g${u}" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="${e.gradient[0]}"/><stop offset="1" stop-color="${e.gradient[1]}"/>
+    </linearGradient></defs>
+    <rect width="400" height="300" fill="url(#g${u})"/>
+    <circle cx="310" cy="60" r="90" fill="rgba(255,255,255,.13)"/>
+    <circle cx="60" cy="250" r="110" fill="rgba(0,0,0,.15)"/>
+    <g transform="translate(200,150) scale(5) translate(-12,-12)" fill="none" stroke="rgba(255,255,255,.95)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">${ICON_PATHS[e.icon] || ICON_PATHS.ticket}</g>
+  </svg>`;
+}
+
+function posterSVG(e, ctx){
+  const key = e.id + ':' + (ctx || 'c');
+  let svg = posterCache.get(key);
+  if (!svg){
+    svg = buildArt(e, key.replace(/[^a-z0-9]/gi, ''));
+    posterCache.set(key, svg);
+  }
+  return svg;
+}
+
+/* =========================================================
+   JAPAN EVENT DATA
+   ========================================================= */
+const JP_PRICING = [
+  { name:'一般', price:8500, left:420 },
+  { name:'プレミアム', price:15000, left:120 },
+  { name:'VIP', price:30000, left:30 }
+];
+
+const JP_SELLERS = {
+  primary:['チケットぴあ','ローソンチケット','e+'],
+  secondary:['チケット流通センター','StubHub Japan']
+};
+
+const EVENTS = [
+  { id:201, title:"YOASOBI ASIA 10-CITY DOME TOUR", artist:"YOASOBI",
+    category:"concert", genre:"J-Pop / Anime", date:"2026-12-05", time:"18:00",
+    venue:"東京ドーム", city:"東京", fromPrice:8500,
+    gradient:["#4c1d95","#ec4899"], icon:"music", art:"neon", hot:true,
+    pricing:JP_PRICING, sellers:JP_SELLERS,
+    desc:"YOASOBIがアジア10都市を巡るドーム＆スタジアムツアーを東京ドームで開催。アニメ主題歌のヒット曲から最新曲まで、圧巻のステージパフォーマンスを体感してください。" },
+  { id:202, title:"Stray Kids World Tour <RUN IT JAPAN>", artist:"Stray Kids",
+    category:"concert", genre:"K-Pop", date:"2026-11-06", time:"18:00",
+    venue:"東京ドーム", city:"東京", fromPrice:11000,
+    gradient:["#dc2626","#111827"], icon:"music", art:"sakura", hot:true,
+    pricing:[
+      { name:'一般', price:11000, left:380 },
+      { name:'プレミアム', price:18000, left:95 },
+      { name:'VIP', price:35000, left:25 }
+    ],
+    sellers:JP_SELLERS,
+    desc:"Stray Kidsのワールドツアー日本公演が東京ドームで3日間開催。最新アルバムの楽曲を中心に、迫力のパフォーマンスと映像演出で会場を熱狂させます。" },
+  { id:203, title:"藤井風 ピアノリサイタル", artist:"藤井風",
+    category:"concert", genre:"J-Pop / Piano", date:"2026-11-20", time:"19:00",
+    venue:"東京ドーム", city:"東京", fromPrice:9500,
+    gradient:["#1e1b4b","#f59e0b"], icon:"music", art:"fuji", hot:true,
+    pricing:[
+      { name:'一般', price:9500, left:500 },
+      { name:'プレミアム', price:16000, left:150 },
+      { name:'VIP', price:28000, left:40 }
+    ],
+    sellers:JP_SELLERS,
+    desc:"藤井風が東京ドームでピアノリサイタルを開催。代表曲の数々をピアノアレンジで披露する特別な夜。静寂と熱狂が交差する唯一無二のステージ。" },
+  { id:204, title:"INI 5TH ANNIVERSARY DOME TOUR", artist:"INI",
+    category:"concert", genre:"J-Pop / Idol", date:"2026-09-16", time:"18:30",
+    venue:"東京ドーム", city:"東京", fromPrice:8000,
+    gradient:["#7c3aed","#22d3ee"], icon:"music", art:"neon",
+    pricing:JP_PRICING, sellers:JP_SELLERS,
+    desc:"INIの5周年を記念したドームツアー。最新ヒット曲からデビュー曲まで、5年間の軌跡を凝縮した特別なステージ。" },
+  { id:205, title:"SUPER BEAVER 都会のラクダ DOME TOUR", artist:"SUPER BEAVER",
+    category:"concert", genre:"Rock", date:"2026-09-22", time:"18:00",
+    venue:"東京ドーム", city:"東京", fromPrice:7500,
+    gradient:["#0f766e","#f59e0b"], icon:"music", art:"torii",
+    pricing:JP_PRICING, sellers:JP_SELLERS,
+    desc:"SUPER BEAVERが東京ドームで2日間のライブを開催。ロックバンドの熱い演奏とメッセージ性の強い歌詞で、会場全体が一体となるステージ。" },
+  { id:206, title:"ENHYPEN WORLD TOUR 'BLOOD SAGA'", artist:"ENHYPEN",
+    category:"concert", genre:"K-Pop", date:"2026-12-01", time:"18:30",
+    venue:"東京ドーム", city:"東京", fromPrice:10500,
+    gradient:["#be185d","#0f172a"], icon:"music", art:"sakura",
+    pricing:[
+      { name:'一般', price:10500, left:360 },
+      { name:'プレミアム', price:17000, left:100 },
+      { name:'VIP', price:32000, left:30 }
+    ],
+    sellers:JP_SELLERS,
+    desc:"ENHYPENのワールドツアー日本公演。ダークでスタイリッシュなパフォーマンスと、美しいハーモニーが融合したステージ。2日間限定公演。" },
+  { id:207, title:"BIGBANG 2026 WORLD TOUR IN JAPAN", artist:"BIGBANG",
+    category:"concert", genre:"K-Pop", date:"2026-12-13", time:"17:00",
+    venue:"東京ドーム", city:"東京", fromPrice:12000,
+    gradient:["#fbbf24","#111827"], icon:"music", art:"neon", hot:true,
+    pricing:[
+      { name:'一般', price:12000, left:300 },
+      { name:'プレミアム', price:20000, left:80 },
+      { name:'VIP', price:40000, left:20 }
+    ],
+    sellers:JP_SELLERS,
+    desc:"BIGBANGがワールドツアーで東京ドームに3日間帰還。伝説のヒット曲の数々と、進化し続けるパフォーマンスでファンを魅了します。" },
+  { id:208, title:"Snow Man DOME TOUR 2026-2027", artist:"Snow Man",
+    category:"concert", genre:"J-Pop / Idol", date:"2026-12-23", time:"17:00",
+    venue:"東京ドーム", city:"東京", fromPrice:9000,
+    gradient:["#0ea5e9","#f8fafc"], icon:"music", art:"sakura",
+    pricing:JP_PRICING, sellers:JP_SELLERS,
+    desc:"Snow Manのドームツアーが東京ドームで4日間開催。圧倒的なパフォーマンスと華やかなステージセットで、会場を笑顔と熱気で包みます。" },
+  { id:209, title:"Fujii Kaze「Prema World Tour」", artist:"藤井風",
+    category:"concert", genre:"J-Pop", date:"2026-12-19", time:"18:00",
+    venue:"東京ドーム", city:"東京", fromPrice:9500,
+    gradient:["#4c1d95","#f59e0b"], icon:"music", art:"fuji", hot:true,
+    pricing:JP_PRICING, sellers:JP_SELLERS,
+    desc:"藤井風のワールドツアー日本公演。最新アルバム「Prema」の楽曲を中心に、彼の音楽的進化を体感できるステージ。" },
+  { id:210, title:"Number_i LIVE TOUR No.III", artist:"Number_i",
+    category:"concert", genre:"J-Pop / Hip-Hop", date:"2026-12-09", time:"18:30",
+    venue:"東京ドーム", city:"東京", fromPrice:8200,
+    gradient:["#ef4444","#111827"], icon:"music", art:"neon",
+    pricing:JP_PRICING, sellers:JP_SELLERS,
+    desc:"Number_iのライブツアーが東京ドームで2日間開催。ヒップホップとJ-Popを融合させた独自のサウンドと、キレのあるパフォーマンス。" },
+
+  { id:301, title:"SUMMER SONIC 2026", artist:"The Strokes / Ado / JENNIE ほか",
+    category:"festival", genre:"Music Festival", date:"2026-08-14", time:"11:00",
+    venue:"ZOZOマリンスタジアム & 幕張メッセ", city:"千葉", fromPrice:21000,
+    gradient:["#06b6d4","#8b5cf6"], icon:"tent", art:"neon", hot:true,
+    pricing:[
+      { name:'1DAY', price:21000, left:800 },
+      { name:'3DAY', price:59000, left:200 },
+      { name:'プラチナム', price:100000, left:50 }
+    ],
+    sellers:JP_SELLERS,
+    desc:"25周年を迎えるSUMMER SONICが初の3日間開催。The Strokes、Ado、JENNIE、FKA twigs、David Byrneほか、国内外のトップアーティストが集結。" },
+  { id:302, title:"FUJI ROCK FESTIVAL '26", artist:"Fujii Kaze / Mitski / XG ほか",
+    category:"festival", genre:"Rock / Alternative", date:"2026-07-24", time:"10:00",
+    venue:"苗場スキー場", city:"新潟", fromPrice:22000,
+    gradient:["#15803d","#0ea5e9"], icon:"tent", art:"fuji", hot:true,
+    pricing:[
+      { name:'1DAY', price:22000, left:600 },
+      { name:'3DAY', price:58000, left:150 },
+      { name:'VIP', price:120000, left:30 }
+    ],
+    sellers:JP_SELLERS,
+    desc:"日本を代表する野外フェス、フジロック。苗場スキー場の自然の中で、Fujii Kaze、Mitski、XGなど国内外のアーティストが出演。キャンプサイトも完備。" },
+  { id:303, title:"ROCK IN JAPAN FESTIVAL 2026", artist:"Ado / ずっと真夜中でいいのに。ほか",
+    category:"festival", genre:"Rock / J-Pop", date:"2026-08-08", time:"10:00",
+    venue:"千葉市蘇我スポーツ公園", city:"千葉", fromPrice:15000,
+    gradient:["#dc2626","#f59e0b"], icon:"tent", art:"torii",
+    pricing:[
+      { name:'1DAY', price:15000, left:1000 },
+      { name:'4DAY', price:42000, left:300 },
+      { name:'VIP', price:80000, left:60 }
+    ],
+    sellers:JP_SELLERS,
+    desc:"国内最大級のロックフェス。Ado、ずっと真夜中でいいのに。をはじめ、J-ROCK、J-POPのトップアーティストが5日間にわたり出演。" },
+  { id:304, title:"JAPAN JAM 2026", artist:"UVERworld / 超ときめき♡宣伝部 ほか",
+    category:"festival", genre:"Rock / Idol", date:"2026-05-02", time:"10:00",
+    venue:"千葉市蘇我スポーツ公園", city:"千葉", fromPrice:14000,
+    gradient:["#7c3aed","#ec4899"], icon:"tent", art:"sakura",
+    pricing:[
+      { name:'1DAY', price:14000, left:900 },
+      { name:'2DAY', price:26000, left:250 },
+      { name:'4DAY', price:42000, left:100 }
+    ],
+    sellers:JP_SELLERS,
+    desc:"ゴールデンウィークに開催されるJAPAN JAM。UVERworld、超ときめき♡宣伝部、CUTIE STREET、10-FEETなど、人気アーティストが多数出演。" },
+
+  { id:401, title:"読売ジャイアンツ vs 阪神タイガース 開幕戦", artist:"読売 vs 阪神",
+    category:"sports", genre:"プロ野球", date:"2026-03-27", time:"18:15",
+    venue:"東京ドーム", city:"東京", fromPrice:4500,
+    gradient:["#f59e0b","#111827"], icon:"trophy", art:"stadium", hot:true,
+    pricing:[
+      { name:'内野指定', price:4500, left:600 },
+      { name:'内野SS', price:8000, left:180 },
+      { name:'VIPボックス', price:20000, left:40 }
+    ],
+    sellers:JP_SELLERS,
+    desc:"2026年セントラル・リーグ開幕戦。読売ジャイアンツが東京ドームで阪神タイガースを迎え撃つ。伝統の一戦を生で体感しよう。" },
+  { id:402, title:"Jリーグオールスター DAZNカップ 2026", artist:"Jリーグ選抜",
+    category:"sports", genre:"サッカー", date:"2026-06-13", time:"18:00",
+    venue:"味の素スタジアム", city:"東京", fromPrice:3500,
+    gradient:["#0ea5e9","#15803d"], icon:"trophy", art:"stadium",
+    pricing:[
+      { name:'一般', price:3500, left:800 },
+      { name:'プレミアム', price:7000, left:200 },
+      { name:'VIP', price:15000, left:50 }
+    ],
+    sellers:JP_SELLERS,
+    desc:"Jリーグのスター選手が集結するオールスターゲーム。日本サッカーの最高峰のプレーを間近で観戦できる特別な試合。" },
+  { id:403, title:"K-1 WORLD GP 2026", artist:"武尊 vs チンギス・アラゾフ",
+    category:"sports", genre:"格闘技", date:"2026-02-09", time:"17:00",
+    venue:"さいたまスーパーアリーナ", city:"埼玉", fromPrice:8000,
+    gradient:["#dc2626","#111827"], icon:"trophy", art:"stadium", hot:true,
+    pricing:[
+      { name:'アリーナA', price:8000, left:500 },
+      { name:'アリーナSS', price:20000, left:120 },
+      { name:'VIPリングサイド', price:60000, left:20 }
+    ],
+    sellers:JP_SELLERS,
+    desc:"K-1 WORLD GPがさいたまスーパーアリーナに帰還。武尊とチンギス・アラゾフの頂上決戦をはじめ、世界最強のキックボクサーが集結。" },
+  { id:404, title:"SUPER RIZIN.5", artist:"RIZIN MMA",
+    category:"sports", genre:"総合格闘技", date:"2026-09-10", time:"17:00",
+    venue:"さいたまスーパーアリーナ", city:"埼玉", fromPrice:9000,
+    gradient:["#7c3aed","#111827"], icon:"trophy", art:"neon",
+    pricing:[
+      { name:'アリーナB', price:9000, left:400 },
+      { name:'アリーナS', price:25000, left:100 },
+      { name:'VIP', price:80000, left:15 }
+    ],
+    sellers:JP_SELLERS,
+    desc:"RIZINのビッグマッチがさいたまスーパーアリーナで開催。国内最強ファイターたちが激突する総合格闘技の祭典。" },
+  { id:405, title:"プロ野球 ドラフト会議 2026", artist:"NPB",
+    category:"sports", genre:"プロ野球", date:"2026-10-26", time:"17:00",
+    venue:"東京ドーム", city:"東京", fromPrice:4950,
+    gradient:["#0369a1","#f8fafc"], icon:"trophy", art:"stadium",
+    pricing:[
+      { name:'全席指定', price:4950, left:2000 },
+      { name:'プレミアム', price:8000, left:500 }
+    ],
+    sellers:JP_SELLERS,
+    desc:"2026年プロ野球ドラフト会議。未来のスター選手が指名される瞬間を東京ドームで目撃しよう。" },
+
+  { id:501, title:"agefarre 2026 — ageHa×velfarre 15th Anniversary", artist:"ageHa / velfarre",
+    category:"party", genre:"Club / EDM", date:"2026-10-11", time:"15:00",
+    venue:"ZEROTOKYO", city:"東京", fromPrice:3500,
+    gradient:["#ec4899","#8b5cf6"], icon:"party", art:"neon", hot:true,
+    pricing:[
+      { name:'デイタイム', price:3500, left:1000 },
+      { name:'クラブタイム', price:4000, left:800 },
+      { name:'VIP', price:12000, left:80 }
+    ],
+    sellers:JP_SELLERS,
+    desc:"ageHaとvelfarreの15周年を記念した大型クラブイベント。ZEROTOKYOを舞台に、デイタイムからクラブタイムまで2部構成のロングパーティー。" },
+  { id:502, title:"WOMB WTW Weekday Party", artist:"Tokyo Local DJs",
+    category:"party", genre:"Techno / House", date:"2026-09-30", time:"23:00",
+    venue:"WOMB 渋谷", city:"東京", fromPrice:1500,
+    gradient:["#8b5cf6","#22d3ee"], icon:"party", art:"neon",
+    pricing:[
+      { name:'一般', price:1500, left:300 },
+      { name:'VIP', price:5000, left:40 }
+    ],
+    sellers:JP_SELLERS,
+    desc:"渋谷WOMBで開催される平日限定テクノ＆ハウスパーティー。東京のローカルDJと新進気鋭のアーティストが出演。20歳以上限定。" },
+  { id:503, title:"WARP SHINJUKU Nightclub", artist:"WARP",
+    category:"party", genre:"Club", date:"2026-10-15", time:"20:00",
+    venue:"WARP SHINJUKU", city:"東京", fromPrice:1000,
+    gradient:["#f43f5e","#8b5cf6"], icon:"party", art:"sakura",
+    pricing:[
+      { name:'入場+2ドリンク', price:1000, left:500 },
+      { name:'入場+飲み放題', price:2000, left:400 },
+      { name:'VIPシート', price:8000, left:30 }
+    ],
+    sellers:JP_SELLERS,
+    desc:"新宿最大級のナイトクラブWARP。外国人観光客向けの特別プランも用意。2ドリンク付きの入場チケットと飲み放題プランから選べます。" },
+  { id:504, title:"激ロックDJパーティー HALLOWEEN SPECIAL", artist:"EDGE-CRUSHER",
+    category:"party", genre:"DJ / Rock", date:"2026-10-31", time:"13:00",
+    venue:"渋谷 clubasia", city:"東京", fromPrice:2500,
+    gradient:["#ef4444","#7c3aed"], icon:"party", art:"torii",
+    pricing:[
+      { name:'一般', price:2500, left:600 },
+      { name:'VIP', price:6000, left:50 }
+    ],
+    sellers:JP_SELLERS,
+    desc:"ハロウィン限定の激ロックDJパーティー。水野ギイ、DJとも、ジエメイほか計20組が出演。渋谷clubasiaで朝まで踊り明かそう。" },
+  { id:505, title:"SPARTA presents「JOMO」", artist:"OMSB / 仙人掌 / KM",
+    category:"party", genre:"Hip-Hop / DJ", date:"2026-11-14", time:"22:00",
+    venue:"渋谷 WWW X", city:"東京", fromPrice:3000,
+    gradient:["#f59e0b","#111827"], icon:"party", art:"neon",
+    pricing:[
+      { name:'一般', price:3000, left:400 },
+      { name:'VIP', price:7000, left:40 }
+    ],
+    sellers:JP_SELLERS,
+    desc:"SPARTA主催のオールナイトイベント「JOMO」。OMSB、仙人掌がライブ、KMらがDJで出演。渋谷WWW Xでヒップホップの夜を楽しもう。" }
+];
+
+/* =========================================================
+   STATE
+   ========================================================= */
+const state = {
+  category:'all', query:'', city:'all', sort:'date',
+  cart:[], currentEvent:null, currentTiers:[], selection:{}
+};
+
+const $ = id => document.getElementById(id);
+const money = n => '¥' + n.toLocaleString('ja-JP');
+
+function seededRand(seed){
+  const x = Math.sin(seed * 127.1 + 311.7) * 43758.5453;
+  return x - Math.floor(x);
+}
+function fmtDate(iso){
+  return new Date(iso + 'T12:00:00').toLocaleDateString('ja-JP', { year:'numeric', month:'long', day:'numeric', weekday:'long' });
+}
+function fmtShort(iso){
+  return new Date(iso + 'T12:00:00').toLocaleDateString('ja-JP', { month:'short', day:'numeric', weekday:'short' });
+}
+function monthAbbr(iso){
+  return new Date(iso + 'T12:00:00').toLocaleDateString('ja-JP', { month:'short' });
+}
+function dayNum(iso){
+  return new Date(iso + 'T12:00:00').getDate();
+}
+function tierBadgeClass(name){
+  const n = name.toLowerCase();
+  if (n.includes('vvip') || n.includes('vip')) return 'vip';
+  if (n.includes('プレミアム') || n.includes('プラチナム')) return 'vvip';
+  return 'reg';
+}
+
+function tiersFor(event){
+  if (event.pricing) return event.pricing.map(p => ({ ...p }));
+  const presets = {
+    concert: [
+      { name:'一般',       mult:1,   range:[200,600] },
+      { name:'プレミアム', mult:1.8, range:[80,200]  },
+      { name:'VIP',        mult:3.2, range:[20,60]   }
+    ],
+    festival: [
+      { name:'1DAY', mult:1,   range:[500,1200] },
+      { name:'3DAY', mult:2.8, range:[150,500]  },
+      { name:'VIP',  mult:5.5, range:[30,100]   }
+    ],
+    sports: [
+      { name:'一般',       mult:1,   range:[400,1000] },
+      { name:'プレミアム', mult:1.9, range:[100,300]  },
+      { name:'VIP',        mult:4.0, range:[20,80]    }
+    ],
+    party: [
+      { name:'一般', mult:1,   range:[300,800] },
+      { name:'VIP',  mult:3.0, range:[30,120]  }
+    ]
+  }[event.category];
+  return presets.map((p, i) => {
+    const r = seededRand(event.id * 10 + i);
+    return { name:p.name, price:Math.round(event.fromPrice * p.mult), left:Math.round(p.range[0] + r * (p.range[1] - p.range[0])) };
+  });
+}
+
+const cartQty = () => state.cart.reduce((s,i) => s + i.qty, 0);
+const cartSub = () => state.cart.reduce((s,i) => s + i.qty * i.price, 0);
+
+function toast(msg, iconName, variant){
+  const el = document.createElement('div');
+  el.className = 'toast ' + (variant || '');
+  el.innerHTML = ic(iconName || 'check') + '<span>' + msg + '</span>';
+  $('toastStack').appendChild(el);
+  setTimeout(() => {
+    el.classList.add('out');
+    setTimeout(() => el.remove(), 250);
+  }, 3000);
+}
+
+/* =========================================================
+   TELEGRAM (basket checkout only)
+   ========================================================= */
+function copyText(text){
+  if (navigator.clipboard && window.isSecureContext){
+    navigator.clipboard.writeText(text).catch(() => {
+      const ta = document.createElement('textarea');
+      ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); } catch(e){}
+      ta.remove();
+    });
+  } else {
+    const ta = document.createElement('textarea');
+    ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); } catch(e){}
+    ta.remove();
+  }
+}
+
+function checkoutBasketOnTelegram(){
+  if (!state.cart.length) return;
+  const DIV = '------------------------------------';
+  const lines = ['チケットリクエスト — TixNest Japan', DIV,
+    'アイテム数: ' + state.cart.length + '   チケット枚数: ' + cartQty(), ''];
+  let grand = 0;
+  state.cart.forEach((item, i) => {
+    const e = EVENTS.find(x => x.id === item.eventId);
+    const lineTotal = item.price * item.qty;
+    grand += lineTotal;
+    lines.push((i+1) + '. ' + e.title);
+    lines.push('   日付: ' + fmtDate(e.date) + ' ' + e.time);
+    lines.push('   会場: ' + e.venue + '（' + e.city + '）');
+    lines.push('   ' + item.tier + ' x ' + item.qty + '  =  ' + money(lineTotal));
+    lines.push('');
+  });
+  lines.push(DIV);
+  lines.push('合計: ' + money(grand));
+  lines.push('');
+  lines.push('空席状況と支払い方法をご確認ください。よろしくお願いいたします。');
+  const msg = lines.join('\n');
+
+  copyText(msg);
+  toast('バスケットの内容をコピーしました — Telegramに貼り付けてください', 'check', 'ok');
+  setTimeout(() => window.open(TG_URL, '_blank', 'noopener,noreferrer'), 400);
+}
+
+/* =========================================================
+   CITY FILTER
+   ========================================================= */
+(function(){
+  const cities = [...new Set(EVENTS.map(e => e.city))].sort();
+  const sel = $('cityFilter');
+  cities.forEach(c => {
+    const o = document.createElement('option');
+    o.value = c; o.textContent = c;
+    sel.appendChild(o);
+  });
+})();
+
+/* =========================================================
+   GRID
+   ========================================================= */
+function visibleEvents(){
+  let list = EVENTS;
+  if (state.category !== 'all') list = list.filter(e => e.category === state.category);
+  if (state.city !== 'all')     list = list.filter(e => e.city === state.city);
+  if (state.query){
+    const q = state.query;
+    list = list.filter(e =>
+      (e.title + ' ' + e.artist + ' ' + e.venue + ' ' + e.city + ' ' + e.genre + ' ' + CATEGORY_META[e.category].label)
+        .toLowerCase().includes(q)
+    );
+  }
+  list = list.slice();
+  switch (state.sort){
+    case 'date':       list.sort((a,b) => new Date(a.date) - new Date(b.date)); break;
+    case 'price-asc':  list.sort((a,b) => a.fromPrice - b.fromPrice); break;
+    case 'price-desc': list.sort((a,b) => b.fromPrice - a.fromPrice); break;
+    case 'name':       list.sort((a,b) => a.title.localeCompare(b.title)); break;
+  }
+  return list;
+}
+
+function cardHTML(e){
+  const meta = CATEGORY_META[e.category];
+  return `<article class="card" data-open="${e.id}">
+    <div class="poster">
+      <div class="poster-art">${posterSVG(e,'c')}</div>
+      <div class="date-badge"><span>${monthAbbr(e.date)}</span><strong>${dayNum(e.date)}</strong></div>
+      <span class="cat-chip">${ic(meta.icon)}${meta.label}</span>
+      ${e.hot ? '<span class="hot-chip">' + ic('bolt') + '人気</span>' : ''}
+      <div class="poster-sub">${e.artist}</div>
+    </div>
+    <div class="card-body">
+      <h3>${e.title}</h3>
+      <p class="venue">${ic('pin')}<span>${e.venue}</span></p>
+      <p class="when">${ic('calendar')}<span>${fmtShort(e.date)} &middot; ${e.time}</span></p>
+      <div class="card-foot">
+        <div class="price" data-price="1" aria-hidden="true">
+          <span>最安</span><strong>${money(e.fromPrice)}</strong>
+        </div>
+        <button class="btn-buy" data-add="${e.id}">
+          ${ic('cart')}<span>バスケットに追加</span>
+        </button>
+      </div>
+    </div>
+  </article>`;
+}
+
+function renderEvents(){
+  const list = visibleEvents();
+  const grid = $('eventGrid');
+  $('resultCount').textContent = list.length + '件のイベント';
+
+  const titles = { all:'すべてのイベント', concert:'コンサート', festival:'フェス', sports:'スポーツ', party:'パーティー' };
+  $('sectionTitle').textContent = state.query ? '「' + state.query + '」の検索結果' : titles[state.category];
+
+  if (!list.length){
+    grid.innerHTML = '<div class="empty"><div class="big">' + ic('search') + '</div><h3>該当するイベントがありません</h3><p>キーワードを変更するか、フィルターをクリアしてください。</p></div>';
+    return;
+  }
+  grid.innerHTML = list.map(cardHTML).join('');
+}
+
+/* =========================================================
+   CATEGORY FILTERING
+   ========================================================= */
+function setCategory(cat){
+  state.category = cat;
+  document.querySelectorAll('#catStrip .cat').forEach(b => b.classList.toggle('active', b.dataset.cat === cat));
+  document.querySelectorAll('#mainNav button').forEach(b => b.classList.toggle('active', b.dataset.cat === cat));
+  renderEvents();
+}
+document.querySelectorAll('#catStrip .cat').forEach(b => b.addEventListener('click', () => setCategory(b.dataset.cat)));
+document.querySelectorAll('#mainNav button').forEach(b => b.addEventListener('click', () => setCategory(b.dataset.cat)));
+document.querySelectorAll('.foot-col a[data-cat]').forEach(a => a.addEventListener('click', () => {
+  setCategory(a.dataset.cat);
+  window.scrollTo({ top: 400, behavior:'smooth' });
+}));
+
+/* =========================================================
+   SEARCH + SORT
+   ========================================================= */
+let searchTimer;
+$('headerSearch').addEventListener('input', e => {
+  const v = e.target.value.trim().toLowerCase();
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(() => { state.query = v; renderEvents(); }, 150);
+});
+$('heroGo').addEventListener('click', () => {
+  state.city = $('cityFilter').value;
+  state.query = $('headerSearch').value.trim().toLowerCase();
+  renderEvents();
+  const grid = $('eventGrid');
+  window.scrollTo({ top: grid.getBoundingClientRect().top + window.pageYOffset - 90, behavior:'smooth' });
+});
+$('cityFilter').addEventListener('change', e => { state.city = e.target.value; renderEvents(); });
+$('sortSelect').addEventListener('change', e => { state.sort = e.target.value; renderEvents(); });
+
+/* =========================================================
+   EVENT MODAL
+   ========================================================= */
+function openEvent(id){
+  const e = EVENTS.find(x => x.id === id);
+  if (!e) return;
+  state.currentEvent = e;
+  state.currentTiers = tiersFor(e);
+  state.selection = {};
+  state.currentTiers.forEach(t => state.selection[t.name] = 0);
+  renderEventModal();
+  $('eventModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function renderEventModal(){
+  const e = state.currentEvent;
+  const meta = CATEGORY_META[e.category];
+
+  const tiersHTML = state.currentTiers.map((t, i) => {
+    const qty = state.selection[t.name] || 0;
+    const low = t.left < 25;
+    const bc = tierBadgeClass(t.name);
+    const badgeLabel = bc === 'vvip' ? 'VIP' : bc === 'vip' ? 'VIP' : '一般';
+    return `<div class="tier ${qty > 0 ? 'selected' : ''}" data-tier="${i}">
+      <div class="tier-info">
+        <div class="tier-name"><span class="tier-badge ${bc}">${badgeLabel}</span>${t.name}</div>
+        <div class="tier-note ${low ? 'low' : ''}">${low ? '残り' + t.left + '枚' : '空席あり'}</div>
+      </div>
+      <div class="tier-price" data-price="1" aria-hidden="true">${money(t.price)}</div>
+      <div class="stepper">
+        <button data-step="-1" data-idx="${i}" ${qty === 0 ? 'disabled' : ''} aria-label="減らす">&minus;</button>
+        <span class="qty">${qty}</span>
+        <button data-step="1" data-idx="${i}" ${qty >= 8 ? 'disabled' : ''} aria-label="増やす">+</button>
+      </div>
+    </div>`;
+  }).join('');
+
+  const sellersHTML = e.sellers ? `<div class="sellers">
+    <h6>${ic('cart')} チケット販売サイト</h6>
+    <div class="seller-row"><span class="lbl">正規販売</span><span class="val">${e.sellers.primary.map(s => '<span class="seller-tag">' + s + '</span>').join('')}</span></div>
+    <div class="seller-row"><span class="lbl">リセール</span><span class="val">${e.sellers.secondary.map(s => '<span class="seller-tag">' + s + '</span>').join('')}</span></div>
+  </div>` : '';
+
+  $('eventModalContent').innerHTML = `
+    <div class="modal-hero">
+      <div class="m-art">${posterSVG(e,'m')}</div>
+      <button class="modal-close" id="closeEventModal" aria-label="閉じる">${ic('close')}</button>
+      <div class="m-info">
+        <span class="m-tag">${ic(meta.icon)}${meta.label} &middot; ${e.genre}</span>
+        <h2>${e.title}</h2>
+        <div class="m-sub">${e.artist}</div>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div class="meta-grid">
+        <div class="meta-item"><span class="mi">${ic('calendar')}</span><div><div class="ml">日時</div><div class="mv">${fmtDate(e.date)}<br>${e.time}</div></div></div>
+        <div class="meta-item"><span class="mi">${ic('pin')}</span><div><div class="ml">会場</div><div class="mv">${e.venue}<br>${e.city}</div></div></div>
+        <div class="meta-item"><span class="mi">${ic('seats')}</span><div><div class="ml">空席状況</div><div class="mv">${state.currentTiers.reduce((s,t)=>s+t.left,0)}席<br>${state.currentTiers.length}種類</div></div></div>
+      </div>
+      <p class="desc">${e.desc}</p>
+      ${sellersHTML}
+      <div class="section-title">チケットを選択</div>
+      <div id="tierList">${tiersHTML}</div>
+      <div class="live-total">
+        <div>
+          <div class="lt-label">選択中の合計</div>
+          <div class="lt-value" id="liveTotal">¥0</div>
+          <div class="lt-sub" id="liveQty">未選択</div>
+        </div>
+        <div style="text-align:right">
+          <div class="lt-label">バスケット内</div>
+          <div class="lt-value" id="liveBasketTotal">${money(cartSub())}</div>
+          <div class="lt-sub" id="liveBasketQty">${cartQty()}枚</div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <div class="total-box">
+        <div class="tl">選択中</div>
+        <div class="tv" id="modalTotal">¥0</div>
+        <div class="tn" id="modalQty">未選択</div>
+      </div>
+      <div class="footer-actions">
+        <button class="btn-ghost" id="addToCartBtn" disabled>${ic('cart')}バスケットに追加</button>
+        <button class="btn-buy" id="addViewBtn" disabled>${ic('eye')}追加して開く</button>
+      </div>
+    </div>`;
+
+  $('tierList').addEventListener('click', ev => {
+    const btn = ev.target.closest('button[data-step]');
+    if (!btn) return;
+    const idx = +btn.dataset.idx;
+    const delta = +btn.dataset.step;
+    const tier = state.currentTiers[idx];
+    const current = state.selection[tier.name] || 0;
+    const next = Math.max(0, Math.min(8, current + delta));
+    if (next === current) return;
+    state.selection[tier.name] = next;
+    refreshModalTotals();
+  });
+
+  $('closeEventModal').addEventListener('click', closeEventModal);
+  $('addToCartBtn').addEventListener('click', () => commitSelection(false));
+  $('addViewBtn').addEventListener('click', () => commitSelection(true));
+}
+
+function currentSelectionTiers(){
+  return state.currentTiers
+    .filter(t => (state.selection[t.name] || 0) > 0)
+    .map(t => ({ name:t.name, price:t.price, qty:state.selection[t.name] }));
+}
+
+function refreshModalTotals(){
+  document.querySelectorAll('#tierList .tier').forEach((row, i) => {
+    const tier = state.currentTiers[i];
+    const qty = state.selection[tier.name] || 0;
+    row.classList.toggle('selected', qty > 0);
+    row.querySelector('.qty').textContent = qty;
+    const btns = row.querySelectorAll('button[data-step]');
+    btns[0].disabled = qty === 0;
+    btns[1].disabled = qty >= 8;
+  });
+
+  const total = state.currentTiers.reduce((s,t) => s + (state.selection[t.name] || 0) * t.price, 0);
+  const qty = Object.values(state.selection).reduce((s,q) => s + q, 0);
+
+  $('modalTotal').textContent = money(total);
+  $('modalQty').textContent = qty === 0 ? '未選択' : qty + '枚選択中';
+  $('liveTotal').textContent = money(total);
+  $('liveQty').textContent = qty === 0 ? '未選択' : qty + '枚選択中';
+  $('liveBasketTotal').textContent = money(cartSub());
+  const cq = cartQty();
+  $('liveBasketQty').textContent = cq + '枚';
+
+  $('addToCartBtn').disabled = qty === 0;
+  $('addViewBtn').disabled = qty === 0;
+}
+
+function closeEventModal(){
+  $('eventModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function commitSelection(openBasketAfter){
+  const e = state.currentEvent;
+  const tiers = currentSelectionTiers();
+  if (!tiers.length) return;
+  const added = addToBasket(e, tiers);
+  closeEventModal();
+  renderCart();
+  if (openBasketAfter){
+    openDrawer();
+  } else {
+    toast(added + '枚をバスケットに追加しました', 'cart', 'ok');
+  }
+}
+
+function addToBasket(e, tiers){
+  let added = 0;
+  tiers.forEach(t => {
+    const key = e.id + '::' + t.name;
+    const existing = state.cart.find(i => i.key === key);
+    if (existing) existing.qty = Math.min(8, existing.qty + t.qty);
+    else state.cart.push({ key, eventId:e.id, tier:t.name, price:t.price, qty:t.qty });
+    added += t.qty;
+  });
+  return added;
+}
+
+/* =========================================================
+   CART RENDER
+   ========================================================= */
+function renderCart(){
+  const qty = cartQty();
+  const sub = cartSub();
+
+  $('cartCount').textContent = qty;
+  $('drawerCount').textContent = qty + '枚';
+  $('basketBubble').textContent = qty;
+  $('basketCount').textContent = qty + '枚のチケット';
+  $('basketTotal').textContent = money(sub);
+
+  if (state.cart.length){
+    const names = state.cart.slice(0, 2).map(i => EVENTS.find(x => x.id === i.eventId).title);
+    const more = state.cart.length > 2 ? ' ほか' + (state.cart.length - 2) + '件' : '';
+    $('basketItems').textContent = names.join(' · ') + more;
+  } else {
+    $('basketItems').textContent = '';
+  }
+
+  $('basketBar').classList.toggle('show', qty > 0);
+  $('toastStack').classList.toggle('raised', qty > 0);
+
+  const body = $('cartItems');
+  const foot = $('cartFoot');
+
+  if (!state.cart.length){
+    body.innerHTML = '<div class="cart-empty"><div class="big">' + ic('cart') + '</div><h4>バスケットは空です</h4><p>イベントを探してチケットを追加してください。</p></div>';
+    foot.innerHTML = '<button class="checkout-btn" disabled>' + ic('send') + 'Telegramで注文する</button><div class="secure-note">ご注文は <b style="color:#7dd3fc">@' + TG_USER + '</b> にて確認されます。</div>';
+    return;
+  }
+
+  body.innerHTML = state.cart.map(item => {
+    const e = EVENTS.find(x => x.id === item.eventId);
+    return `<div class="cart-item">
+      <div class="ci-poster" style="background:linear-gradient(135deg,${e.gradient[0]},${e.gradient[1]})">${ic(e.icon)}</div>
+      <div class="ci-info">
+        <div class="ci-title">${e.title}</div>
+        <div class="ci-tier">${item.tier}</div>
+        <div class="ci-meta">${fmtShort(e.date)} &middot; ${e.time} &middot; ${e.venue}</div>
+      </div>
+      <div class="ci-right">
+        <div class="ci-price">${money(item.price * item.qty)}</div>
+        <div class="ci-meta">${item.qty} &times; ${money(item.price)}</div>
+        <button class="ci-remove" data-remove="${item.key}">${ic('trash')}削除</button>
+      </div>
+    </div>`;
+  }).join('');
+
+  foot.innerHTML = '<div class="sum-row"><span>小計（' + qty + '枚）</span><span>' + money(sub) + '</span></div>'
+    + '<div class="sum-row total"><span>合計</span><span>' + money(sub) + '</span></div>'
+    + '<button class="checkout-btn" id="goTelegram">' + ic('send') + 'Telegramで注文する</button>'
+    + '<div class="secure-note">このボタンのみ <b style="color:#7dd3fc">@' + TG_USER + '</b> に注文を送信します。</div>';
+
+  $('goTelegram').addEventListener('click', checkoutBasketOnTelegram);
+
+  body.querySelectorAll('[data-remove]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      state.cart = state.cart.filter(i => i.key !== btn.dataset.remove);
+      renderCart();
+      toast('チケットを削除しました', 'trash', 'warn');
+    });
+  });
+}
+
+/* =========================================================
+   DRAWER
+   ========================================================= */
+function openDrawer(){
+  $('cartDrawer').classList.add('open');
+  $('drawerBackdrop').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeDrawer(){
+  $('cartDrawer').classList.remove('open');
+  $('drawerBackdrop').classList.remove('open');
+  if (!$('eventModal').classList.contains('open')) document.body.style.overflow = '';
+}
+$('cartBtn').addEventListener('click', openDrawer);
+$('closeDrawer').addEventListener('click', closeDrawer);
+$('drawerBackdrop').addEventListener('click', closeDrawer);
+$('basketOpenBtn').addEventListener('click', openDrawer);
+
+/* =========================================================
+   GLOBAL CLICK
+   ========================================================= */
+$('eventGrid').addEventListener('click', ev => {
+  if (ev.target.closest('.price')){
+    ev.preventDefault();
+    ev.stopPropagation();
+    return;
+  }
+
+  const add = ev.target.closest('[data-add]');
+  if (add){
+    ev.stopPropagation();
+    const e = EVENTS.find(x => x.id === +add.dataset.add);
+    if (!e) return;
+    const base = tiersFor(e)[0];
+    addToBasket(e, [{ name:base.name, price:base.price, qty:1 }]);
+    renderCart();
+    toast('1枚をバスケットに追加しました', 'cart', 'ok');
+    return;
+  }
+
+  const open = ev.target.closest('[data-open]');
+  if (open) openEvent(+open.dataset.open);
+});
+
+$('eventModal').addEventListener('click', ev => {
+  if (ev.target.closest('.tier-price')){
+    ev.preventDefault();
+    ev.stopPropagation();
+    return;
+  }
+  if (ev.target === $('eventModal')) closeEventModal();
+});
+
+document.addEventListener('keydown', ev => {
+  if (ev.key !== 'Escape') return;
+  if ($('eventModal').classList.contains('open')) closeEventModal();
+  else if ($('cartDrawer').classList.contains('open')) closeDrawer();
+});
+
+/* =========================================================
+   INIT
+   ========================================================= */
+renderEvents();
+renderCart();
+</script>
+</body>
+</html>
