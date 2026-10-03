@@ -1112,253 +1112,423 @@ function posterSVG(e, ctx){
 }
 
 /* =========================================================
-   JAPAN EVENT DATA
+   JAPAN EVENT DATA — UPDATED WITH PROVIDED LIST
    ========================================================= */
-const JP_PRICING = [
-  { name:'一般', price:8500, left:420 },
-  { name:'プレミアム', price:15000, left:120 },
-  { name:'VIP', price:30000, left:30 }
-];
-
 const JP_SELLERS = {
   primary:['チケットぴあ','ローソンチケット','e+'],
   secondary:['チケット流通センター','StubHub Japan']
 };
 
 const EVENTS = [
-  { id:201, title:"YOASOBI ASIA 10-CITY DOME TOUR", artist:"YOASOBI",
-    category:"concert", genre:"J-Pop / Anime", date:"2026-12-05", time:"18:00",
-    venue:"東京ドーム", city:"東京", fromPrice:8500,
+  // ——— Oct 6, 2026 ———
+  { id:601, title:"Post Malone", artist:"Post Malone",
+    category:"concert", genre:"Hip-Hop / Pop", date:"2026-10-06", time:"18:00",
+    venue:"K-Arena Yokohama", city:"神奈川", fromPrice:10000,
+    gradient:["#f59e0b","#8b5cf6"], icon:"music", art:"neon", hot:true,
+    pricing:[
+      { name:'一般', price:10000, left:400 },
+      { name:'プレミアム', price:12500, left:120 },
+      { name:'VIP', price:15000, left:40 }
+    ],
+    sellers:JP_SELLERS,
+    desc:"グラミー賞ノミネートのポスト・マローンがKアリーナ横浜に登場。ヒップホップとポップを融合させた唯一無二のライブを体感しよう。" },
+
+  // ——— Oct 7–8, 2026 ———
+  { id:602, title:"Novelbright", artist:"Novelbright",
+    category:"concert", genre:"J-Rock / Pop", date:"2026-10-07", time:"18:30",
+    venue:"Pia Arena MM, Yokohama", city:"神奈川", fromPrice:8500,
+    gradient:["#0ea5e9","#f59e0b"], icon:"music", art:"sakura",
+    pricing:[
+      { name:'一般', price:8500, left:350 },
+      { name:'プレミアム', price:9500, left:100 },
+      { name:'VIP', price:10500, left:30 }
+    ],
+    sellers:JP_SELLERS,
+    desc:"Novelbrightが横浜Pia Arena MMで2日間のライブを開催。爽やかなロックサウンドと心に響く歌詞で会場を包みます。" },
+
+  { id:603, title:"Zara Larsson", artist:"Zara Larsson",
+    category:"concert", genre:"Pop / Dance", date:"2026-10-07", time:"19:00",
+    venue:"Ebisu Garden Hall, Tokyo", city:"東京", fromPrice:9000,
+    gradient:["#ec4899","#8b5cf6"], icon:"music", art:"neon", hot:true,
+    pricing:[
+      { name:'一般', price:9000, left:300 },
+      { name:'プレミアム', price:10000, left:80 },
+      { name:'VIP', price:11000, left:20 }
+    ],
+    sellers:JP_SELLERS,
+    desc:"スウェーデンのポップスター、ザラ・ラーソンが恵比寿ガーデンホールで来日公演。ダンサブルなヒット曲の数々を披露。" },
+
+  // ——— Oct 9, 2026 ———
+  { id:604, title:"Tokyo Hanayome Tour", artist:"Tokyo Hanayome",
+    category:"concert", genre:"J-Rock / Alternative", date:"2026-10-09", time:"19:00",
+    venue:"Ikebukuro EDGE, Tokyo", city:"東京", fromPrice:10000,
+    gradient:["#7c3aed","#ec4899"], icon:"music", art:"torii",
+    pricing:[
+      { name:'一般', price:10000, left:200 },
+      { name:'最前・優先', price:10000, left:40 }
+    ],
+    sellers:JP_SELLERS,
+    desc:"Tokyo Hanayome Tourが池袋EDGEで開催。最前・優先エリアのチケットのみの限定販売。熱狂的なファン必見のステージ。" },
+
+  { id:605, title:"SAMURAI CAFE Live Show", artist:"SAMURAI CAFE",
+    category:"concert", genre:"Live Show / Entertainment", date:"2026-10-09", time:"19:00",
+    venue:"Samurai Cafe, Osaka", city:"大阪", fromPrice:10000,
+    gradient:["#dc2626","#f59e0b"], icon:"music", art:"sakura",
+    pricing:[
+      { name:'一般', price:10000, left:150 },
+      { name:'VIP', price:10000, left:30 }
+    ],
+    sellers:JP_SELLERS,
+    desc:"大阪・サムライカフェで繰り広げられるライブショー。和のテイストを取り入れたパフォーマンスと音楽の融合。" },
+
+  // ——— Oct 11, 2026 ———
+  { id:606, title:"Lorna Shore", artist:"Lorna Shore",
+    category:"concert", genre:"Deathcore / Metal", date:"2026-10-11", time:"18:30",
+    venue:"Namba Hatch, Osaka", city:"大阪", fromPrice:8500,
+    gradient:["#111827","#dc2626"], icon:"music", art:"neon",
+    pricing:[
+      { name:'一般', price:8500, left:300 },
+      { name:'プレミアム', price:9500, left:80 },
+      { name:'VIP', price:10000, left:20 }
+    ],
+    sellers:JP_SELLERS,
+    desc:"デスコア界の重鎮、ローナ・ショアが難波ハッチに登場。圧倒的なヘヴィネスとテクニカルな演奏で会場を圧倒する。" },
+
+  // ——— Oct 15, 2026 ———
+  { id:607, title:"Tokyo Hanayome Tour", artist:"Tokyo Hanayome",
+    category:"concert", genre:"J-Rock / Alternative", date:"2026-10-15", time:"19:00",
+    venue:"Osaka RUIDO, Osaka", city:"大阪", fromPrice:10000,
+    gradient:["#7c3aed","#ec4899"], icon:"music", art:"torii",
+    pricing:[
+      { name:'一般', price:10000, left:200 },
+      { name:'最前・優先', price:10000, left:40 }
+    ],
+    sellers:JP_SELLERS,
+    desc:"Tokyo Hanayome Tourが大阪RUIDOで開催。最前・優先エリアの限定チケット。関西のファン必見のライブ。" },
+
+  // ——— Oct 16, 2026 ———
+  { id:608, title:"Charlie Puth", artist:"Charlie Puth",
+    category:"concert", genre:"Pop / R&B", date:"2026-10-16", time:"19:00",
+    venue:"Pia Arena MM, Yokohama", city:"神奈川", fromPrice:10000,
+    gradient:["#0ea5e9","#8b5cf6"], icon:"music", art:"neon", hot:true,
+    pricing:[
+      { name:'一般', price:10000, left:400 },
+      { name:'プレミアム', price:12000, left:120 },
+      { name:'VIP', price:14000, left:40 }
+    ],
+    sellers:JP_SELLERS,
+    desc:"チャーリー・プースが横浜Pia Arena MMで来日公演。数々のヒット曲と卓越したピアノパフォーマンスを披露。" },
+
+  // ——— Oct 20, 2026 ———
+  { id:609, title:"Tokyo Hanayome Tour", artist:"Tokyo Hanayome",
+    category:"concert", genre:"J-Rock / Alternative", date:"2026-10-20", time:"19:00",
+    venue:"Fukuoka DRUM SON, Fukuoka", city:"福岡", fromPrice:10000,
+    gradient:["#7c3aed","#ec4899"], icon:"music", art:"torii",
+    pricing:[
+      { name:'一般', price:10000, left:150 },
+      { name:'最前・優先', price:10000, left:30 }
+    ],
+    sellers:JP_SELLERS,
+    desc:"Tokyo Hanayome Tourが福岡DRUM SONで開催。最前・優先エリアの限定チケット。九州のファン必見。" },
+
+  // ——— Oct 24–25, 2026 ———
+  { id:610, title:"YOASOBI", artist:"YOASOBI",
+    category:"concert", genre:"J-Pop / Anime", date:"2026-10-24", time:"18:00",
+    venue:"Kyocera Dome, Osaka", city:"大阪", fromPrice:10000,
     gradient:["#4c1d95","#ec4899"], icon:"music", art:"neon", hot:true,
-    pricing:JP_PRICING, sellers:JP_SELLERS,
-    desc:"YOASOBIがアジア10都市を巡るドーム＆スタジアムツアーを東京ドームで開催。アニメ主題歌のヒット曲から最新曲まで、圧巻のステージパフォーマンスを体感してください。" },
-  { id:202, title:"Stray Kids World Tour <RUN IT JAPAN>", artist:"Stray Kids",
+    pricing:[
+      { name:'一般', price:10000, left:500 },
+      { name:'プレミアム', price:11000, left:150 },
+      { name:'VIP', price:12000, left:50 }
+    ],
+    sellers:JP_SELLERS,
+    desc:"YOASOBIが京セラドーム大阪で2日間のライブを開催。アニメ主題歌のヒット曲から最新曲まで、圧巻のステージ。" },
+
+  // ——— Oct 29, 2026 ———
+  { id:611, title:"Benson Boone", artist:"Benson Boone",
+    category:"concert", genre:"Pop / Rock", date:"2026-10-29", time:"19:00",
+    venue:"Toyota Arena Tokyo", city:"東京", fromPrice:10000,
+    gradient:["#f59e0b","#ec4899"], icon:"music", art:"neon",
+    pricing:[
+      { name:'一般', price:10000, left:400 },
+      { name:'プレミアム', price:11500, left:100 },
+      { name:'VIP', price:13000, left:30 }
+    ],
+    sellers:JP_SELLERS,
+    desc:"ベンソン・ブーンがトヨタアリーナ東京で来日公演。若き才能が放つポップとロックの融合サウンド。" },
+
+  // ——— Nov 1, 2026 ———
+  { id:612, title:"BAND-MAID", artist:"BAND-MAID",
+    category:"concert", genre:"Rock / Metal", date:"2026-11-01", time:"18:00",
+    venue:"Comtec Portbase, Nagoya", city:"愛知", fromPrice:8000,
+    gradient:["#dc2626","#111827"], icon:"music", art:"sakura",
+    pricing:[
+      { name:'一般', price:8000, left:300 },
+      { name:'プレミアム', price:9000, left:80 },
+      { name:'VIP', price:10000, left:20 }
+    ],
+    sellers:JP_SELLERS,
+    desc:"BAND-MAIDが名古屋Comtec Portbaseでライブ。メイド服で繰り広げるハードロックサウンドが世界を魅了。" },
+
+  // ——— Nov 6–8, 2026 ———
+  { id:613, title:"Stray Kids", artist:"Stray Kids",
     category:"concert", genre:"K-Pop", date:"2026-11-06", time:"18:00",
-    venue:"東京ドーム", city:"東京", fromPrice:11000,
+    venue:"Tokyo Dome", city:"東京", fromPrice:13000,
     gradient:["#dc2626","#111827"], icon:"music", art:"sakura", hot:true,
     pricing:[
-      { name:'一般', price:11000, left:380 },
-      { name:'プレミアム', price:18000, left:95 },
-      { name:'VIP', price:35000, left:25 }
+      { name:'一般', price:13000, left:380 },
+      { name:'プレミアム', price:14500, left:95 },
+      { name:'VIP', price:16000, left:25 }
     ],
     sellers:JP_SELLERS,
-    desc:"Stray Kidsのワールドツアー日本公演が東京ドームで3日間開催。最新アルバムの楽曲を中心に、迫力のパフォーマンスと映像演出で会場を熱狂させます。" },
-  { id:203, title:"藤井風 ピアノリサイタル", artist:"藤井風",
-    category:"concert", genre:"J-Pop / Piano", date:"2026-11-20", time:"19:00",
-    venue:"東京ドーム", city:"東京", fromPrice:9500,
-    gradient:["#1e1b4b","#f59e0b"], icon:"music", art:"fuji", hot:true,
+    desc:"Stray Kidsが東京ドームで3日間のワールドツアー日本公演を開催。最新アルバムの楽曲を中心に迫力のステージ。" },
+
+  // ——— Nov 8, 2026 ———
+  { id:614, title:"Death Cab for Cutie", artist:"Death Cab for Cutie",
+    category:"concert", genre:"Indie Rock", date:"2026-11-08", time:"18:30",
+    venue:"Matsushita IMP Hall, Osaka", city:"大阪", fromPrice:9000,
+    gradient:["#0f766e","#f59e0b"], icon:"music", art:"neon",
     pricing:[
-      { name:'一般', price:9500, left:500 },
-      { name:'プレミアム', price:16000, left:150 },
-      { name:'VIP', price:28000, left:40 }
+      { name:'一般', price:9000, left:250 },
+      { name:'プレミアム', price:10000, left:70 },
+      { name:'VIP', price:11000, left:20 }
     ],
     sellers:JP_SELLERS,
-    desc:"藤井風が東京ドームでピアノリサイタルを開催。代表曲の数々をピアノアレンジで披露する特別な夜。静寂と熱狂が交差する唯一無二のステージ。" },
-  { id:204, title:"INI 5TH ANNIVERSARY DOME TOUR", artist:"INI",
-    category:"concert", genre:"J-Pop / Idol", date:"2026-09-16", time:"18:30",
-    venue:"東京ドーム", city:"東京", fromPrice:8000,
-    gradient:["#7c3aed","#22d3ee"], icon:"music", art:"neon",
-    pricing:JP_PRICING, sellers:JP_SELLERS,
-    desc:"INIの5周年を記念したドームツアー。最新ヒット曲からデビュー曲まで、5年間の軌跡を凝縮した特別なステージ。" },
-  { id:205, title:"SUPER BEAVER 都会のラクダ DOME TOUR", artist:"SUPER BEAVER",
-    category:"concert", genre:"Rock", date:"2026-09-22", time:"18:00",
-    venue:"東京ドーム", city:"東京", fromPrice:7500,
-    gradient:["#0f766e","#f59e0b"], icon:"music", art:"torii",
-    pricing:JP_PRICING, sellers:JP_SELLERS,
-    desc:"SUPER BEAVERが東京ドームで2日間のライブを開催。ロックバンドの熱い演奏とメッセージ性の強い歌詞で、会場全体が一体となるステージ。" },
-  { id:206, title:"ENHYPEN WORLD TOUR 'BLOOD SAGA'", artist:"ENHYPEN",
+    desc:"デス・キャブ・フォー・キューティーが松下IMPホールで来日公演。インディーロックの名曲の数々を披露。" },
+
+  // ——— Nov 10, 2026 ———
+  { id:615, title:"Jason Mraz", artist:"Jason Mraz",
+    category:"concert", genre:"Pop / Acoustic", date:"2026-11-10", time:"19:00",
+    venue:"Tokyo Garden Theater", city:"東京", fromPrice:10000,
+    gradient:["#0ea5e9","#f59e0b"], icon:"music", art:"sakura",
+    pricing:[
+      { name:'一般', price:10000, left:300 },
+      { name:'プレミアム', price:11000, left:80 },
+      { name:'VIP', price:12500, left:30 }
+    ],
+    sellers:JP_SELLERS,
+    desc:"ジェイソン・ムラーズが東京ガーデンシアターで来日公演。アコースティックなサウンドと心温まる歌声を届けます。" },
+
+  // ——— Nov 18–19, 2026 ———
+  { id:616, title:"Tedeschi Trucks Band", artist:"Tedeschi Trucks Band",
+    category:"concert", genre:"Blues / Rock", date:"2026-11-18", time:"19:00",
+    venue:"SGC Hall Ariake, Tokyo", city:"東京", fromPrice:11000,
+    gradient:["#f59e0b","#111827"], icon:"music", art:"neon",
+    pricing:[
+      { name:'一般', price:11000, left:250 },
+      { name:'プレミアム', price:12500, left:70 },
+      { name:'VIP', price:14000, left:20 }
+    ],
+    sellers:JP_SELLERS,
+    desc:"テデスキ・トラックス・バンドが有明SGCホールで2日間のライブ。ブルースとロックの融合サウンドを堪能。" },
+
+  // ——— Nov 21–22, 2026 ———
+  { id:617, title:"5 Seconds of Summer", artist:"5 Seconds of Summer",
+    category:"concert", genre:"Pop Rock", date:"2026-11-21", time:"18:30",
+    venue:"SGC Hall Ariake, Tokyo", city:"東京", fromPrice:10000,
+    gradient:["#ec4899","#8b5cf6"], icon:"music", art:"neon", hot:true,
+    pricing:[
+      { name:'一般', price:10000, left:400 },
+      { name:'プレミアム', price:12000, left:100 },
+      { name:'VIP', price:13500, left:30 }
+    ],
+    sellers:JP_SELLERS,
+    desc:"5 Seconds of Summerが有明SGCホールで2日間の来日公演。ポップロックのヒット曲満載のステージ。" },
+
+  // ——— Nov 24–25, 2026 ———
+  { id:618, title:"Iron Maiden", artist:"Iron Maiden",
+    category:"concert", genre:"Heavy Metal", date:"2026-11-24", time:"19:00",
+    venue:"K-Arena Yokohama", city:"神奈川", fromPrice:10000,
+    gradient:["#111827","#dc2626"], icon:"music", art:"neon",
+    pricing:[
+      { name:'アリーナ / スタンドB標準', price:10000, left:500 },
+      { name:'アリーナS', price:15000, left:100 },
+      { name:'VIP', price:25000, left:20 }
+    ],
+    sellers:JP_SELLERS,
+    desc:"アイアン・メイデンがKアリーナ横浜で2日間の来日公演。ヘヴィメタルの伝説が最新ツアーで日本を熱狂させる。" },
+
+  // ——— Nov 26, 2026 ———
+  { id:619, title:"Queens of the Stone Age", artist:"Queens of the Stone Age",
+    category:"concert", genre:"Stoner Rock", date:"2026-11-26", time:"19:00",
+    venue:"Zepp Nagoya", city:"愛知", fromPrice:10000,
+    gradient:["#dc2626","#111827"], icon:"music", art:"neon",
+    pricing:[
+      { name:'一般', price:10000, left:300 },
+      { name:'プレミアム', price:11000, left:80 },
+      { name:'VIP', price:12000, left:20 }
+    ],
+    sellers:JP_SELLERS,
+    desc:"クイーンズ・オブ・ザ・ストーン・エイジが名古屋Zeppでライブ。ヘヴィでサイケデリックなロックサウンド。" },
+
+  // ——— Nov 27, 2026 ———
+  { id:620, title:"Wave to Earth", artist:"Wave to Earth",
+    category:"concert", genre:"Indie / Bedroom Pop", date:"2026-11-27", time:"19:00",
+    venue:"Zepp DiverCity, Tokyo", city:"東京", fromPrice:8500,
+    gradient:["#0ea5e9","#8b5cf6"], icon:"music", art:"neon",
+    pricing:[
+      { name:'一般', price:8500, left:250 },
+      { name:'プレミアム', price:9500, left:70 },
+      { name:'VIP', price:10500, left:20 }
+    ],
+    sellers:JP_SELLERS,
+    desc:"韓国のインディーバンド、ウェイヴ・トゥ・アースがZepp DiverCityで来日公演。心地よいサウンドと透明感のある歌声。" },
+
+  // ——— Nov 29, 2026 ———
+  { id:621, title:"YOASOBI", artist:"YOASOBI",
+    category:"concert", genre:"J-Pop / Anime", date:"2026-11-29", time:"18:00",
+    venue:"Mizuho PayPay Dome, Fukuoka", city:"福岡", fromPrice:10000,
+    gradient:["#4c1d95","#ec4899"], icon:"music", art:"neon", hot:true,
+    pricing:[
+      { name:'一般', price:10000, left:500 },
+      { name:'プレミアム', price:11000, left:150 },
+      { name:'VIP', price:12000, left:50 }
+    ],
+    sellers:JP_SELLERS,
+    desc:"YOASOBIが福岡PayPayドームでライブ。アニメ主題歌のヒット曲の数々をドーム規模で披露。" },
+
+  // ——— Nov 30, 2026 ———
+  { id:622, title:"Two Door Cinema Club", artist:"Two Door Cinema Club",
+    category:"concert", genre:"Indie Rock / Electronic", date:"2026-11-30", time:"19:00",
+    venue:"SGC Hall Ariake, Tokyo", city:"東京", fromPrice:9500,
+    gradient:["#0ea5e9","#f59e0b"], icon:"music", art:"neon",
+    pricing:[
+      { name:'一般', price:9500, left:300 },
+      { name:'プレミアム', price:10500, left:80 },
+      { name:'VIP', price:11500, left:20 }
+    ],
+    sellers:JP_SELLERS,
+    desc:"トゥー・ドア・シネマ・クラブが有明SGCホールで来日公演。ダンサブルなインディーロックサウンド。" },
+
+  // ——— Dec 1, 2026 ———
+  { id:623, title:"Evanescence", artist:"Evanescence",
+    category:"concert", genre:"Alternative Metal / Rock", date:"2026-12-01", time:"19:00",
+    venue:"SGC Hall Ariake, Tokyo", city:"東京", fromPrice:10500,
+    gradient:["#7c3aed","#111827"], icon:"music", art:"neon",
+    pricing:[
+      { name:'一般', price:10500, left:300 },
+      { name:'プレミアム', price:12000, left:80 },
+      { name:'VIP', price:13000, left:20 }
+    ],
+    sellers:JP_SELLERS,
+    desc:"エヴァネッセンスが有明SGCホールで来日公演。圧倒的な歌声とヘヴィなロックサウンドで会場を魅了。" },
+
+  // ——— Dec 1–2, 2026 ———
+  { id:624, title:"ENHYPEN", artist:"ENHYPEN",
     category:"concert", genre:"K-Pop", date:"2026-12-01", time:"18:30",
-    venue:"東京ドーム", city:"東京", fromPrice:10500,
-    gradient:["#be185d","#0f172a"], icon:"music", art:"sakura",
+    venue:"Tokyo Dome", city:"東京", fromPrice:13000,
+    gradient:["#be185d","#0f172a"], icon:"music", art:"sakura", hot:true,
     pricing:[
-      { name:'一般', price:10500, left:360 },
-      { name:'プレミアム', price:17000, left:100 },
-      { name:'VIP', price:32000, left:30 }
+      { name:'一般', price:13000, left:360 },
+      { name:'プレミアム', price:14500, left:100 },
+      { name:'VIP', price:16000, left:30 }
     ],
     sellers:JP_SELLERS,
-    desc:"ENHYPENのワールドツアー日本公演。ダークでスタイリッシュなパフォーマンスと、美しいハーモニーが融合したステージ。2日間限定公演。" },
-  { id:207, title:"BIGBANG 2026 WORLD TOUR IN JAPAN", artist:"BIGBANG",
-    category:"concert", genre:"K-Pop", date:"2026-12-13", time:"17:00",
-    venue:"東京ドーム", city:"東京", fromPrice:12000,
-    gradient:["#fbbf24","#111827"], icon:"music", art:"neon", hot:true,
+    desc:"ENHYPENが東京ドームで2日間のワールドツアー日本公演。ダークでスタイリッシュなパフォーマンス。" },
+
+  // ——— Dec 5, 2026 ———
+  { id:625, title:"Ryokuoushoku Shakai", artist:"Ryokuoushoku Shakai",
+    category:"concert", genre:"J-Pop / Rock", date:"2026-12-05", time:"18:00",
+    venue:"Yokohama Arena", city:"神奈川", fromPrice:9000,
+    gradient:["#0ea5e9","#f59e0b"], icon:"music", art:"sakura",
     pricing:[
-      { name:'一般', price:12000, left:300 },
-      { name:'プレミアム', price:20000, left:80 },
-      { name:'VIP', price:40000, left:20 }
+      { name:'一般', price:9000, left:400 },
+      { name:'プレミアム', price:10000, left:100 },
+      { name:'VIP', price:11000, left:30 }
     ],
     sellers:JP_SELLERS,
-    desc:"BIGBANGがワールドツアーで東京ドームに3日間帰還。伝説のヒット曲の数々と、進化し続けるパフォーマンスでファンを魅了します。" },
-  { id:208, title:"Snow Man DOME TOUR 2026-2027", artist:"Snow Man",
-    category:"concert", genre:"J-Pop / Idol", date:"2026-12-23", time:"17:00",
-    venue:"東京ドーム", city:"東京", fromPrice:9000,
-    gradient:["#0ea5e9","#f8fafc"], icon:"music", art:"sakura",
-    pricing:JP_PRICING, sellers:JP_SELLERS,
-    desc:"Snow Manのドームツアーが東京ドームで4日間開催。圧倒的なパフォーマンスと華やかなステージセットで、会場を笑顔と熱気で包みます。" },
-  { id:209, title:"Fujii Kaze「Prema World Tour」", artist:"藤井風",
-    category:"concert", genre:"J-Pop", date:"2026-12-19", time:"18:00",
-    venue:"東京ドーム", city:"東京", fromPrice:9500,
+    desc:"緑黄色社会が横浜アリーナでライブ。ポップでキャッチーなサウンドと力強い歌声で会場を魅了。" },
+
+  // ——— Dec 5–6, 2026 ———
+  { id:626, title:"YOASOBI", artist:"YOASOBI",
+    category:"concert", genre:"J-Pop / Anime", date:"2026-12-05", time:"18:00",
+    venue:"Tokyo Dome", city:"東京", fromPrice:10000,
+    gradient:["#4c1d95","#ec4899"], icon:"music", art:"neon", hot:true,
+    pricing:[
+      { name:'一般', price:10000, left:500 },
+      { name:'プレミアム', price:11000, left:150 },
+      { name:'VIP', price:12000, left:50 }
+    ],
+    sellers:JP_SELLERS,
+    desc:"YOASOBIが東京ドームで2日間のライブを開催。アニメ主題歌のヒット曲の数々をドーム規模で披露。" },
+
+  // ——— Dec 13, 2026 ———
+  { id:627, title:"Salon Orchestra Japan", artist:"Salon Orchestra Japan",
+    category:"concert", genre:"Classical / Orchestra", date:"2026-12-13", time:"14:00",
+    venue:"Harmony Hall, Chiba", city:"千葉", fromPrice:2000,
+    gradient:["#8b5cf6","#f59e0b"], icon:"music", art:"sakura",
+    pricing:[
+      { name:'一般', price:2000, left:600 },
+      { name:'プレミアム', price:3500, left:150 },
+      { name:'VIP', price:5000, left:50 }
+    ],
+    sellers:JP_SELLERS,
+    desc:"サロン・オーケストラ・ジャパンが千葉ハーモニーホールでコンサート。クラシックの名曲をサロン形式でお届け。" },
+
+  { id:628, title:"Fujii Kaze", artist:"Fujii Kaze",
+    category:"concert", genre:"J-Pop / Piano", date:"2026-12-13", time:"18:00",
+    venue:"Kyocera Dome, Osaka", city:"大阪", fromPrice:11000,
     gradient:["#4c1d95","#f59e0b"], icon:"music", art:"fuji", hot:true,
-    pricing:JP_PRICING, sellers:JP_SELLERS,
-    desc:"藤井風のワールドツアー日本公演。最新アルバム「Prema」の楽曲を中心に、彼の音楽的進化を体感できるステージ。" },
-  { id:210, title:"Number_i LIVE TOUR No.III", artist:"Number_i",
-    category:"concert", genre:"J-Pop / Hip-Hop", date:"2026-12-09", time:"18:30",
-    venue:"東京ドーム", city:"東京", fromPrice:8200,
-    gradient:["#ef4444","#111827"], icon:"music", art:"neon",
-    pricing:JP_PRICING, sellers:JP_SELLERS,
-    desc:"Number_iのライブツアーが東京ドームで2日間開催。ヒップホップとJ-Popを融合させた独自のサウンドと、キレのあるパフォーマンス。" },
+    pricing:[
+      { name:'一般', price:11000, left:500 },
+      { name:'プレミアム', price:12000, left:150 },
+      { name:'VIP', price:13000, left:40 }
+    ],
+    sellers:JP_SELLERS,
+    desc:"藤井風が京セラドーム大阪でライブ。ピアノと歌声で魅せる唯一無二のステージ。" },
 
-  { id:301, title:"SUMMER SONIC 2026", artist:"The Strokes / Ado / JENNIE ほか",
-    category:"festival", genre:"Music Festival", date:"2026-08-14", time:"11:00",
-    venue:"ZOZOマリンスタジアム & 幕張メッセ", city:"千葉", fromPrice:21000,
-    gradient:["#06b6d4","#8b5cf6"], icon:"tent", art:"neon", hot:true,
+  // ——— Dec 15, 2026 ———
+  { id:629, title:"A Perfect Circle w/ Puscifer", artist:"A Perfect Circle / Puscifer",
+    category:"concert", genre:"Alternative Rock / Metal", date:"2026-12-15", time:"19:00",
+    venue:"Zepp DiverCity, Tokyo", city:"東京", fromPrice:10000,
+    gradient:["#111827","#8b5cf6"], icon:"music", art:"neon",
     pricing:[
-      { name:'1DAY', price:21000, left:800 },
-      { name:'3DAY', price:59000, left:200 },
-      { name:'プラチナム', price:100000, left:50 }
+      { name:'一般', price:10000, left:300 },
+      { name:'プレミアム', price:11000, left:80 },
+      { name:'VIP', price:12000, left:20 }
     ],
     sellers:JP_SELLERS,
-    desc:"25周年を迎えるSUMMER SONICが初の3日間開催。The Strokes、Ado、JENNIE、FKA twigs、David Byrneほか、国内外のトップアーティストが集結。" },
-  { id:302, title:"FUJI ROCK FESTIVAL '26", artist:"Fujii Kaze / Mitski / XG ほか",
-    category:"festival", genre:"Rock / Alternative", date:"2026-07-24", time:"10:00",
-    venue:"苗場スキー場", city:"新潟", fromPrice:22000,
-    gradient:["#15803d","#0ea5e9"], icon:"tent", art:"fuji", hot:true,
-    pricing:[
-      { name:'1DAY', price:22000, left:600 },
-      { name:'3DAY', price:58000, left:150 },
-      { name:'VIP', price:120000, left:30 }
-    ],
-    sellers:JP_SELLERS,
-    desc:"日本を代表する野外フェス、フジロック。苗場スキー場の自然の中で、Fujii Kaze、Mitski、XGなど国内外のアーティストが出演。キャンプサイトも完備。" },
-  { id:303, title:"ROCK IN JAPAN FESTIVAL 2026", artist:"Ado / ずっと真夜中でいいのに。ほか",
-    category:"festival", genre:"Rock / J-Pop", date:"2026-08-08", time:"10:00",
-    venue:"千葉市蘇我スポーツ公園", city:"千葉", fromPrice:15000,
-    gradient:["#dc2626","#f59e0b"], icon:"tent", art:"torii",
-    pricing:[
-      { name:'1DAY', price:15000, left:1000 },
-      { name:'4DAY', price:42000, left:300 },
-      { name:'VIP', price:80000, left:60 }
-    ],
-    sellers:JP_SELLERS,
-    desc:"国内最大級のロックフェス。Ado、ずっと真夜中でいいのに。をはじめ、J-ROCK、J-POPのトップアーティストが5日間にわたり出演。" },
-  { id:304, title:"JAPAN JAM 2026", artist:"UVERworld / 超ときめき♡宣伝部 ほか",
-    category:"festival", genre:"Rock / Idol", date:"2026-05-02", time:"10:00",
-    venue:"千葉市蘇我スポーツ公園", city:"千葉", fromPrice:14000,
-    gradient:["#7c3aed","#ec4899"], icon:"tent", art:"sakura",
-    pricing:[
-      { name:'1DAY', price:14000, left:900 },
-      { name:'2DAY', price:26000, left:250 },
-      { name:'4DAY', price:42000, left:100 }
-    ],
-    sellers:JP_SELLERS,
-    desc:"ゴールデンウィークに開催されるJAPAN JAM。UVERworld、超ときめき♡宣伝部、CUTIE STREET、10-FEETなど、人気アーティストが多数出演。" },
+    desc:"ア・パーフェクト・サークルとプシファーのジョイント来日公演。オルタナティブロックの名曲の数々を披露。" },
 
-  { id:401, title:"読売ジャイアンツ vs 阪神タイガース 開幕戦", artist:"読売 vs 阪神",
-    category:"sports", genre:"プロ野球", date:"2026-03-27", time:"18:15",
-    venue:"東京ドーム", city:"東京", fromPrice:4500,
-    gradient:["#f59e0b","#111827"], icon:"trophy", art:"stadium", hot:true,
+  // ——— Dec 16, 2026 ———
+  { id:630, title:"New Japan Philharmonic (Beethoven No. 9)", artist:"New Japan Philharmonic",
+    category:"concert", genre:"Classical", date:"2026-12-16", time:"19:00",
+    venue:"Minato Mirai Hall, Yokohama", city:"神奈川", fromPrice:5000,
+    gradient:["#0ea5e9","#8b5cf6"], icon:"music", art:"sakura",
     pricing:[
-      { name:'内野指定', price:4500, left:600 },
-      { name:'内野SS', price:8000, left:180 },
-      { name:'VIPボックス', price:20000, left:40 }
+      { name:'一般', price:5000, left:400 },
+      { name:'プレミアム', price:7500, left:100 },
+      { name:'VIP', price:10000, left:30 }
     ],
     sellers:JP_SELLERS,
-    desc:"2026年セントラル・リーグ開幕戦。読売ジャイアンツが東京ドームで阪神タイガースを迎え撃つ。伝統の一戦を生で体感しよう。" },
-  { id:402, title:"Jリーグオールスター DAZNカップ 2026", artist:"Jリーグ選抜",
-    category:"sports", genre:"サッカー", date:"2026-06-13", time:"18:00",
-    venue:"味の素スタジアム", city:"東京", fromPrice:3500,
-    gradient:["#0ea5e9","#15803d"], icon:"trophy", art:"stadium",
-    pricing:[
-      { name:'一般', price:3500, left:800 },
-      { name:'プレミアム', price:7000, left:200 },
-      { name:'VIP', price:15000, left:50 }
-    ],
-    sellers:JP_SELLERS,
-    desc:"Jリーグのスター選手が集結するオールスターゲーム。日本サッカーの最高峰のプレーを間近で観戦できる特別な試合。" },
-  { id:403, title:"K-1 WORLD GP 2026", artist:"武尊 vs チンギス・アラゾフ",
-    category:"sports", genre:"格闘技", date:"2026-02-09", time:"17:00",
-    venue:"さいたまスーパーアリーナ", city:"埼玉", fromPrice:8000,
-    gradient:["#dc2626","#111827"], icon:"trophy", art:"stadium", hot:true,
-    pricing:[
-      { name:'アリーナA', price:8000, left:500 },
-      { name:'アリーナSS', price:20000, left:120 },
-      { name:'VIPリングサイド', price:60000, left:20 }
-    ],
-    sellers:JP_SELLERS,
-    desc:"K-1 WORLD GPがさいたまスーパーアリーナに帰還。武尊とチンギス・アラゾフの頂上決戦をはじめ、世界最強のキックボクサーが集結。" },
-  { id:404, title:"SUPER RIZIN.5", artist:"RIZIN MMA",
-    category:"sports", genre:"総合格闘技", date:"2026-09-10", time:"17:00",
-    venue:"さいたまスーパーアリーナ", city:"埼玉", fromPrice:9000,
-    gradient:["#7c3aed","#111827"], icon:"trophy", art:"neon",
-    pricing:[
-      { name:'アリーナB', price:9000, left:400 },
-      { name:'アリーナS', price:25000, left:100 },
-      { name:'VIP', price:80000, left:15 }
-    ],
-    sellers:JP_SELLERS,
-    desc:"RIZINのビッグマッチがさいたまスーパーアリーナで開催。国内最強ファイターたちが激突する総合格闘技の祭典。" },
-  { id:405, title:"プロ野球 ドラフト会議 2026", artist:"NPB",
-    category:"sports", genre:"プロ野球", date:"2026-10-26", time:"17:00",
-    venue:"東京ドーム", city:"東京", fromPrice:4950,
-    gradient:["#0369a1","#f8fafc"], icon:"trophy", art:"stadium",
-    pricing:[
-      { name:'全席指定', price:4950, left:2000 },
-      { name:'プレミアム', price:8000, left:500 }
-    ],
-    sellers:JP_SELLERS,
-    desc:"2026年プロ野球ドラフト会議。未来のスター選手が指名される瞬間を東京ドームで目撃しよう。" },
+    desc:"新日本フィルハーモニー交響楽団がみなとみらいホールでベートーヴェン交響曲第9番を演奏。年末の定番コンサート。" },
 
-  { id:501, title:"agefarre 2026 — ageHa×velfarre 15th Anniversary", artist:"ageHa / velfarre",
-    category:"party", genre:"Club / EDM", date:"2026-10-11", time:"15:00",
-    venue:"ZEROTOKYO", city:"東京", fromPrice:3500,
-    gradient:["#ec4899","#8b5cf6"], icon:"party", art:"neon", hot:true,
+  // ——— Dec 17–20, 2026 ———
+  { id:631, title:"Kodo 45th Anniversary Taiko", artist:"Kodo",
+    category:"concert", genre:"Traditional / Taiko", date:"2026-12-17", time:"19:00",
+    venue:"Bunkyo Civic Hall, Tokyo", city:"東京", fromPrice:7800,
+    gradient:["#dc2626","#f59e0b"], icon:"music", art:"torii",
     pricing:[
-      { name:'デイタイム', price:3500, left:1000 },
-      { name:'クラブタイム', price:4000, left:800 },
-      { name:'VIP', price:12000, left:80 }
+      { name:'一般', price:7800, left:300 },
+      { name:'プレミアム', price:8900, left:80 },
+      { name:'VIP', price:10000, left:20 }
     ],
     sellers:JP_SELLERS,
-    desc:"ageHaとvelfarreの15周年を記念した大型クラブイベント。ZEROTOKYOを舞台に、デイタイムからクラブタイムまで2部構成のロングパーティー。" },
-  { id:502, title:"WOMB WTW Weekday Party", artist:"Tokyo Local DJs",
-    category:"party", genre:"Techno / House", date:"2026-09-30", time:"23:00",
-    venue:"WOMB 渋谷", city:"東京", fromPrice:1500,
-    gradient:["#8b5cf6","#22d3ee"], icon:"party", art:"neon",
+    desc:"鼓童の45周年記念太鼓コンサートが文京シビックホールで4日間開催。魂を揺さぶる和太鼓の響きを体感。" },
+
+  // ——— Dec 2026 (TBD) ———
+  { id:632, title:"Zelda 40th Anniversary", artist:"The Legend of Zelda Orchestra",
+    category:"concert", genre:"Game Music / Orchestra", date:"2026-12-20", time:"18:00",
+    venue:"K-Arena Yokohama", city:"神奈川", fromPrice:11000,
+    gradient:["#f59e0b","#15803d"], icon:"music", art:"neon", hot:true,
     pricing:[
-      { name:'一般', price:1500, left:300 },
-      { name:'VIP', price:5000, left:40 }
+      { name:'ティアA', price:11000, left:400 },
+      { name:'ティアS', price:15000, left:100 },
+      { name:'VIP', price:25000, left:30 }
     ],
     sellers:JP_SELLERS,
-    desc:"渋谷WOMBで開催される平日限定テクノ＆ハウスパーティー。東京のローカルDJと新進気鋭のアーティストが出演。20歳以上限定。" },
-  { id:503, title:"WARP SHINJUKU Nightclub", artist:"WARP",
-    category:"party", genre:"Club", date:"2026-10-15", time:"20:00",
-    venue:"WARP SHINJUKU", city:"東京", fromPrice:1000,
-    gradient:["#f43f5e","#8b5cf6"], icon:"party", art:"sakura",
-    pricing:[
-      { name:'入場+2ドリンク', price:1000, left:500 },
-      { name:'入場+飲み放題', price:2000, left:400 },
-      { name:'VIPシート', price:8000, left:30 }
-    ],
-    sellers:JP_SELLERS,
-    desc:"新宿最大級のナイトクラブWARP。外国人観光客向けの特別プランも用意。2ドリンク付きの入場チケットと飲み放題プランから選べます。" },
-  { id:504, title:"激ロックDJパーティー HALLOWEEN SPECIAL", artist:"EDGE-CRUSHER",
-    category:"party", genre:"DJ / Rock", date:"2026-10-31", time:"13:00",
-    venue:"渋谷 clubasia", city:"東京", fromPrice:2500,
-    gradient:["#ef4444","#7c3aed"], icon:"party", art:"torii",
-    pricing:[
-      { name:'一般', price:2500, left:600 },
-      { name:'VIP', price:6000, left:50 }
-    ],
-    sellers:JP_SELLERS,
-    desc:"ハロウィン限定の激ロックDJパーティー。水野ギイ、DJとも、ジエメイほか計20組が出演。渋谷clubasiaで朝まで踊り明かそう。" },
-  { id:505, title:"SPARTA presents「JOMO」", artist:"OMSB / 仙人掌 / KM",
-    category:"party", genre:"Hip-Hop / DJ", date:"2026-11-14", time:"22:00",
-    venue:"渋谷 WWW X", city:"東京", fromPrice:3000,
-    gradient:["#f59e0b","#111827"], icon:"party", art:"neon",
-    pricing:[
-      { name:'一般', price:3000, left:400 },
-      { name:'VIP', price:7000, left:40 }
-    ],
-    sellers:JP_SELLERS,
-    desc:"SPARTA主催のオールナイトイベント「JOMO」。OMSB、仙人掌がライブ、KMらがDJで出演。渋谷WWW Xでヒップホップの夜を楽しもう。" }
+    desc:"ゼルダの伝説40周年記念オーケストラコンサートがKアリーナ横浜で開催。名曲の数々をオーケストラで堪能。" }
+
 ];
 
 /* =========================================================
@@ -1391,7 +1561,7 @@ function dayNum(iso){
 function tierBadgeClass(name){
   const n = name.toLowerCase();
   if (n.includes('vvip') || n.includes('vip')) return 'vip';
-  if (n.includes('プレミアム') || n.includes('プラチナム')) return 'vvip';
+  if (n.includes('プレミアム') || n.includes('プラチナム') || n.includes('ティア')) return 'vvip';
   return 'reg';
 }
 
@@ -1901,4 +2071,4 @@ renderEvents();
 renderCart();
 </script>
 </body>
-        </html>
+</html>
