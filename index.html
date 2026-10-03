@@ -3,949 +3,1168 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0a0a12">
+<meta name="description" content="TixNest Japan — 日本全国のコンサート、フェス、スポーツ、ライブイベントのチケットを安全・簡単に検索・購入。">
+<meta property="og:title" content="TixNest Japan — チケットマーケットプレイス">
+<meta property="og:description" content="コンサート、フェス、スポーツ、ナイトライフ。日本最大級のライブイベントチケットを検索。">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
 <title>TixNest Japan — コンサート・スポーツ・フェス チケット</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
+  /* ============================================================
+     DESIGN TOKENS
+     ============================================================ */
   :root{
-    --bg:#08080f;
-    --surface:#12121d;
-    --surface-2:#1a1a29;
-    --surface-3:#222235;
-    --border:rgba(255,255,255,.09);
-    --border-strong:rgba(255,255,255,.18);
-    --text:#f6f6fb;
-    --muted:#9a9ab2;
-    --accent:#8b5cf6;
-    --accent-2:#ec4899;
-    --radius:14px;
-    --serif:"Times New Roman", Times, "Liberation Serif", "Nimbus Roman", Georgia, serif;
+    /* Surfaces */
+    --bg:#0a0a12;
+    --surface:#11111c;
+    --surface-2:#181826;
+    --surface-3:#22222f;
+    --surface-hover:#1e1e2c;
+
+    /* Borders */
+    --border:rgba(255,255,255,.08);
+    --border-2:rgba(255,255,255,.14);
+    --border-3:rgba(255,255,255,.24);
+
+    /* Text */
+    --text:#f5f5f8;
+    --text-2:#b4b4c4;
+    --text-3:#7a7a8e;
+    --text-4:#52525e;
+
+    /* Brand — single confident accent */
+    --brand:#7c3aed;
+    --brand-hover:#8b4ff7;
+    --brand-soft:rgba(124,58,237,.14);
+    --brand-border:rgba(124,58,237,.4);
+
+    /* Semantic */
+    --success:#10b981;
+    --success-bg:rgba(16,185,129,.12);
+    --warning:#f59e0b;
+    --warning-bg:rgba(245,158,11,.12);
+    --danger:#ef4444;
+    --danger-bg:rgba(239,68,68,.12);
+    --info:#3b82f6;
+    --info-bg:rgba(59,130,246,.12);
+
+    /* Spacing scale (8px) */
+    --s-1:4px; --s-2:8px; --s-3:12px; --s-4:16px;
+    --s-5:24px; --s-6:32px; --s-7:48px; --s-8:64px;
+
+    /* Radii */
+    --r-sm:8px; --r-md:12px; --r-lg:16px; --r-xl:20px; --r-full:999px;
+
+    /* Type scale */
+    --fs-xs:12px; --fs-sm:14px; --fs-base:16px; --fs-lg:18px;
+    --fs-xl:22px; --fs-2xl:28px; --fs-3xl:36px; --fs-4xl:48px;
+
+    /* Layout */
+    --max:1280px;
+    --header-h:64px;
+
+    /* Fonts */
+    --font:"Inter","Noto Sans JP",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+
+    /* Shadows */
+    --shadow-1:0 1px 2px rgba(0,0,0,.24);
+    --shadow-2:0 4px 12px rgba(0,0,0,.32);
+    --shadow-3:0 12px 32px rgba(0,0,0,.44);
+    --shadow-4:0 24px 48px rgba(0,0,0,.56);
   }
+
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
   body{
-    font-family:var(--serif);
+    font-family:var(--font);
     background:var(--bg);color:var(--text);min-height:100vh;
-    font-size:16px;line-height:1.5;
-    -webkit-font-smoothing:antialiased;overflow-x:hidden;
+    font-size:var(--fs-base);line-height:1.5;
+    -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+    overflow-x:hidden;
     display:flex;flex-direction:column;
   }
-  button,input,select{font-family:var(--serif);color:inherit}
+  img{max-width:100%;display:block}
+  button,input,select,textarea{font-family:inherit;color:inherit;font-size:inherit}
   button{cursor:pointer;border:none;background:none}
-  ::selection{background:rgba(139,92,246,.4)}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--brand);color:#fff}
   ::-webkit-scrollbar{width:10px;height:10px}
-  ::-webkit-scrollbar-thumb{background:rgba(255,255,255,.14);border-radius:10px;border:2px solid var(--bg)}
+  ::-webkit-scrollbar-track{background:var(--bg)}
+  ::-webkit-scrollbar-thumb{background:rgba(255,255,255,.12);border-radius:var(--r-full);border:2px solid var(--bg)}
+  ::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,.2)}
 
-  .ic{width:1em;height:1em;display:inline-block;vertical-align:-.14em;flex-shrink:0;pointer-events:none}
+  :focus-visible{outline:2px solid var(--brand);outline-offset:2px;border-radius:4px}
 
-  /* Header */
-  header{
+  .ic{width:1em;height:1em;display:inline-block;vertical-align:-.14em;flex-shrink:0;pointer-events:none;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+  .ic.fill{fill:currentColor;stroke:none}
+
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+  .skip-link{
+    position:absolute;top:-100px;left:var(--s-4);z-index:9999;
+    background:var(--brand);color:#fff;padding:var(--s-3) var(--s-5);
+    border-radius:var(--r-sm);font-weight:600;transition:top .2s;
+  }
+  .skip-link:focus{top:var(--s-4)}
+
+  /* ============================================================
+     HEADER
+     ============================================================ */
+  .header{
     position:sticky;top:0;z-index:60;
-    background:rgba(8,8,15,.94);
+    background:rgba(10,10,18,.85);
+    backdrop-filter:saturate(180%) blur(16px);
+    -webkit-backdrop-filter:saturate(180%) blur(16px);
+    border-bottom:1px solid var(--border);
+    transition:background .2s,border-color .2s;
+  }
+  .header.scrolled{background:rgba(10,10,18,.96);border-color:var(--border-2)}
+
+  .header-inner{
+    max-width:var(--max);margin:0 auto;
+    padding:0 var(--s-5);
+    height:var(--header-h);
+    display:flex;align-items:center;gap:var(--s-5);
+  }
+
+  /* Logo */
+  .logo{display:flex;align-items:center;gap:var(--s-3);flex-shrink:0;user-select:none;font-weight:700;font-size:var(--fs-lg);letter-spacing:-.02em}
+  .logo-mark{
+    width:34px;height:34px;border-radius:10px;
+    background:var(--brand);
+    display:grid;place-items:center;color:#fff;flex-shrink:0;
+    box-shadow:0 2px 12px rgba(124,58,237,.4);
+  }
+  .logo-mark svg{width:20px;height:20px}
+  .logo-text{color:var(--text)}
+  .logo-text em{color:var(--brand);font-style:normal}
+
+  /* Nav */
+  .main-nav{display:flex;gap:2px;flex-shrink:0}
+  .nav-link{
+    padding:var(--s-2) var(--s-4);border-radius:var(--r-sm);
+    font-size:var(--fs-sm);font-weight:500;color:var(--text-2);
+    transition:color .15s,background .15s;
+    white-space:nowrap;
+  }
+  .nav-link:hover{color:var(--text);background:var(--surface-2)}
+  .nav-link.active{color:var(--text);background:var(--brand-soft)}
+
+  /* Search */
+  .search-wrap{flex:1;max-width:420px;margin-left:auto;position:relative}
+  .search-input{
+    width:100%;padding:10px var(--s-4) 10px 40px;
+    border-radius:var(--r-sm);
+    background:var(--surface-2);border:1px solid var(--border);
+    font-size:var(--fs-sm);color:var(--text);outline:none;
+    transition:border-color .15s,background .15s;
+  }
+  .search-input::placeholder{color:var(--text-3)}
+  .search-input:focus{border-color:var(--brand);background:var(--surface-3)}
+  .search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--text-3);font-size:16px;pointer-events:none}
+
+  /* Header actions */
+  .header-actions{display:flex;align-items:center;gap:var(--s-2);flex-shrink:0}
+  .icon-btn{
+    width:40px;height:40px;border-radius:var(--r-sm);
+    display:grid;place-items:center;color:var(--text-2);font-size:18px;
+    transition:color .15s,background .15s;position:relative;
+  }
+  .icon-btn:hover{color:var(--text);background:var(--surface-2)}
+
+  .cart-btn{
+    display:flex;align-items:center;gap:var(--s-2);
+    padding:0 var(--s-4);height:40px;border-radius:var(--r-sm);
+    background:var(--brand);color:#fff;font-size:var(--fs-sm);font-weight:600;
+    transition:background .15s,transform .1s;
+  }
+  .cart-btn:hover{background:var(--brand-hover)}
+  .cart-btn:active{transform:scale(.97)}
+  .cart-count{
+    background:rgba(255,255,255,.2);border-radius:var(--r-full);
+    padding:0 8px;font-size:12px;font-weight:700;
+    min-width:20px;height:20px;display:grid;place-items:center;
+    font-variant-numeric:tabular-nums;
+  }
+
+  .mobile-menu-btn{display:none}
+
+  /* ============================================================
+     TOP BAR — Telegram notice (dismissible)
+     ============================================================ */
+  .topbar{
+    background:linear-gradient(90deg,rgba(124,58,237,.1),rgba(59,130,246,.08));
+    border-bottom:1px solid var(--border);
+    padding:10px var(--s-5);
+    font-size:13px;color:var(--text-2);
+    display:flex;align-items:center;justify-content:center;
+    gap:var(--s-2);position:relative;text-align:center;
+  }
+  .topbar strong{color:var(--text);font-weight:600}
+  .topbar code{
+    background:var(--surface-2);border:1px solid var(--border);
+    padding:2px 8px;border-radius:var(--r-sm);
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+    font-size:12px;color:var(--text);
+  }
+  .topbar-close{
+    position:absolute;right:var(--s-3);top:50%;transform:translateY(-50%);
+    width:28px;height:28px;border-radius:var(--r-sm);color:var(--text-3);
+    display:grid;place-items:center;font-size:16px;
+    transition:color .15s,background .15s;
+  }
+  .topbar-close:hover{color:var(--text);background:var(--surface-2)}
+  .topbar.hidden{display:none}
+
+  /* ============================================================
+     HERO
+     ============================================================ */
+  .hero{
+    position:relative;
+    padding:var(--s-8) var(--s-5) var(--s-7);
+    overflow:hidden;
     border-bottom:1px solid var(--border);
   }
-  .header-inner{max-width:1360px;margin:0 auto;padding:13px 22px;display:flex;align-items:center;gap:16px}
-  .logo{display:flex;align-items:center;gap:9px;font-weight:700;font-size:20px;flex-shrink:0;user-select:none}
-  .logo-mark{
-    width:30px;height:30px;border-radius:9px;
-    background:linear-gradient(135deg,var(--accent),var(--accent-2));
-    display:grid;place-items:center;font-size:16px;color:#fff;
-  }
-  .logo span{background:linear-gradient(100deg,#fff,#c4b5fd);-webkit-background-clip:text;background-clip:text;color:transparent}
-  nav.main-nav{display:flex;gap:2px;margin-left:4px}
-  nav.main-nav button{padding:8px 12px;border-radius:8px;font-size:15px;color:var(--muted);transition:.18s}
-  nav.main-nav button:hover{color:var(--text);background:rgba(255,255,255,.06)}
-  nav.main-nav button.active{color:var(--text);background:rgba(139,92,246,.18)}
-  .header-search{flex:1;max-width:330px;margin-left:auto;position:relative}
-  .header-search input{
-    width:100%;padding:9px 14px 9px 34px;border-radius:10px;
-    background:var(--surface-2);border:1px solid var(--border);
-    font-size:15px;outline:none;transition:.2s;
-  }
-  .header-search input:focus{border-color:rgba(139,92,246,.65);background:var(--surface-3)}
-  .header-search input::placeholder{color:#6c6c85}
-  .header-search .s-icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);font-size:15px;opacity:.5;pointer-events:none;color:#9a9ab2}
-  .cart-btn{
-    display:flex;align-items:center;gap:7px;
-    padding:9px 14px;border-radius:10px;font-size:15px;
-    background:linear-gradient(135deg,var(--accent),var(--accent-2));
-    color:#fff;transition:.2s;flex-shrink:0;
-  }
-  .cart-btn:hover{filter:brightness(1.08)}
-  .cart-btn .cart-count{background:rgba(0,0,0,.35);border-radius:20px;padding:0 7px;font-size:13px;min-width:19px;text-align:center}
-
-  /* Banner */
-  .tg-banner{
-    background:linear-gradient(90deg,rgba(34,158,217,.14),rgba(139,92,246,.14));
-    border-bottom:1px solid rgba(34,158,217,.24);
-    padding:8px 20px;text-align:center;font-size:14px;color:#bae6fd;
-    display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;
-  }
-  .tg-banner b{color:#fff}
-  .tg-banner .tg-handle{
-    background:rgba(34,158,217,.22);border:1px solid rgba(34,158,217,.4);
-    padding:1px 9px;border-radius:100px;font-size:13.5px;color:#e0f2fe;
-    font-family:"Courier New",monospace;
-  }
-
-  /* Hero */
-  .hero{position:relative;padding:60px 22px 44px;text-align:center;overflow:hidden;
+  .hero::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
     background:
-      radial-gradient(ellipse 60% 70% at 35% 25%, rgba(139,92,246,.28), transparent 70%),
-      radial-gradient(ellipse 55% 65% at 68% 20%, rgba(236,72,153,.20), transparent 70%);
+      radial-gradient(ellipse 60% 60% at 20% 0%, rgba(124,58,237,.18), transparent 60%),
+      radial-gradient(ellipse 50% 50% at 90% 10%, rgba(59,130,246,.1), transparent 60%);
   }
-  .hero-inner{position:relative;max-width:880px;margin:0 auto}
-  .hero-badge{
-    display:inline-flex;align-items:center;gap:8px;font-size:14px;
-    padding:5px 14px;border-radius:100px;margin-bottom:20px;
-    background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.3);color:#c4b5fd;
+  .hero-inner{position:relative;max-width:var(--max);margin:0 auto}
+  .hero-content{max-width:720px}
+  .hero-eyebrow{
+    display:inline-flex;align-items:center;gap:var(--s-2);
+    font-size:13px;font-weight:500;
+    padding:6px var(--s-3);border-radius:var(--r-full);
+    background:var(--surface-2);border:1px solid var(--border);
+    color:var(--text-2);margin-bottom:var(--s-5);
   }
-  .hero-badge .dot{width:6px;height:6px;border-radius:50%;background:#22c55e}
-  .hero h1{font-size:clamp(30px,5.4vw,54px);line-height:1.08;font-weight:700;margin-bottom:16px}
-  .hero h1 em{font-style:italic;background:linear-gradient(100deg,#a78bfa,#ec4899 55%,#f97316);-webkit-background-clip:text;background-clip:text;color:transparent}
-  .hero p{color:var(--muted);font-size:clamp(15px,1.7vw,18px);max-width:580px;margin:0 auto 30px;line-height:1.6}
+  .hero-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--success);box-shadow:0 0 0 3px rgba(16,185,129,.2)}
+  .hero h1{
+    font-size:clamp(32px,5vw,56px);
+    font-weight:800;line-height:1.05;letter-spacing:-.03em;
+    margin-bottom:var(--s-5);color:var(--text);
+  }
+  .hero h1 .accent{color:var(--brand)}
+  .hero-lede{
+    font-size:clamp(15px,1.6vw,18px);line-height:1.6;
+    color:var(--text-2);max-width:560px;margin-bottom:var(--s-6);
+  }
 
-  .hero-cta{
-    display:flex;align-items:center;gap:8px;padding:7px;
-    border-radius:16px;background:var(--surface);
-    border:1px solid var(--border-strong);
-    max-width:520px;margin:0 auto;
+  /* Hero CTA — search bar */
+  .hero-search{
+    display:flex;gap:var(--s-2);padding:var(--s-2);
+    background:var(--surface);border:1px solid var(--border-2);
+    border-radius:var(--r-lg);max-width:640px;
+    box-shadow:var(--shadow-2);
   }
-  .cta-field{flex:1;display:flex;align-items:center;gap:9px;padding:8px 12px;min-width:0;color:var(--muted);font-size:15px}
-  .cta-field select{width:100%;background:none;border:none;outline:none;font-size:15px;cursor:pointer;color:var(--text);min-width:0}
-  .cta-field select option{background:#1a1a29;color:#fff}
-  .search-go{
-    padding:12px 24px;border-radius:12px;font-size:15px;color:#fff;flex-shrink:0;
-    background:linear-gradient(135deg,var(--accent),var(--accent-2));
-    transition:.2s;display:inline-flex;align-items:center;gap:8px;
+  .hero-search-field{
+    flex:1;display:flex;align-items:center;gap:var(--s-2);
+    padding:0 var(--s-3);min-width:0;color:var(--text-3);
   }
-  .search-go:hover{filter:brightness(1.1)}
+  .hero-search-field select{
+    flex:1;background:none;border:none;outline:none;
+    font-size:var(--fs-sm);color:var(--text);cursor:pointer;
+    min-width:0;padding:10px 0;
+  }
+  .hero-search-field select option{background:var(--surface-2);color:var(--text)}
+  .hero-search-btn{
+    padding:0 var(--s-5);height:44px;border-radius:var(--r-md);
+    background:var(--brand);color:#fff;font-weight:600;font-size:var(--fs-sm);
+    display:inline-flex;align-items:center;gap:var(--s-2);
+    transition:background .15s;white-space:nowrap;
+  }
+  .hero-search-btn:hover{background:var(--brand-hover)}
 
-  /* ========================================================
-     INDUSTRY INSIGHTS
-     ======================================================== */
-  .insights{
-    max-width:1360px;margin:0 auto;padding:8px 22px 46px;width:100%;
+  /* Trust signals */
+  .trust-row{
+    display:flex;flex-wrap:wrap;gap:var(--s-5);
+    margin-top:var(--s-6);font-size:13px;color:var(--text-2);
   }
-  .insights-head{text-align:center;max-width:800px;margin:0 auto 32px}
-  .insights-tag{
-    display:inline-flex;align-items:center;gap:8px;
-    font-size:13px;padding:5px 14px;border-radius:100px;margin-bottom:16px;
-    background:rgba(34,158,217,.12);border:1px solid rgba(34,158,217,.3);color:#7dd3fc;
-  }
-  .insights-tag .ic{color:#7dd3fc}
-  .insights-head h2{
-    font-size:clamp(24px,3.4vw,34px);font-weight:700;line-height:1.2;
-    margin-bottom:12px;letter-spacing:-.3px;
-  }
-  .insights-head h2 em{
-    font-style:italic;
-    background:linear-gradient(100deg,#a78bfa,#ec4899);
-    -webkit-background-clip:text;background-clip:text;color:transparent;
-  }
-  .insights-head p{color:var(--muted);font-size:clamp(14px,1.6vw,16px);line-height:1.7}
+  .trust-item{display:flex;align-items:center;gap:var(--s-2)}
+  .trust-item .ic{color:var(--success);font-size:16px}
 
-  .insights-grid{
-    display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px;
-  }
-  .insight-card{
-    background:var(--surface);border:1px solid var(--border);border-radius:16px;
-    padding:22px 20px 20px;display:flex;flex-direction:column;gap:14px;
-    transition:border-color .18s, background .18s;
-  }
-  .insight-card:hover{border-color:var(--border-strong);background:var(--surface-2)}
-  .insight-head{display:flex;align-items:center;gap:11px}
-  .insight-icon{
-    width:38px;height:38px;border-radius:10px;flex-shrink:0;
-    display:grid;place-items:center;font-size:17px;color:#fff;
-  }
-  .insight-icon.i1{background:linear-gradient(135deg,#8b5cf6,#ec4899)}
-  .insight-icon.i2{background:linear-gradient(135deg,#0891b2,#8b5cf6)}
-  .insight-icon.i3{background:linear-gradient(135deg,#f59e0b,#dc2626)}
-  .insight-icon.i4{background:linear-gradient(135deg,#ec4899,#f59e0b)}
-  .insight-head h3{font-size:17px;font-weight:700;line-height:1.25;letter-spacing:-.2px}
+  /* ============================================================
+     SECTION — shared
+     ============================================================ */
+  .section{max-width:var(--max);margin:0 auto;padding:var(--s-7) var(--s-5);width:100%}
+  .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:var(--s-4);margin-bottom:var(--s-5);flex-wrap:wrap}
+  .section-title{font-size:var(--fs-2xl);font-weight:700;letter-spacing:-.02em;line-height:1.15}
+  .section-sub{font-size:var(--fs-sm);color:var(--text-2);margin-top:var(--s-1)}
+  .section-link{font-size:var(--fs-sm);color:var(--brand);font-weight:600;display:inline-flex;align-items:center;gap:6px;transition:gap .15s}
+  .section-link:hover{gap:10px}
 
-  .insight-list{list-style:none;display:flex;flex-direction:column;gap:10px}
-  .insight-list li{
-    display:flex;gap:9px;font-size:14px;line-height:1.58;color:var(--muted);
+  /* ============================================================
+     RESALE NOTICE
+     ============================================================ */
+  .notice{
+    display:flex;gap:var(--s-3);padding:var(--s-4);
+    background:var(--warning-bg);border:1px solid rgba(245,158,11,.28);
+    border-radius:var(--r-md);margin-bottom:var(--s-5);
+    font-size:var(--fs-sm);color:var(--text-2);line-height:1.55;
   }
-  .insight-list li .ic{color:#a78bfa;font-size:14px;margin-top:4px;flex-shrink:0}
-  .insight-list li b{color:var(--text);font-weight:700}
-  .insight-list li .era{
-    display:inline-block;font-size:11.5px;letter-spacing:.4px;
-    padding:1px 6px;border-radius:4px;margin-right:5px;font-weight:700;
-    text-transform:uppercase;vertical-align:1px;
-  }
-  .era.past{background:rgba(148,163,184,.18);color:#cbd5e1}
-  .era.now{background:rgba(139,92,246,.22);color:#c4b5fd}
-  .era.next{background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff}
+  .notice .ic{color:var(--warning);font-size:18px;flex-shrink:0;margin-top:2px}
+  .notice strong{color:var(--text)}
 
-  .insight-stat{
-    margin-top:auto;padding-top:14px;border-top:1px solid var(--border);
-    display:flex;align-items:baseline;gap:10px;
-  }
-  .insight-stat .num{
-    font-size:27px;font-weight:700;line-height:1;
-    background:linear-gradient(100deg,#a78bfa,#ec4899);
-    -webkit-background-clip:text;background-clip:text;color:transparent;
-  }
-  .insight-stat .lbl{font-size:12.5px;color:var(--muted);line-height:1.4}
-
-  .insights-foot{
-    margin-top:20px;padding:16px 20px;border-radius:14px;
-    background:linear-gradient(135deg,rgba(139,92,246,.08),rgba(34,158,217,.06));
-    border:1px solid rgba(139,92,246,.22);
-    display:flex;align-items:center;gap:12px;flex-wrap:wrap;
-    font-size:13.5px;color:#cbd5e1;line-height:1.6;
-  }
-  .insights-foot .ic{color:#a78bfa;font-size:16px;flex-shrink:0}
-  .insights-foot b{color:#fff}
-
-  /* Categories */
+  /* ============================================================
+     CATEGORY STRIP
+     ============================================================ */
   .cats{
-    max-width:1360px;margin:0 auto;padding:0 22px 6px;width:100%;
-    display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;
-    border-top:1px solid var(--border);padding-top:28px;
+    display:flex;gap:var(--s-2);overflow-x:auto;scrollbar-width:none;
+    -webkit-overflow-scrolling:touch;padding-bottom:2px;
   }
   .cats::-webkit-scrollbar{display:none}
   .cat{
-    display:flex;align-items:center;gap:7px;padding:9px 16px;border-radius:100px;
+    display:flex;align-items:center;gap:var(--s-2);
+    padding:9px var(--s-4);border-radius:var(--r-full);
     background:var(--surface);border:1px solid var(--border);
-    font-size:15px;color:var(--muted);white-space:nowrap;transition:.18s;
+    font-size:var(--fs-sm);font-weight:500;color:var(--text-2);
+    white-space:nowrap;transition:all .15s;
   }
+  .cat:hover{color:var(--text);border-color:var(--border-2);background:var(--surface-hover)}
+  .cat.active{background:var(--brand);border-color:var(--brand);color:#fff}
   .cat .ic{font-size:15px}
-  .cat:hover{color:var(--text);border-color:var(--border-strong)}
-  .cat.active{
-    background:linear-gradient(135deg,rgba(139,92,246,.9),rgba(236,72,153,.9));
-    color:#fff;border-color:transparent;
-  }
 
-  /* Toolbar */
-  .toolbar{max-width:1360px;margin:24px auto 0;padding:0 22px;width:100%;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-  .toolbar h2{font-size:21px;font-weight:700}
-  .result-count{font-size:15px;color:var(--muted)}
-  .toolbar .spacer{flex:1}
+  /* ============================================================
+     TOOLBAR
+     ============================================================ */
+  .toolbar{
+    display:flex;align-items:center;gap:var(--s-3);
+    margin-top:var(--s-5);flex-wrap:wrap;
+  }
+  .toolbar-title{font-size:var(--fs-lg);font-weight:700;letter-spacing:-.01em}
+  .toolbar-count{font-size:var(--fs-sm);color:var(--text-2)}
+  .toolbar-spacer{flex:1}
   .sort-wrap{position:relative}
-  .sort-wrap select{
+  .sort-select{
     appearance:none;-webkit-appearance:none;
-    padding:8px 32px 8px 13px;border-radius:9px;
+    padding:8px 34px 8px 14px;border-radius:var(--r-sm);
     background:var(--surface-2);border:1px solid var(--border);
-    font-size:14.5px;cursor:pointer;outline:none;
+    font-size:var(--fs-sm);cursor:pointer;outline:none;
+    transition:border-color .15s;
   }
-  .sort-wrap::after{content:"▾";position:absolute;right:12px;top:50%;transform:translateY(-50%);pointer-events:none;opacity:.5;font-size:11px}
+  .sort-select:hover{border-color:var(--border-2)}
+  .sort-wrap::after{content:"";position:absolute;right:14px;top:50%;width:8px;height:8px;border-right:2px solid var(--text-3);border-bottom:2px solid var(--text-3);transform:translateY(-70%) rotate(45deg);pointer-events:none}
 
-  /* Grid */
+  /* ============================================================
+     EVENT GRID
+     ============================================================ */
   .grid{
-    max-width:1360px;margin:0 auto;padding:20px 22px 130px;width:100%;
-    display:grid;grid-template-columns:repeat(auto-fill,minmax(248px,1fr));gap:20px;
+    display:grid;gap:var(--s-5);margin-top:var(--s-5);
+    grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
   }
+
   .card{
-    background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
-    overflow:hidden;cursor:pointer;transition:transform .18s, border-color .18s;
+    background:var(--surface);border:1px solid var(--border);
+    border-radius:var(--r-md);overflow:hidden;cursor:pointer;
     display:flex;flex-direction:column;
-    content-visibility:auto;
-    contain-intrinsic-size:320px;
-    contain:layout style paint;
+    transition:transform .18s cubic-bezier(.4,0,.2,1),border-color .18s,box-shadow .18s;
+    position:relative;
   }
-  .card:hover{transform:translateY(-4px);border-color:var(--border-strong)}
-  .poster{position:relative;aspect-ratio:4/3;overflow:hidden;background:#1e1b4b}
+  .card:hover{transform:translateY(-3px);border-color:var(--border-2);box-shadow:var(--shadow-3)}
+
+  .poster{position:relative;aspect-ratio:3/4;overflow:hidden;background:var(--surface-2)}
   .poster-art{position:absolute;inset:0}
   .poster-art svg{width:100%;height:100%;display:block}
-  .poster::after{
-    content:"";position:absolute;inset:0;pointer-events:none;
-    background:linear-gradient(to bottom,rgba(0,0,0,.28) 0%,transparent 32%,transparent 58%,rgba(0,0,0,.66) 100%);
+  .poster-overlay{
+    position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(to bottom,transparent 40%,rgba(0,0,0,.7) 100%);
   }
-  .date-badge{
-    position:absolute;top:10px;left:10px;z-index:3;
-    background:rgba(255,255,255,.96);color:#111;border-radius:9px;
-    padding:5px 9px;text-align:center;line-height:1;
-  }
-  .date-badge span{display:block;font-size:11px;font-weight:700;letter-spacing:.6px;color:#c81e4a}
-  .date-badge strong{display:block;font-size:18px;font-weight:700;margin-top:1px}
-  .cat-chip{
-    position:absolute;top:10px;right:10px;z-index:3;
-    display:inline-flex;align-items:center;gap:5px;
-    font-size:12.5px;padding:4px 9px;border-radius:100px;color:#fff;
-    background:rgba(0,0,0,.48);
-    border:1px solid rgba(255,255,255,.22);
-  }
-  .hot-chip{
-    position:absolute;top:44px;right:10px;z-index:3;
+
+  .badge{
+    position:absolute;z-index:3;
     display:inline-flex;align-items:center;gap:4px;
-    font-size:11px;letter-spacing:.5px;text-transform:uppercase;
-    padding:3px 8px;border-radius:100px;color:#fff;
-    background:linear-gradient(135deg,#f97316,#ef4444);
+    font-size:11px;font-weight:600;letter-spacing:.02em;
+    padding:4px 8px;border-radius:var(--r-sm);
+    backdrop-filter:blur(8px);
   }
-  .hot-chip .ic{font-size:11px}
-  .poster-sub{
-    position:absolute;bottom:9px;left:12px;right:12px;z-index:3;
-    font-size:13.5px;font-style:italic;
-    color:rgba(255,255,255,.95);text-shadow:0 2px 10px rgba(0,0,0,.8);
+  .badge-date{top:12px;left:12px;background:rgba(255,255,255,.95);color:#111;line-height:1}
+  .badge-date strong{display:block;font-size:16px;font-weight:800}
+  .badge-date span{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:#666;font-weight:700}
+  .badge-cat{top:12px;right:12px;background:rgba(0,0,0,.55);color:#fff;border:1px solid rgba(255,255,255,.15)}
+  .badge-hot{
+    top:52px;right:12px;
+    background:var(--danger);color:#fff;
+    font-size:10px;text-transform:uppercase;letter-spacing:.06em;
+  }
+
+  .wishlist{
+    position:absolute;top:12px;right:12px;z-index:4;
+    width:32px;height:32px;border-radius:var(--r-full);
+    background:rgba(0,0,0,.55);backdrop-filter:blur(8px);
+    color:#fff;display:grid;place-items:center;font-size:16px;
+    opacity:0;transform:translateY(-4px);
+    transition:opacity .18s,transform .18s,background .15s;
+  }
+  .card:hover .wishlist{opacity:1;transform:none}
+  .wishlist:hover{background:rgba(0,0,0,.8)}
+  .wishlist.active{color:var(--danger);background:rgba(255,255,255,.95)}
+  .wishlist.active .ic{fill:currentColor;stroke:currentColor}
+
+  .poster-label{
+    position:absolute;bottom:12px;left:14px;right:14px;z-index:3;
+    font-size:13px;font-weight:600;color:#fff;
+    text-shadow:0 1px 8px rgba(0,0,0,.6);
     white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
   }
-  .card-body{padding:13px 14px 14px;display:flex;flex-direction:column;flex:1;gap:5px}
-  .card-body h3{
-    font-size:16px;font-weight:700;line-height:1.3;
+
+  .card-body{padding:var(--s-3) var(--s-4) var(--s-4);display:flex;flex-direction:column;gap:4px;flex:1}
+  .card-title{
+    font-size:15px;font-weight:600;line-height:1.35;letter-spacing:-.01em;
     display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
-    min-height:42px;
+    min-height:40px;
   }
-  .venue,.when{
-    font-size:14px;color:var(--muted);
+  .card-meta{
+    font-size:13px;color:var(--text-2);
     display:flex;align-items:center;gap:6px;
     white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
   }
-  .venue .ic,.when .ic{color:#7c7c96}
+  .card-meta .ic{color:var(--text-3);font-size:14px}
+
   .card-foot{
-    margin-top:auto;padding-top:11px;display:flex;align-items:center;justify-content:space-between;gap:8px;
+    margin-top:auto;padding-top:var(--s-3);
+    display:flex;align-items:center;justify-content:space-between;gap:var(--s-2);
     border-top:1px solid var(--border);
   }
-  .price{
-    display:flex;flex-direction:column;line-height:1.15;min-width:0;
-    cursor:default;user-select:none;-webkit-user-select:none;
-    -webkit-tap-highlight-color:transparent;
-  }
-  .price span{font-size:11.5px;color:#7c7c96;text-transform:uppercase;letter-spacing:.6px}
-  .price strong{font-size:18px;font-weight:700}
+  .price-block{display:flex;flex-direction:column;line-height:1.1;min-width:0}
+  .price-label{font-size:10px;color:var(--text-3);text-transform:uppercase;letter-spacing:.08em;font-weight:600}
+  .price-value{font-size:17px;font-weight:700;font-variant-numeric:tabular-nums}
 
-  .btn-buy{
-    display:inline-flex;align-items:center;gap:5px;
-    padding:8px 12px;border-radius:9px;font-size:14px;color:#fff;
-    background:linear-gradient(135deg,var(--accent),var(--accent-2));
-    transition:.18s;white-space:nowrap;
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:6px;
+    padding:8px 14px;border-radius:var(--r-sm);
+    font-size:13px;font-weight:600;line-height:1;
+    transition:background .15s,color .15s,border-color .15s,transform .1s;
+    white-space:nowrap;
   }
-  .btn-buy:hover{filter:brightness(1.12)}
-  .btn-buy .ic{font-size:14px}
-  .btn-ghost{
+  .btn:active{transform:scale(.97)}
+  .btn-primary{background:var(--brand);color:#fff}
+  .btn-primary:hover{background:var(--brand-hover)}
+  .btn-secondary{background:var(--surface-2);color:var(--text);border:1px solid var(--border)}
+  .btn-secondary:hover{border-color:var(--border-2);background:var(--surface-3)}
+  .btn-transfer{background:var(--info);color:#fff}
+  .btn-transfer:hover{background:#2563eb}
+  .btn-lg{padding:13px 20px;font-size:15px;border-radius:var(--r-md)}
+  .btn-block{width:100%}
+  .btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+
+  .empty{grid-column:1/-1;text-align:center;padding:var(--s-8) var(--s-5);color:var(--text-2)}
+  .empty-icon{font-size:40px;color:var(--text-4);margin-bottom:var(--s-4)}
+  .empty h3{color:var(--text);font-size:var(--fs-lg);margin-bottom:var(--s-2)}
+  .empty p{font-size:var(--fs-sm)}
+
+  /* ============================================================
+     MODAL
+     ============================================================ */
+  .modal-wrap{
+    position:fixed;inset:0;z-index:110;
+    display:grid;place-items:center;padding:var(--s-5);
+    opacity:0;pointer-events:none;transition:opacity .2s;
+  }
+  .modal-wrap.open{opacity:1;pointer-events:auto}
+  .modal{
+    width:100%;max-width:840px;max-height:90vh;overflow-y:auto;
+    background:var(--surface);border:1px solid var(--border-2);
+    border-radius:var(--r-xl);box-shadow:var(--shadow-4);
+    display:flex;flex-direction:column;
+    transform:translateY(8px);transition:transform .22s;
+  }
+  .modal-wrap.open .modal{transform:none}
+
+  .modal-hero{position:relative;min-height:240px;overflow:hidden;flex-shrink:0;display:flex;align-items:flex-end;padding:var(--s-6)}
+  .modal-hero-art{position:absolute;inset:0}
+  .modal-hero-art svg{width:100%;height:100%;display:block}
+  .modal-hero::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(to top,rgba(17,17,28,.98) 0%,rgba(17,17,28,.5) 50%,rgba(17,17,28,.2) 100%);
+  }
+  .modal-hero-info{position:relative;z-index:2;max-width:85%}
+  .modal-tag{
     display:inline-flex;align-items:center;gap:6px;
-    padding:9px 14px;border-radius:9px;font-size:14px;
-    background:var(--surface-2);border:1px solid var(--border);color:var(--muted);transition:.18s;
+    font-size:12px;font-weight:600;
+    padding:5px 11px;border-radius:var(--r-full);
+    background:rgba(0,0,0,.5);color:#fff;border:1px solid rgba(255,255,255,.2);
+    margin-bottom:var(--s-3);backdrop-filter:blur(6px);
   }
-  .btn-ghost:hover{color:#fff;border-color:var(--border-strong);background:var(--surface-3)}
+  .modal-hero h2{
+    font-size:clamp(22px,3vw,32px);font-weight:800;line-height:1.15;letter-spacing:-.02em;
+    margin-bottom:6px;color:#fff;
+  }
+  .modal-hero-sub{font-size:var(--fs-sm);color:rgba(255,255,255,.85)}
 
-  .empty{grid-column:1/-1;text-align:center;padding:70px 20px;color:var(--muted)}
-  .empty .big{font-size:44px;margin-bottom:14px;opacity:.4;color:#6c6c85}
-  .empty h3{color:var(--text);font-size:20px;margin-bottom:8px}
-  .empty p{font-size:15px}
+  .modal-close{
+    position:absolute;top:16px;right:16px;z-index:5;
+    width:36px;height:36px;border-radius:var(--r-full);
+    background:rgba(0,0,0,.6);backdrop-filter:blur(8px);
+    color:#fff;display:grid;place-items:center;font-size:16px;
+    transition:background .15s,transform .2s;
+  }
+  .modal-close:hover{background:rgba(0,0,0,.85);transform:rotate(90deg)}
 
-  /* Backdrop */
+  .modal-body{padding:var(--s-6) var(--s-6) var(--s-4)}
+  .meta-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:var(--s-4);
+    padding-bottom:var(--s-5);border-bottom:1px solid var(--border);margin-bottom:var(--s-5);
+  }
+  .meta-item{display:flex;gap:var(--s-3);align-items:flex-start}
+  .meta-item .ic{color:var(--brand);font-size:18px;margin-top:2px}
+  .meta-label{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--text-3);font-weight:600;margin-bottom:2px}
+  .meta-value{font-size:var(--fs-sm);color:var(--text);line-height:1.45}
+
+  .desc{font-size:var(--fs-sm);line-height:1.7;color:var(--text-2);margin-bottom:var(--s-5);white-space:pre-line}
+
+  /* Structured transfer fields */
+  .transfer-fields{display:flex;flex-direction:column;gap:var(--s-3);margin-bottom:var(--s-5)}
+  .transfer-row{
+    display:flex;align-items:flex-start;gap:var(--s-3);
+    padding:var(--s-3) var(--s-4);
+    background:var(--surface-2);border:1px solid var(--border);border-radius:var(--r-md);
+  }
+  .transfer-row .ic{color:var(--text-3);font-size:16px;margin-top:3px}
+  .transfer-row-label{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--text-3);font-weight:600;margin-bottom:3px}
+  .transfer-row-value{font-size:var(--fs-sm);color:var(--text);line-height:1.5}
+  .transfer-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+  .chip{
+    display:inline-flex;align-items:center;gap:4px;
+    padding:3px 9px;border-radius:var(--r-sm);
+    background:var(--surface-3);border:1px solid var(--border);
+    font-size:12px;font-weight:500;color:var(--text);
+  }
+
+  .seller-box{
+    padding:var(--s-4);border-radius:var(--r-md);
+    background:var(--info-bg);border:1px solid rgba(59,130,246,.24);
+    margin-bottom:var(--s-5);
+  }
+  .seller-box h6{
+    font-size:11px;text-transform:uppercase;letter-spacing:.08em;
+    color:#93c5fd;font-weight:700;margin-bottom:var(--s-3);
+    display:flex;align-items:center;gap:6px;
+  }
+  .seller-row{display:flex;gap:var(--s-3);font-size:var(--fs-sm);line-height:1.5;margin-bottom:var(--s-2)}
+  .seller-row:last-child{margin-bottom:0}
+  .seller-row .lbl{color:var(--text-3);min-width:110px;flex-shrink:0;font-size:13px}
+  .seller-row .val{color:var(--text)}
+  .seller-tag{
+    display:inline-block;padding:2px 8px;border-radius:5px;
+    font-size:12px;background:var(--surface-3);border:1px solid var(--border);
+    margin:2px 4px 2px 0;
+  }
+
+  .section-label{
+    font-size:12px;text-transform:uppercase;letter-spacing:.08em;
+    color:var(--text-2);font-weight:700;margin-bottom:var(--s-3);
+    display:flex;align-items:center;gap:var(--s-3);
+  }
+  .section-label::after{content:"";flex:1;height:1px;background:var(--border)}
+
+  .tier-list{display:flex;flex-direction:column;gap:var(--s-2);margin-bottom:var(--s-5)}
+  .tier{
+    display:flex;align-items:center;gap:var(--s-3);
+    padding:var(--s-3) var(--s-4);border-radius:var(--r-md);
+    background:var(--surface-2);border:1px solid var(--border);
+    transition:border-color .15s,background .15s;
+  }
+  .tier:hover{border-color:var(--border-2)}
+  .tier.selected{border-color:var(--brand-border);background:var(--brand-soft)}
+  .tier-info{flex:1;min-width:0}
+  .tier-name{font-size:var(--fs-sm);font-weight:600;margin-bottom:2px;display:flex;align-items:center;gap:var(--s-2);flex-wrap:wrap}
+  .tier-badge{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:4px}
+  .tier-badge.reg{background:var(--surface-3);color:var(--text-2)}
+  .tier-badge.vip{background:var(--brand-soft);color:#c4b5fd;border:1px solid var(--brand-border)}
+  .tier-badge.vvip{background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff}
+  .tier-note{font-size:12px;color:var(--text-3)}
+  .tier-note.low{color:var(--warning)}
+  .tier-price{font-size:15px;font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums}
+
+  .stepper{
+    display:flex;align-items:center;background:var(--bg);
+    border-radius:var(--r-sm);border:1px solid var(--border);
+    padding:2px;flex-shrink:0;
+  }
+  .stepper button{
+    width:28px;height:28px;border-radius:6px;display:grid;place-items:center;
+    font-size:16px;color:var(--text-2);transition:background .15s,color .15s;
+  }
+  .stepper button:hover:not(:disabled){background:var(--surface-3);color:var(--text)}
+  .stepper button:disabled{opacity:.25;cursor:not-allowed}
+  .stepper .qty{width:28px;text-align:center;font-size:var(--fs-sm);font-weight:600;font-variant-numeric:tabular-nums}
+
+  .summary-box{
+    display:flex;align-items:center;justify-content:space-between;gap:var(--s-4);
+    padding:var(--s-4);border-radius:var(--r-md);
+    background:linear-gradient(135deg,var(--brand-soft),var(--info-bg));
+    border:1px solid var(--brand-border);
+    margin-bottom:var(--s-5);
+  }
+  .summary-label{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#c4b5fd;font-weight:700}
+  .summary-value{font-size:var(--fs-xl);font-weight:800;line-height:1.1;margin-top:2px}
+  .summary-sub{font-size:13px;color:var(--text-2);margin-top:2px}
+
+  .modal-foot{
+    position:sticky;bottom:0;
+    padding:var(--s-4) var(--s-6);
+    background:rgba(17,17,28,.98);
+    backdrop-filter:blur(12px);
+    border-top:1px solid var(--border);
+    display:flex;align-items:center;justify-content:space-between;gap:var(--s-4);flex-wrap:wrap;
+  }
+  .foot-total-label{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--text-3);font-weight:600}
+  .foot-total-value{font-size:var(--fs-xl);font-weight:800;margin-top:2px}
+  .foot-total-sub{font-size:13px;color:var(--text-2);margin-top:2px}
+  .foot-actions{display:flex;gap:var(--s-2);flex-wrap:wrap}
+
+  /* ============================================================
+     DRAWER (cart)
+     ============================================================ */
   .backdrop{
-    position:fixed;inset:0;background:rgba(4,4,10,.78);
+    position:fixed;inset:0;background:rgba(0,0,0,.7);
+    backdrop-filter:blur(4px);
     opacity:0;pointer-events:none;transition:opacity .22s;z-index:100;
   }
   .backdrop.open{opacity:1;pointer-events:auto}
 
-  /* Modals */
-  .modal-wrap{
-    position:fixed;inset:0;z-index:110;display:grid;place-items:center;padding:20px;
-    opacity:0;pointer-events:none;transition:opacity .22s;
-  }
-  .modal-wrap.open{opacity:1;pointer-events:auto}
-  .modal{
-    width:100%;max-width:800px;max-height:92vh;overflow-y:auto;
-    background:var(--surface);border:1px solid var(--border-strong);border-radius:20px;
-    display:flex;flex-direction:column;
-  }
-  .modal-hero{
-    position:relative;padding:32px 26px 28px;overflow:hidden;flex-shrink:0;min-height:200px;
-    display:flex;align-items:flex-end;
-  }
-  .m-art{position:absolute;inset:0}
-  .m-art svg{width:100%;height:100%;display:block}
-  .modal-hero::after{
-    content:"";position:absolute;inset:0;
-    background:linear-gradient(to top,rgba(18,18,29,.97) 0%,rgba(18,18,29,.42) 55%,rgba(18,18,29,.22) 100%);
-  }
-  .modal-hero .m-info{position:relative;z-index:2;max-width:80%}
-  .modal-hero .m-tag{
-    display:inline-flex;align-items:center;gap:6px;
-    font-size:13px;padding:4px 11px;border-radius:100px;
-    background:rgba(0,0,0,.48);color:#fff;
-    border:1px solid rgba(255,255,255,.28);margin-bottom:12px;
-  }
-  .modal-hero h2{font-size:clamp(22px,3.2vw,30px);font-weight:700;line-height:1.15;margin-bottom:6px;text-shadow:0 3px 16px rgba(0,0,0,.55)}
-  .modal-hero .m-sub{font-size:15px;font-style:italic;color:rgba(255,255,255,.92)}
-  .modal-close{
-    position:absolute;top:12px;right:12px;z-index:5;
-    width:34px;height:34px;border-radius:50%;display:grid;place-items:center;
-    background:rgba(0,0,0,.55);color:#fff;font-size:16px;
-    border:1px solid rgba(255,255,255,.2);transition:.2s;
-  }
-  .modal-close:hover{background:rgba(0,0,0,.85);transform:rotate(90deg)}
-
-  .modal-body{padding:22px 26px 6px}
-  .meta-grid{
-    display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:14px;
-    padding-bottom:20px;border-bottom:1px solid var(--border);
-  }
-  .meta-item{display:flex;gap:10px;align-items:flex-start}
-  .meta-item .mi{color:#a78bfa;font-size:17px;line-height:1.25}
-  .meta-item .ml{font-size:12px;text-transform:uppercase;letter-spacing:.6px;color:#7c7c96;margin-bottom:2px}
-  .meta-item .mv{font-size:14.5px;line-height:1.4}
-  .desc{font-size:15px;line-height:1.68;color:var(--muted);padding:18px 0 4px}
-
-  .sellers{
-    margin-top:18px;padding:15px 17px;border-radius:12px;
-    background:rgba(34,158,217,.07);border:1px solid rgba(34,158,217,.22);
-  }
-  .sellers h6{
-    font-size:12.5px;text-transform:uppercase;letter-spacing:.7px;color:#7dd3fc;
-    margin-bottom:10px;display:flex;align-items:center;gap:7px;
-  }
-  .seller-row{display:flex;gap:10px;font-size:14px;line-height:1.6;margin-bottom:6px;flex-wrap:wrap}
-  .seller-row:last-child{margin-bottom:0}
-  .seller-row .lbl{color:#7c7c96;min-width:130px;flex-shrink:0}
-  .seller-row .val{color:#cbd5e1}
-  .seller-tag{
-    display:inline-block;padding:1px 8px;border-radius:5px;font-size:13.5px;
-    background:rgba(255,255,255,.07);border:1px solid var(--border);margin:2px 4px 2px 0;color:#e2e8f0;
-  }
-
-  .section-title{
-    font-size:14.5px;letter-spacing:.5px;text-transform:uppercase;
-    color:#a5a5bd;margin:22px 0 13px;display:flex;align-items:center;gap:9px;
-  }
-  .section-title::after{content:"";flex:1;height:1px;background:var(--border)}
-
-  .tier{
-    display:flex;align-items:center;gap:12px;padding:13px 14px;border-radius:12px;
-    background:var(--surface-2);border:1px solid var(--border);margin-bottom:9px;transition:.18s;
-  }
-  .tier:hover{border-color:var(--border-strong);background:var(--surface-3)}
-  .tier.selected{border-color:rgba(139,92,246,.65);background:rgba(139,92,246,.1)}
-  .tier-info{flex:1;min-width:0}
-  .tier-name{font-size:15px;font-weight:700;margin-bottom:2px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-  .tier-badge{font-size:11px;letter-spacing:.5px;text-transform:uppercase;padding:2px 7px;border-radius:5px}
-  .tier-badge.reg{background:rgba(148,163,184,.2);color:#cbd5e1}
-  .tier-badge.vip{background:rgba(139,92,246,.25);color:#c4b5fd}
-  .tier-badge.vvip{background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff}
-  .tier-note{font-size:13px;color:#7c7c96}
-  .tier-note.low{color:#fb923c}
-  .tier-price{
-    font-size:16.5px;font-weight:700;white-space:nowrap;
-    cursor:default;user-select:none;-webkit-user-select:none;
-    -webkit-tap-highlight-color:transparent;
-  }
-
-  .stepper{
-    display:flex;align-items:center;gap:1px;background:var(--bg);
-    border-radius:8px;padding:3px;border:1px solid var(--border);flex-shrink:0;
-  }
-  .stepper button{
-    width:27px;height:27px;border-radius:6px;display:grid;place-items:center;
-    font-size:16px;color:var(--muted);transition:.15s;line-height:1;
-  }
-  .stepper button:hover:not(:disabled){background:rgba(255,255,255,.1);color:#fff}
-  .stepper button:disabled{opacity:.25;cursor:not-allowed}
-  .stepper .qty{width:24px;text-align:center;font-size:15px;font-variant-numeric:tabular-nums}
-
-  .live-total{
-    display:flex;align-items:center;justify-content:space-between;gap:12px;
-    margin-top:16px;padding:14px 16px;border-radius:12px;
-    background:linear-gradient(135deg,rgba(139,92,246,.13),rgba(236,72,153,.09));
-    border:1px solid rgba(139,92,246,.3);
-  }
-  .live-total .lt-label{font-size:13px;text-transform:uppercase;letter-spacing:.6px;color:#c4b5fd}
-  .live-total .lt-value{font-size:22px;font-weight:700;line-height:1.1}
-  .live-total .lt-sub{font-size:13px;color:var(--muted);margin-top:1px}
-
-  .modal-footer{
-    position:sticky;bottom:0;margin-top:20px;
-    padding:14px 26px;background:rgba(18,18,29,.98);
-    border-top:1px solid var(--border);
-    display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
-  }
-  .total-box .tl{font-size:12px;text-transform:uppercase;letter-spacing:.6px;color:#7c7c96}
-  .total-box .tv{font-size:23px;font-weight:700}
-  .total-box .tn{font-size:13px;color:var(--muted);margin-top:1px}
-  .footer-actions{display:flex;gap:9px;flex-wrap:wrap}
-
-  /* Drawer */
   .drawer{
-    position:fixed;top:0;right:0;bottom:0;width:min(410px,100%);z-index:120;
-    background:var(--surface);border-left:1px solid var(--border-strong);
+    position:fixed;top:0;right:0;bottom:0;width:min(420px,100%);z-index:120;
+    background:var(--surface);border-left:1px solid var(--border-2);
     display:flex;flex-direction:column;
-    transform:translateX(102%);transition:transform .28s cubic-bezier(.2,.8,.3,1);
+    transform:translateX(102%);transition:transform .28s cubic-bezier(.4,0,.2,1);
   }
   .drawer.open{transform:none}
-  .drawer-head{padding:18px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
-  .drawer-head h3{font-size:18px;font-weight:700;display:flex;align-items:center;gap:9px}
-  .drawer-head .pill{font-size:13px;background:rgba(139,92,246,.2);color:#c4b5fd;padding:2px 9px;border-radius:100px}
-  .icon-btn{
-    width:34px;height:34px;border-radius:8px;display:grid;place-items:center;
-    color:var(--muted);font-size:17px;transition:.18s;
+  .drawer-head{
+    padding:var(--s-5);border-bottom:1px solid var(--border);
+    display:flex;align-items:center;justify-content:space-between;flex-shrink:0;
   }
-  .icon-btn:hover{background:rgba(255,255,255,.08);color:#fff}
-  .drawer-body{flex:1;overflow-y:auto;padding:16px 20px;-webkit-overflow-scrolling:touch}
-  .cart-item{display:flex;gap:12px;padding:13px 0;border-bottom:1px solid var(--border)}
-  .ci-poster{
-    width:54px;height:54px;border-radius:10px;flex-shrink:0;
-    display:grid;place-items:center;font-size:24px;color:#fff;
-  }
-  .ci-poster .ic{width:24px;height:24px}
-  .ci-info{flex:1;min-width:0}
-  .ci-title{font-size:14.5px;font-weight:700;line-height:1.3;margin-bottom:3px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-  .ci-tier{font-size:13px;color:#a78bfa;margin-bottom:2px}
-  .ci-meta{font-size:12.5px;color:#7c7c96}
-  .ci-right{display:flex;flex-direction:column;align-items:flex-end;justify-content:space-between;gap:7px;flex-shrink:0}
-  .ci-price{font-size:14.5px;font-weight:700}
-  .ci-remove{font-size:12.5px;color:#7c7c96;transition:.15s;display:inline-flex;align-items:center;gap:4px}
-  .ci-remove:hover{color:#f87171}
-  .cart-empty{text-align:center;padding:60px 20px;color:var(--muted)}
-  .cart-empty .big{font-size:38px;margin-bottom:12px;opacity:.4;color:#6c6c85}
-  .cart-empty h4{color:var(--text);font-size:17px;margin-bottom:6px}
-  .cart-empty p{font-size:14.5px;line-height:1.6}
-  .drawer-foot{padding:18px 20px 22px;border-top:1px solid var(--border);background:var(--surface-2);flex-shrink:0}
-  .sum-row{display:flex;justify-content:space-between;font-size:14.5px;color:var(--muted);margin-bottom:8px}
-  .sum-row.total{
-    font-size:19px;color:var(--text);
-    padding-top:11px;margin-top:11px;border-top:1px solid var(--border);margin-bottom:14px;
-  }
-  .checkout-btn{
-    width:100%;padding:15px;border-radius:12px;font-size:16px;color:#fff;
-    background:linear-gradient(135deg,#229ED9,#1d8ec4);transition:.18s;
-    display:flex;align-items:center;justify-content:center;gap:9px;
-    font-weight:700;
-  }
-  .checkout-btn:hover{filter:brightness(1.1)}
-  .checkout-btn:disabled{opacity:.35;cursor:not-allowed;filter:none}
-  .secure-note{text-align:center;font-size:13px;color:#6c6c85;margin-top:11px;line-height:1.5}
+  .drawer-title{font-size:var(--fs-lg);font-weight:700;display:flex;align-items:center;gap:var(--s-2)}
+  .drawer-pill{font-size:12px;font-weight:600;background:var(--brand-soft);color:#c4b5fd;padding:3px 10px;border-radius:var(--r-full)}
 
-  /* Sticky basket bar */
+  .drawer-body{flex:1;overflow-y:auto;padding:var(--s-4) var(--s-5)}
+  .cart-item{display:flex;gap:var(--s-3);padding:var(--s-4) 0;border-bottom:1px solid var(--border)}
+  .cart-item:first-child{padding-top:0}
+  .cart-item:last-child{border-bottom:none}
+  .ci-art{
+    width:52px;height:52px;border-radius:var(--r-sm);flex-shrink:0;
+    display:grid;place-items:center;color:#fff;font-size:22px;
+  }
+  .ci-info{flex:1;min-width:0}
+  .ci-title{font-size:var(--fs-sm);font-weight:600;line-height:1.3;margin-bottom:3px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .ci-tier{font-size:12px;color:var(--brand);font-weight:600;margin-bottom:2px}
+  .ci-meta{font-size:12px;color:var(--text-3)}
+  .ci-right{display:flex;flex-direction:column;align-items:flex-end;justify-content:space-between;gap:var(--s-2);flex-shrink:0}
+  .ci-price{font-size:var(--fs-sm);font-weight:700;font-variant-numeric:tabular-nums}
+  .ci-qty{font-size:12px;color:var(--text-3)}
+  .ci-remove{
+    font-size:12px;color:var(--text-3);
+    display:inline-flex;align-items:center;gap:4px;
+    transition:color .15s;
+  }
+  .ci-remove:hover{color:var(--danger)}
+
+  .cart-empty{text-align:center;padding:var(--s-8) var(--s-5);color:var(--text-2)}
+  .cart-empty-icon{font-size:36px;color:var(--text-4);margin-bottom:var(--s-4)}
+  .cart-empty h4{color:var(--text);font-size:var(--fs-base);margin-bottom:var(--s-2)}
+  .cart-empty p{font-size:var(--fs-sm);line-height:1.6}
+
+  .drawer-foot{
+    padding:var(--s-5);border-top:1px solid var(--border);
+    background:var(--surface-2);flex-shrink:0;
+  }
+  .sum-row{display:flex;justify-content:space-between;font-size:var(--fs-sm);color:var(--text-2);margin-bottom:var(--s-2)}
+  .sum-row.total{
+    font-size:var(--fs-lg);color:var(--text);font-weight:700;
+    padding-top:var(--s-3);margin-top:var(--s-3);
+    border-top:1px solid var(--border);margin-bottom:var(--s-4);
+  }
+  .secure-note{
+    text-align:center;font-size:12px;color:var(--text-3);
+    margin-top:var(--s-3);line-height:1.5;
+  }
+  .secure-note a{color:var(--brand);font-weight:600}
+  .secure-note a:hover{text-decoration:underline}
+
+  .btn-checkout{
+    width:100%;padding:14px;border-radius:var(--r-md);
+    font-size:var(--fs-base);font-weight:700;color:#fff;
+    background:var(--brand);
+    display:flex;align-items:center;justify-content:center;gap:var(--s-2);
+    transition:background .15s;
+  }
+  .btn-checkout:hover{background:var(--brand-hover)}
+  .btn-checkout:disabled{opacity:.4;cursor:not-allowed}
+
+  /* ============================================================
+     STICKY BASKET BAR
+     ============================================================ */
   .basket-bar{
     position:fixed;left:0;right:0;bottom:0;z-index:95;
-    background:rgba(18,18,29,.98);
-    border-top:1px solid var(--border-strong);
-    padding:11px 22px calc(11px + env(safe-area-inset-bottom));
+    background:rgba(17,17,28,.98);backdrop-filter:blur(16px);
+    border-top:1px solid var(--border-2);
+    padding:var(--s-3) var(--s-5) calc(var(--s-3) + env(safe-area-inset-bottom));
     transform:translateY(110%);
-    transition:transform .28s cubic-bezier(.2,.8,.3,1);
+    transition:transform .28s cubic-bezier(.4,0,.2,1);
+    box-shadow:0 -8px 24px rgba(0,0,0,.4);
   }
   .basket-bar.show{transform:none}
-  .basket-inner{max-width:1360px;margin:0 auto;display:flex;align-items:center;gap:16px}
+  .basket-inner{max-width:var(--max);margin:0 auto;display:flex;align-items:center;gap:var(--s-4)}
   .basket-icon{
-    width:42px;height:42px;border-radius:11px;flex-shrink:0;
-    background:linear-gradient(135deg,var(--accent),var(--accent-2));
-    display:grid;place-items:center;font-size:19px;color:#fff;position:relative;
+    width:44px;height:44px;border-radius:var(--r-md);flex-shrink:0;
+    background:var(--brand);color:#fff;
+    display:grid;place-items:center;font-size:20px;position:relative;
   }
   .basket-icon .bubble{
-    position:absolute;top:-5px;right:-5px;
-    background:#229ED9;color:#fff;border-radius:100px;
-    font-size:11px;font-weight:700;min-width:19px;height:19px;
-    display:grid;place-items:center;padding:0 5px;
+    position:absolute;top:-4px;right:-4px;
+    background:var(--danger);color:#fff;
+    font-size:11px;font-weight:700;
+    min-width:20px;height:20px;padding:0 6px;
+    display:grid;place-items:center;border-radius:var(--r-full);
     border:2px solid var(--surface);
   }
   .basket-summary{flex:1;min-width:0}
-  .basket-count{font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px}
-  .basket-total{font-size:22px;font-weight:700;line-height:1.15}
-  .basket-items{font-size:13px;color:var(--muted);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .basket-actions{display:flex;gap:9px;flex-shrink:0}
-  .basket-open{
-    padding:11px 22px;border-radius:10px;font-size:15px;color:#fff;font-weight:700;
-    background:linear-gradient(135deg,var(--accent),var(--accent-2));transition:.18s;
-    display:inline-flex;align-items:center;gap:8px;
-  }
-  .basket-open:hover{filter:brightness(1.1)}
+  .basket-count{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--text-2);font-weight:600}
+  .basket-total{font-size:var(--fs-xl);font-weight:800;line-height:1.1;font-variant-numeric:tabular-nums}
+  .basket-items{font-size:12px;color:var(--text-3);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
-  /* Toast */
+  /* ============================================================
+     TOAST
+     ============================================================ */
   .toast-stack{
-    position:fixed;bottom:90px;left:50%;transform:translateX(-50%);z-index:200;
-    display:flex;flex-direction:column;gap:9px;align-items:center;
-    pointer-events:none;width:max-content;max-width:92vw;
+    position:fixed;bottom:100px;left:50%;transform:translateX(-50%);
+    z-index:200;display:flex;flex-direction:column;gap:var(--s-2);
+    align-items:center;pointer-events:none;
+    width:max-content;max-width:92vw;
     transition:bottom .3s;
   }
-  .toast-stack.raised{bottom:130px}
+  .toast-stack.raised{bottom:150px}
   .toast{
-    padding:11px 18px;border-radius:11px;font-size:14.5px;
-    background:rgba(26,26,41,.98);border:1px solid var(--border-strong);
-    display:flex;align-items:center;gap:9px;
-    animation:toastIn .3s cubic-bezier(.2,.9,.3,1);
+    padding:12px 18px;border-radius:var(--r-md);
+    font-size:var(--fs-sm);font-weight:500;
+    background:var(--surface-2);border:1px solid var(--border-2);
+    color:var(--text);
+    display:flex;align-items:center;gap:var(--s-2);
+    box-shadow:var(--shadow-3);
+    animation:toastIn .3s cubic-bezier(.4,0,.2,1);
   }
-  .toast .ic{font-size:16px;color:#a78bfa}
-  .toast.ok .ic{color:#22c55e}
-  .toast.warn .ic{color:#fb923c}
+  .toast .ic{font-size:16px;color:var(--brand)}
+  .toast.ok .ic{color:var(--success)}
+  .toast.warn .ic{color:var(--warning)}
   @keyframes toastIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
   .toast.out{animation:toastOut .25s forwards}
-  @keyframes toastOut{to{opacity:0;transform:translateY(-6px)}}
+  @keyframes toastOut{to{opacity:0;transform:translateY(-8px)}}
 
-  /* Footer */
-  footer{border-top:1px solid var(--border);background:var(--surface);padding:40px 22px 30px;margin-top:auto}
-  .foot-inner{max-width:1360px;margin:0 auto;display:flex;flex-wrap:wrap;gap:28px;justify-content:space-between;align-items:flex-start}
-  .foot-brand{max-width:300px}
-  .foot-brand p{font-size:14px;color:var(--muted);line-height:1.7;margin-top:12px}
-  .foot-cols{display:flex;gap:52px;flex-wrap:wrap}
-  .foot-col h5{font-size:13px;text-transform:uppercase;letter-spacing:.8px;color:#7c7c96;margin-bottom:12px}
-  .foot-col a{display:block;font-size:14.5px;color:var(--muted);text-decoration:none;margin-bottom:8px;transition:.15s;cursor:pointer}
-  .foot-col a:hover{color:var(--text)}
-  .foot-bottom{
-    max-width:1360px;margin:30px auto 0;padding-top:20px;border-top:1px solid var(--border);
-    font-size:13.5px;color:#6c6c85;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+  /* ============================================================
+     FOOTER
+     ============================================================ */
+  .footer{
+    margin-top:auto;
+    background:var(--surface);border-top:1px solid var(--border);
+    padding:var(--s-8) var(--s-5) var(--s-5);
   }
+  .footer-inner{
+    max-width:var(--max);margin:0 auto;
+    display:grid;grid-template-columns:1.4fr repeat(3,1fr);
+    gap:var(--s-7);
+  }
+  .footer-brand{max-width:340px}
+  .footer-brand-text{font-size:var(--fs-sm);color:var(--text-2);line-height:1.7;margin-top:var(--s-4)}
+  .footer-brand-text b{color:var(--text)}
+  .footer-col h5{
+    font-size:12px;text-transform:uppercase;letter-spacing:.1em;
+    color:var(--text-3);font-weight:700;margin-bottom:var(--s-4);
+  }
+  .footer-col a{
+    display:block;font-size:var(--fs-sm);color:var(--text-2);
+    margin-bottom:var(--s-3);transition:color .15s;cursor:pointer;
+  }
+  .footer-col a:hover{color:var(--text)}
 
-  /* Responsive */
+  .footer-trust{
+    max-width:var(--max);margin:var(--s-7) auto 0;
+    padding-top:var(--s-5);border-top:1px solid var(--border);
+    display:flex;flex-wrap:wrap;gap:var(--s-5);
+    align-items:center;justify-content:space-between;
+  }
+  .payment-icons{display:flex;gap:var(--s-2);align-items:center;flex-wrap:wrap}
+  .payment-chip{
+    height:28px;padding:0 10px;border-radius:6px;
+    background:var(--surface-2);border:1px solid var(--border);
+    display:inline-flex;align-items:center;gap:6px;
+    font-size:11px;font-weight:700;color:var(--text-2);letter-spacing:.02em;
+  }
+  .trust-badge{
+    display:inline-flex;align-items:center;gap:6px;
+    font-size:12px;color:var(--text-2);
+  }
+  .trust-badge .ic{color:var(--success);font-size:14px}
+
+  .footer-bottom{
+    max-width:var(--max);margin:var(--s-5) auto 0;
+    padding-top:var(--s-5);border-top:1px solid var(--border);
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:var(--s-3);
+    font-size:12px;color:var(--text-3);
+  }
+  .footer-bottom-links{display:flex;gap:var(--s-4);flex-wrap:wrap}
+  .footer-bottom-links a{cursor:pointer;transition:color .15s}
+  .footer-bottom-links a:hover{color:var(--text-2)}
+
+  /* ============================================================
+     MOBILE NAV
+     ============================================================ */
+  .mobile-nav{
+    position:fixed;inset:0;z-index:130;
+    background:rgba(0,0,0,.6);backdrop-filter:blur(6px);
+    opacity:0;pointer-events:none;transition:opacity .22s;
+  }
+  .mobile-nav.open{opacity:1;pointer-events:auto}
+  .mobile-nav-panel{
+    position:absolute;top:0;left:0;bottom:0;width:min(320px,80%);
+    background:var(--surface);border-right:1px solid var(--border-2);
+    padding:var(--s-5);
+    transform:translateX(-102%);transition:transform .28s cubic-bezier(.4,0,.2,1);
+    display:flex;flex-direction:column;gap:var(--s-2);
+    overflow-y:auto;
+  }
+  .mobile-nav.open .mobile-nav-panel{transform:none}
+  .mobile-nav-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--s-5)}
+  .mobile-nav-link{
+    display:flex;align-items:center;gap:var(--s-3);
+    padding:var(--s-3) var(--s-3);border-radius:var(--r-sm);
+    font-size:var(--fs-base);color:var(--text-2);font-weight:500;
+    transition:background .15s,color .15s;
+  }
+  .mobile-nav-link:hover,.mobile-nav-link.active{background:var(--brand-soft);color:var(--text)}
+  .mobile-nav-link .ic{font-size:18px;color:var(--text-3)}
+  .mobile-nav-link.active .ic{color:var(--brand)}
+
+  /* ============================================================
+     RESPONSIVE
+     ============================================================ */
   @media (max-width:1024px){
-    .header-search{max-width:230px}
-    nav.main-nav button{padding:8px 10px;font-size:14.5px}
+    .main-nav{display:none}
+    .mobile-menu-btn{display:grid}
+    .footer-inner{grid-template-columns:1fr 1fr;gap:var(--s-6)}
   }
-  @media (max-width:900px){
-    nav.main-nav{display:none}
-    .header-search{max-width:none}
-  }
-  @media (max-width:640px){
-    body{font-size:15px}
-    .header-inner{padding:11px 14px;gap:10px}
-    .logo span{display:none}
-    .cart-btn .lbl{display:none}
-    .cart-btn{padding:9px 11px}
-    .hero{padding:40px 14px 30px}
-    .hero-badge{font-size:13px;padding:4px 12px}
-    .hero p{margin-bottom:22px}
-    .hero-cta{flex-direction:column;align-items:stretch;gap:0;padding:8px;border-radius:14px;max-width:100%}
-    .cta-field{padding:11px 10px;border-bottom:1px solid var(--border)}
-    .search-go{width:100%;justify-content:center;padding:13px}
-
-    .insights{padding:4px 14px 34px}
-    .insights-head{margin-bottom:24px}
-    .insights-head h2{font-size:22px}
-    .insights-grid{gap:12px}
-    .insight-card{padding:18px 16px}
-    .insight-head h3{font-size:16px}
-    .insight-list li{font-size:13.5px}
-    .insight-stat .num{font-size:24px}
-
-    .cats{padding:0 14px 6px;gap:7px;padding-top:22px}
-    .cat{padding:8px 13px;font-size:14px}
-    .toolbar{padding:0 14px;margin-top:20px;gap:9px}
-    .toolbar h2{font-size:18px}
-    .result-count{font-size:13.5px;width:100%}
-    .toolbar .spacer{display:none}
-    .sort-wrap{width:100%}
-    .sort-wrap select{width:100%}
-    .grid{padding:16px 14px 140px;gap:12px;grid-template-columns:repeat(2,1fr)}
-    .card-body{padding:10px 11px 11px;gap:4px}
-    .card-body h3{font-size:14.5px;min-height:38px}
-    .venue,.when{font-size:12.5px;gap:4px}
-    .poster-sub{font-size:11.5px;bottom:7px;left:9px;right:9px}
-    .date-badge{padding:4px 7px;top:8px;left:8px}
-    .date-badge span{font-size:10px}
-    .date-badge strong{font-size:15px}
-    .cat-chip{top:8px;right:8px;font-size:11px;padding:3px 7px;gap:4px}
-    .hot-chip{top:36px;right:8px;font-size:10px;padding:2px 6px}
-    .card-foot{padding-top:9px;gap:6px}
-    .price span{font-size:10.5px}
-    .price strong{font-size:15.5px}
-    .btn-buy{padding:7px 9px;font-size:13px;gap:4px}
-    .btn-buy .ic{font-size:13px}
+  @media (max-width:768px){
+    :root{--header-h:60px}
+    .header-inner{padding:0 var(--s-4);gap:var(--s-3)}
+    .search-wrap{max-width:none}
+    .hero{padding:var(--s-7) var(--s-4) var(--s-6)}
+    .section{padding:var(--s-6) var(--s-4)}
+    .section-title{font-size:var(--fs-xl)}
+    .hero-search{flex-direction:column;padding:var(--s-3)}
+    .hero-search-field{padding:var(--s-3);border-bottom:1px solid var(--border)}
+    .hero-search-btn{width:100%;justify-content:center}
+    .grid{grid-template-columns:repeat(2,1fr);gap:var(--s-4)}
+    .poster{aspect-ratio:1/1}
+    .card-title{font-size:14px;min-height:38px}
+    .card-meta{font-size:12px}
+    .price-value{font-size:15px}
+    .btn{padding:7px 10px;font-size:12px}
+    .toolbar-title{font-size:var(--fs-base)}
     .modal-wrap{padding:0;align-items:flex-end}
-    .modal{max-height:94vh;border-radius:18px 18px 0 0;max-width:100%}
-    .modal-hero{padding:22px 18px 20px;min-height:170px}
-    .modal-hero .m-info{max-width:100%}
-    .modal-hero h2{font-size:21px}
-    .modal-body{padding:18px 18px 6px}
-    .modal-footer{padding:13px 18px}
-    .footer-actions{width:100%}
-    .footer-actions .btn-buy,.footer-actions .btn-ghost{flex:1;justify-content:center}
-    .meta-grid{grid-template-columns:1fr 1fr;gap:12px}
-    .tier{padding:11px 12px;gap:9px}
-    .tier-name{font-size:14px}
-    .tier-price{font-size:15px}
-    .stepper button{width:25px;height:25px}
-    .stepper .qty{width:22px;font-size:14px}
-    .live-total{padding:12px 13px;margin-top:14px}
-    .live-total .lt-value{font-size:20px}
+    .modal{max-height:94vh;border-radius:var(--r-xl) var(--r-xl) 0 0;max-width:100%}
+    .modal-hero{min-height:180px;padding:var(--s-5)}
+    .modal-body{padding:var(--s-5) var(--s-4) var(--s-3)}
+    .modal-foot{padding:var(--s-4)}
+    .foot-actions{width:100%}
+    .foot-actions .btn{flex:1}
+    .meta-grid{grid-template-columns:1fr 1fr}
+    .footer-inner{grid-template-columns:1fr;gap:var(--s-5)}
+    .footer-trust{flex-direction:column;align-items:flex-start;gap:var(--s-4)}
     .drawer{width:100%}
-    .foot-cols{gap:30px}
-    .foot-bottom{font-size:12.5px}
-    .basket-bar{padding:9px 14px calc(9px + env(safe-area-inset-bottom))}
-    .basket-inner{gap:11px}
-    .basket-icon{width:38px;height:38px;font-size:17px;border-radius:10px}
-    .basket-total{font-size:19px}
-    .basket-count{font-size:11.5px}
+    .basket-bar{padding:var(--s-2) var(--s-4) calc(var(--s-2) + env(safe-area-inset-bottom))}
     .basket-items{display:none}
-    .basket-open{padding:10px 16px;font-size:14.5px;gap:6px}
-    .toast-stack{bottom:80px}
-    .toast-stack.raised{bottom:110px}
+    .toast-stack{bottom:90px}
+    .toast-stack.raised{bottom:130px}
   }
-  @media (max-width:380px){
+  @media (max-width:420px){
     .grid{grid-template-columns:1fr}
-    .card-body h3{font-size:16px;min-height:0}
+    .card-title{font-size:15px;min-height:0}
+    .logo-text{display:none}
+    .cart-btn{padding:0 var(--s-3)}
+    .cart-btn span:not(.cart-count){display:none}
     .meta-grid{grid-template-columns:1fr}
   }
+
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important}
+  }
+
+  @media print{.header,.basket-bar,.footer,.toast-stack{display:none}}
 </style>
 </head>
 <body>
 
-<header>
+<a href="#main" class="skip-link">コンテンツへスキップ</a>
+
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+<header class="header" id="header">
   <div class="header-inner">
-    <div class="logo">
+    <a href="#" class="logo" aria-label="TixNest Japan ホーム">
       <div class="logo-mark">
-        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v1.2a2.3 2.3 0 0 0 0 4.6V16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-1.2a2.3 2.3 0 0 0 0-4.6Z"/><path d="M14.5 7v10" stroke-dasharray="2 2"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 9a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v1.2a2.3 2.3 0 0 0 0 4.6V16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-1.2a2.3 2.3 0 0 0 0-4.6Z"/>
+          <path d="M14.5 7v10" stroke-dasharray="2 2"/>
+        </svg>
       </div>
-      <span>TixNest Japan</span>
-    </div>
-    <nav class="main-nav" id="mainNav">
-      <button data-cat="all" class="active">すべて</button>
-      <button data-cat="concert">コンサート</button>
-      <button data-cat="festival">フェス</button>
-      <button data-cat="sports">スポーツ</button>
-      <button data-cat="party">パーティー</button>
-      <button data-cat="transfer">譲渡</button>
+      <span class="logo-text">Tix<em>Nest</em></span>
+    </a>
+
+    <nav class="main-nav" id="mainNav" aria-label="メインナビゲーション">
+      <button class="nav-link active" data-cat="all">すべて</button>
+      <button class="nav-link" data-cat="concert">コンサート</button>
+      <button class="nav-link" data-cat="festival">フェス</button>
+      <button class="nav-link" data-cat="sports">スポーツ</button>
+      <button class="nav-link" data-cat="party">パーティー</button>
+      <button class="nav-link" data-cat="transfer">譲渡</button>
     </nav>
-    <div class="header-search">
-      <span class="s-icon">
-        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.8"/><path d="m20 20-3.7-3.7"/></svg>
+
+    <div class="search-wrap">
+      <span class="search-icon" aria-hidden="true">
+        <svg class="ic" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.8"/><path d="m20 20-3.7-3.7"/></svg>
       </span>
-      <input type="text" id="headerSearch" placeholder="アーティスト、会場で検索…" autocomplete="off">
+      <input type="search" class="search-input" id="headerSearch" placeholder="アーティスト、会場、都市で検索" autocomplete="off" aria-label="イベントを検索">
     </div>
-    <button class="cart-btn" id="cartBtn">
-      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9.5" cy="20" r="1.3"/><circle cx="17.5" cy="20" r="1.3"/><path d="M2.8 3.5h2.3l2.4 11.6a1.7 1.7 0 0 0 1.7 1.4h8.5a1.7 1.7 0 0 0 1.7-1.35L21.2 7.2H6"/></svg>
-      <span class="lbl">バスケット</span>
-      <span class="cart-count" id="cartCount">0</span>
-    </button>
-  </div>
-</header>
 
-<div class="tg-banner">
-  <span>ご注文はバスケット内で完了します —</span>
-  <span class="tg-handle">@Kaduskoh</span>
-</div>
-
-<section class="hero">
-  <div class="hero-inner">
-    <div class="hero-badge"><span class="dot"></span> 2026年 東京・大阪・全国ツアー情報</div>
-    <h1>最高の<em>夜</em>を、<br>ここから。</h1>
-    <p>東京ドーム、さいたまスーパーアリーナ、幕張メッセ。人気アーティストのコンサートから夏フェス、プロ野球、クラブイベントまで。</p>
-    <div class="hero-cta">
-      <div class="cta-field">
-        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6.8-6-6.8-10.8a6.8 6.8 0 1 1 13.6 0C18.8 15 12 21 12 21Z"/><circle cx="12" cy="10.2" r="2.6"/></svg>
-        <select id="cityFilter"><option value="all">すべての都市</option></select>
-      </div>
-      <button class="search-go" id="heroGo">
-        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v1.2a2.3 2.3 0 0 0 0 4.6V16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-1.2a2.3 2.3 0 0 0 0-4.6Z"/><path d="M14.5 7v10" stroke-dasharray="2 2"/></svg>
-        チケットを探す
+    <div class="header-actions">
+      <button class="icon-btn mobile-menu-btn" id="mobileMenuBtn" aria-label="メニューを開く">
+        <svg class="ic" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+      <button class="cart-btn" id="cartBtn" aria-label="バスケットを開く">
+        <svg class="ic" viewBox="0 0 24 24"><circle cx="9.5" cy="20" r="1.3"/><circle cx="17.5" cy="20" r="1.3"/><path d="M2.8 3.5h2.3l2.4 11.6a1.7 1.7 0 0 0 1.7 1.4h8.5a1.7 1.7 0 0 0 1.7-1.35L21.2 7.2H6"/></svg>
+        <span>バスケット</span>
+        <span class="cart-count" id="cartCount">0</span>
       </button>
     </div>
   </div>
-</section>
+</header>
 
-<!-- =====================================================
-     INDUSTRY INSIGHTS
-     ===================================================== -->
-<section class="insights">
-  <div class="insights-head">
-    <span class="insights-tag">
-      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5 13.7 8.3 18.5 10 13.7 11.7 12 16.5 10.3 11.7 5.5 10 10.3 8.3Z"/></svg>
-      業界インサイト 2026
-    </span>
-    <h2>チケット・ライブイベント業界の<em>動向</em></h2>
-    <p>テクノロジー、観客の嗜好の変化、動的価格戦略が、コンサート・スポーツ・ナイトライフ市場を急速に変えています。</p>
-  </div>
+<!-- ============================================================
+     TOP BAR
+     ============================================================ -->
+<div class="topbar" id="topbar">
+  <span>ご注文はバスケットで確定後、Telegram <code>@Kaduskoh</code> にて最終確認されます</span>
+  <button class="topbar-close" id="topbarClose" aria-label="お知らせを閉じる">
+    <svg class="ic" viewBox="0 0 24 24"><path d="M6.5 6.5 17.5 17.5M17.5 6.5 6.5 17.5"/></svg>
+  </button>
+</div>
 
-  <div class="insights-grid">
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <span class="hero-eyebrow">
+        <span class="dot"></span>
+        2026年 東京・大阪・全国ツアー情報
+      </span>
+      <h1>日本中の<span class="accent">ライブ</span>を、<br>ひとつの場所で。</h1>
+      <p class="hero-lede">東京ドーム、さいたまスーパーアリーナ、幕張メッセ。人気アーティストのコンサートから夏フェス、プロ野球、クラブイベントまで、信頼できるチケットを簡単に検索・購入。</p>
 
-    <article class="insight-card">
-      <div class="insight-head">
-        <div class="insight-icon i1">
-          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17 L9 10 L13 14 L21 6"/><path d="M15 6h6v6"/></svg>
+      <form class="hero-search" id="heroSearchForm" role="search">
+        <div class="hero-search-field">
+          <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.8-6-6.8-10.8a6.8 6.8 0 1 1 13.6 0C18.8 15 12 21 12 21Z"/><circle cx="12" cy="10.2" r="2.6"/></svg>
+          <select id="cityFilter" aria-label="都市で絞り込む">
+            <option value="all">すべての都市</option>
+          </select>
         </div>
-        <h3>ライブイベントの進化</h3>
-      </div>
-      <ul class="insight-list">
-        <li>
-          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/></svg>
-          <span><span class="era past">過去</span>パンデミック後の反動で会場収益は過去最高を記録。巨大スタジアムツアーへの高需要が続く一方、<b>「ファンフレーション」</b>によるコスト上昇で消費者疲れも。</span>
-        </li>
-        <li>
-          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/></svg>
-          <span><span class="era now">現在</span>伝統的な複数日フェスより<b>クラブナイトや小規模ライブが高成長</b>。航空券と同じ動的・アルゴリズム価格戦略がライブスポーツと大型コンサートで普及。</span>
-        </li>
-        <li>
-          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/></svg>
-          <span><span class="era next">未来</span><b>予約の70%以上がモバイルファースト</b>。バーチャル・ハイブリッドチケット、AIパーソナライズ推薦、二次市場の転売防止機能が成長領域。</span>
-        </li>
-      </ul>
-      <div class="insight-stat">
-        <span class="num">70%+</span>
-        <span class="lbl">の予約がモバイル経由<br>（モバイルファースト時代）</span>
-      </div>
-    </article>
+        <button type="submit" class="hero-search-btn">
+          <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.8"/><path d="m20 20-3.7-3.7"/></svg>
+          チケットを探す
+        </button>
+      </form>
 
-    <article class="insight-card">
-      <div class="insight-head">
-        <div class="insight-icon i2">
-          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5.5l10-2V16"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></svg>
+      <div class="trust-row">
+        <div class="trust-item">
+          <svg class="ic" viewBox="0 0 24 24"><path d="m5 12.5 4.6 4.6L19 7"/></svg>
+          10,000+ 販売実績
         </div>
-        <h3>コンサート＆音楽フェス</h3>
-      </div>
-      <ul class="insight-list">
-        <li>
-          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/></svg>
-          <span>世界需要は<b>スタジアム／アリーナのポップ、ラップ、エレクトロニック</b>に集中。大型ツアーが市場を牽引。</span>
-        </li>
-        <li>
-          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/></svg>
-          <span>ファンは基本入場料より<b>体験型チケット</b>（VIPパス、早期入場、限定グッズ）を優先。</span>
-        </li>
-        <li>
-          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/></svg>
-          <span>一次販売は <b>Ticketmaster・Eventbrite・AXS</b> が支配。二次市場の <b>StubHub・SeatGeek・Vivid Seats</b> は動的マークアップで厳しく規制。</span>
-        </li>
-      </ul>
-      <div class="insight-stat">
-        <span class="num">VIP</span>
-        <span class="lbl">体験型チケット需要が<br>基本入場を上回る成長</span>
-      </div>
-    </article>
-
-    <article class="insight-card">
-      <div class="insight-head">
-        <div class="insight-icon i3">
-          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4h10v4.5a5 5 0 0 1-10 0Z"/><path d="M7 5.5H4.5V7a3.5 3.5 0 0 0 3.5 3.5M17 5.5h2.5V7a3.5 3.5 0 0 1-3.5 3.5"/><path d="M12 13.5V17M9 20.5h6"/></svg>
+        <div class="trust-item">
+          <svg class="ic" viewBox="0 0 24 24"><path d="m5 12.5 4.6 4.6L19 7"/></svg>
+          認証済み販売者
         </div>
-        <h3>スポーツイベント</h3>
-      </div>
-      <ul class="insight-list">
-        <li>
-          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/></svg>
-          <span><b>デジタル専用チケット</b>（NFC、QRコード、モバイルウォレット）がスポーツ観戦収益の<b>約75%</b>を占める。</span>
-        </li>
-        <li>
-          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/></svg>
-          <span>チーム公式アプリが<b>チケット＋会場F&amp;B＋交通割引</b>をバンドルした統合体験を提供。</span>
-        </li>
-        <li>
-          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/></svg>
-          <span>ファンエンゲージメントは試合当日だけでなく<b>年間を通じたデジタル接点</b>へ拡大。</span>
-        </li>
-      </ul>
-      <div class="insight-stat">
-        <span class="num">75%</span>
-        <span class="lbl">スポーツ観戦収益のうち<br>デジタル専用チケット比率</span>
-      </div>
-    </article>
-
-    <article class="insight-card">
-      <div class="insight-head">
-        <div class="insight-icon i4">
-          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20 L9 10 L19 14 Z"/><path d="M12 4v4M18 6l-2 3M6 8l2 3"/></svg>
+        <div class="trust-item">
+          <svg class="ic" viewBox="0 0 24 24"><path d="m5 12.5 4.6 4.6L19 7"/></svg>
+          安全な取引
         </div>
-        <h3>パーティー＆ナイトライフ</h3>
       </div>
-      <ul class="insight-list">
-        <li>
-          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/></svg>
-          <span><b>マイクロイベント、ポップアップパーティー、テーマナイト</b>がソーシャルリンクとローカル発見アプリ経由で急成長。</span>
-        </li>
-        <li>
-          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/></svg>
-          <span><b>Resident Advisor、Dice、Eventbrite</b> などのキュレーション型プラットフォームが、静的なナイトライフルーティンを凌駕。</span>
-        </li>
-        <li>
-          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/></svg>
-          <span>「行きつけのクラブ」より<b>その夜限りの体験</b>へ。SNS発の限定イベントが予約を独占。</span>
-        </li>
-      </ul>
-      <div class="insight-stat">
-        <span class="num">DICE</span>
-        <span class="lbl">キュレーション型アプリが<br>静的ナイトライフを代替</span>
-      </div>
-    </article>
-
-  </div>
-
-  <div class="insights-foot">
-    <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5 13.7 8.3 18.5 10 13.7 11.7 12 16.5 10.3 11.7 5.5 10 10.3 8.3Z"/></svg>
-    <span><b>総括：</b>ライブイベント市場は「規模」から「体験」へ。モバイルファースト、動的価格、デジタル専用チケット、AI推薦、転売防止——これらが次の10年を定義します。</span>
+    </div>
   </div>
 </section>
 
-<div class="cats" id="catStrip">
-  <button class="cat active" data-cat="all"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5 13.7 8.3 18.5 10 13.7 11.7 12 16.5 10.3 11.7 5.5 10 10.3 8.3Z"/></svg>すべて</button>
-  <button class="cat" data-cat="concert"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5.5l10-2V16"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></svg>コンサート</button>
-  <button class="cat" data-cat="festival"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5 3 20h18Z"/><path d="M12 3.5V20"/></svg>フェス</button>
-  <button class="cat" data-cat="sports"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4h10v4.5a5 5 0 0 1-10 0Z"/><path d="M7 5.5H4.5V7a3.5 3.5 0 0 0 3.5 3.5M17 5.5h2.5V7a3.5 3.5 0 0 1-3.5 3.5"/><path d="M12 13.5V17M9 20.5h6"/></svg>スポーツ</button>
-  <button class="cat" data-cat="party"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20 L9 10 L19 14 Z"/><path d="M12 4v4M18 6l-2 3M6 8l2 3"/></svg>パーティー</button>
-  <button class="cat" data-cat="transfer"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3.5 21 7.5 17 11.5"/><path d="M3 7.5h14"/><path d="M7 20.5 3 16.5 7 12.5"/><path d="M21 16.5H7"/></svg>譲渡</button>
-</div>
+<!-- ============================================================
+     MAIN
+     ============================================================ -->
+<main id="main">
 
-<div class="toolbar">
-  <h2 id="sectionTitle">すべてのイベント</h2>
-  <span class="result-count" id="resultCount"></span>
-  <div class="spacer"></div>
-  <div class="sort-wrap">
-    <select id="sortSelect">
-      <option value="date">日付順（早い順）</option>
-      <option value="price-asc">価格が安い順</option>
-      <option value="price-desc">価格が高い順</option>
-      <option value="name">名前順</option>
-    </select>
+  <!-- Resale notice (shown when transfer category active) -->
+  <div class="section" id="transferNotice" style="display:none;padding-bottom:0">
+    <div class="notice">
+      <svg class="ic" viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg>
+      <div>
+        <strong>譲渡・リセールチケットについて：</strong>
+        TixNest は第三者間のチケット譲渡を仲介しません。取引は当事者間の責任で行ってください。定価を超える転売は法律で禁止されています。不審な取引は通報してください。
+      </div>
+    </div>
   </div>
-</div>
 
-<main class="grid" id="eventGrid"></main>
+  <div class="section">
+    <!-- Categories -->
+    <div class="cats" id="catStrip" role="tablist">
+      <button class="cat active" data-cat="all" role="tab">
+        <svg class="ic" viewBox="0 0 24 24"><path d="M12 3.5 13.7 8.3 18.5 10 13.7 11.7 12 16.5 10.3 11.7 5.5 10 10.3 8.3Z"/></svg>
+        すべて
+      </button>
+      <button class="cat" data-cat="concert" role="tab">
+        <svg class="ic" viewBox="0 0 24 24"><path d="M9 18V5.5l10-2V16"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></svg>
+        コンサート
+      </button>
+      <button class="cat" data-cat="festival" role="tab">
+        <svg class="ic" viewBox="0 0 24 24"><path d="M12 3.5 3 20h18Z"/><path d="M12 3.5V20"/></svg>
+        フェス
+      </button>
+      <button class="cat" data-cat="sports" role="tab">
+        <svg class="ic" viewBox="0 0 24 24"><path d="M7 4h10v4.5a5 5 0 0 1-10 0Z"/><path d="M7 5.5H4.5V7a3.5 3.5 0 0 0 3.5 3.5M17 5.5h2.5V7a3.5 3.5 0 0 1-3.5 3.5"/><path d="M12 13.5V17M9 20.5h6"/></svg>
+        スポーツ
+      </button>
+      <button class="cat" data-cat="party" role="tab">
+        <svg class="ic" viewBox="0 0 24 24"><path d="M5 20 L9 10 L19 14 Z"/><path d="M12 4v4M18 6l-2 3M6 8l2 3"/></svg>
+        パーティー
+      </button>
+      <button class="cat" data-cat="transfer" role="tab">
+        <svg class="ic" viewBox="0 0 24 24"><path d="M17 3.5 21 7.5 17 11.5"/><path d="M3 7.5h14"/><path d="M7 20.5 3 16.5 7 12.5"/><path d="M21 16.5H7"/></svg>
+        譲渡
+      </button>
+    </div>
 
-<footer>
-  <div class="foot-inner">
-    <div class="foot-brand">
-      <div class="logo">
+    <!-- Toolbar -->
+    <div class="toolbar">
+      <h2 class="toolbar-title" id="sectionTitle">すべてのイベント</h2>
+      <span class="toolbar-count" id="resultCount"></span>
+      <div class="toolbar-spacer"></div>
+      <div class="sort-wrap">
+        <select class="sort-select" id="sortSelect" aria-label="並び替え">
+          <option value="date">日付順（早い順）</option>
+          <option value="price-asc">価格が安い順</option>
+          <option value="price-desc">価格が高い順</option>
+          <option value="name">名前順</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Grid -->
+    <div class="grid" id="eventGrid" role="list"></div>
+  </div>
+
+</main>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="#" class="logo">
         <div class="logo-mark">
-          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v1.2a2.3 2.3 0 0 0 0 4.6V16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-1.2a2.3 2.3 0 0 0 0-4.6Z"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v1.2a2.3 2.3 0 0 0 0 4.6V16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-1.2a2.3 2.3 0 0 0 0-4.6Z"/></svg>
         </div>
-        <span>TixNest Japan</span>
-      </div>
-      <p>日本全国のコンサート、フェス、スポーツ、パーティーチケットを簡単に検索・購入。ご注文はTelegram <b style="color:#7dd3fc">@Kaduskoh</b> にて確認されます。</p>
+        <span class="logo-text">Tix<em>Nest</em></span>
+      </a>
+      <p class="footer-brand-text">日本全国のコンサート、フェス、スポーツ、パーティーチケットを簡単に検索・購入。ご注文はTelegram <b>@Kaduskoh</b> にて最終確認されます。</p>
     </div>
-    <div class="foot-cols">
-      <div class="foot-col">
-        <h5>カテゴリー</h5>
-        <a data-cat="concert">コンサート</a>
-        <a data-cat="festival">フェス</a>
-        <a data-cat="sports">スポーツ</a>
-        <a data-cat="party">パーティー</a>
-        <a data-cat="transfer">譲渡</a>
-      </div>
-      <div class="foot-col">
-        <h5>サポート</h5>
-        <a>ヘルプセンター</a>
-        <a>返金ポリシー</a>
-        <a>お問い合わせ</a>
-        <a>アクセシビリティ</a>
-      </div>
-      <div class="foot-col">
-        <h5>会社情報</h5>
-        <a>会社概要</a>
-        <a>採用情報</a>
-        <a>プレスリリース</a>
-        <a>パートナー</a>
-      </div>
+    <div class="footer-col">
+      <h5>カテゴリー</h5>
+      <a data-cat="concert">コンサート</a>
+      <a data-cat="festival">フェス</a>
+      <a data-cat="sports">スポーツ</a>
+      <a data-cat="party">パーティー</a>
+      <a data-cat="transfer">譲渡・リセール</a>
+    </div>
+    <div class="footer-col">
+      <h5>サポート</h5>
+      <a>ヘルプセンター</a>
+      <a>返金ポリシー</a>
+      <a>お問い合わせ</a>
+      <a>アクセシビリティ</a>
+    </div>
+    <div class="footer-col">
+      <h5>会社情報</h5>
+      <a>会社概要</a>
+      <a>特定商取引法に基づく表記</a>
+      <a>プライバシーポリシー</a>
+      <a>利用規約</a>
     </div>
   </div>
-  <div class="foot-bottom">
+
+  <div class="footer-trust">
+    <div class="payment-icons" aria-label="利用可能な支払い方法">
+      <span class="payment-chip">VISA</span>
+      <span class="payment-chip">MASTERCARD</span>
+      <span class="payment-chip">JCB</span>
+      <span class="payment-chip">AMEX</span>
+      <span class="payment-chip">PayPay</span>
+    </div>
+    <div class="trust-badge">
+      <svg class="ic" viewBox="0 0 24 24"><path d="m5 12.5 4.6 4.6L19 7"/></svg>
+      SSL 暗号化通信
+    </div>
+    <div class="trust-badge">
+      <svg class="ic" viewBox="0 0 24 24"><path d="m5 12.5 4.6 4.6L19 7"/></svg>
+      東京都公安委員会 古物商許可
+    </div>
+  </div>
+
+  <div class="footer-bottom">
     <span>© 2026 TixNest Japan. All rights reserved.</span>
-    <span>チケットのご注文はTelegramにて確認されます。</span>
+    <div class="footer-bottom-links">
+      <a>利用規約</a>
+      <a>プライバシー</a>
+      <a>特定商取引法</a>
+      <a>サイトマップ</a>
+    </div>
   </div>
 </footer>
 
-<div class="modal-wrap" id="eventModal">
+<!-- ============================================================
+     MODAL
+     ============================================================ -->
+<div class="modal-wrap" id="eventModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
   <div class="modal" id="eventModalContent"></div>
 </div>
 
+<!-- ============================================================
+     DRAWER
+     ============================================================ -->
 <div class="backdrop" id="drawerBackdrop"></div>
-<aside class="drawer" id="cartDrawer">
+<aside class="drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-label="バスケット">
   <div class="drawer-head">
-    <h3>
-      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9.5" cy="20" r="1.3"/><circle cx="17.5" cy="20" r="1.3"/><path d="M2.8 3.5h2.3l2.4 11.6a1.7 1.7 0 0 0 1.7 1.4h8.5a1.7 1.7 0 0 0 1.7-1.35L21.2 7.2H6"/></svg>
+    <h3 class="drawer-title">
+      <svg class="ic" viewBox="0 0 24 24"><circle cx="9.5" cy="20" r="1.3"/><circle cx="17.5" cy="20" r="1.3"/><path d="M2.8 3.5h2.3l2.4 11.6a1.7 1.7 0 0 0 1.7 1.4h8.5a1.7 1.7 0 0 0 1.7-1.35L21.2 7.2H6"/></svg>
       バスケット
-      <span class="pill" id="drawerCount">0枚</span>
+      <span class="drawer-pill" id="drawerCount">0枚</span>
     </h3>
     <button class="icon-btn" id="closeDrawer" aria-label="閉じる">
-      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 6.5 17.5 17.5M17.5 6.5 6.5 17.5"/></svg>
+      <svg class="ic" viewBox="0 0 24 24"><path d="M6.5 6.5 17.5 17.5M17.5 6.5 6.5 17.5"/></svg>
     </button>
   </div>
   <div class="drawer-body" id="cartItems"></div>
   <div class="drawer-foot" id="cartFoot"></div>
 </aside>
 
+<!-- ============================================================
+     STICKY BASKET BAR
+     ============================================================ -->
 <div class="basket-bar" id="basketBar">
   <div class="basket-inner">
     <div class="basket-icon">
-      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9.5" cy="20" r="1.3"/><circle cx="17.5" cy="20" r="1.3"/><path d="M2.8 3.5h2.3l2.4 11.6a1.7 1.7 0 0 0 1.7 1.4h8.5a1.7 1.7 0 0 0 1.7-1.35L21.2 7.2H6"/></svg>
+      <svg class="ic" viewBox="0 0 24 24"><circle cx="9.5" cy="20" r="1.3"/><circle cx="17.5" cy="20" r="1.3"/><path d="M2.8 3.5h2.3l2.4 11.6a1.7 1.7 0 0 0 1.7 1.4h8.5a1.7 1.7 0 0 0 1.7-1.35L21.2 7.2H6"/></svg>
       <span class="bubble" id="basketBubble">0</span>
     </div>
     <div class="basket-summary">
@@ -953,33 +1172,68 @@
       <div class="basket-total" id="basketTotal">¥0</div>
       <div class="basket-items" id="basketItems"></div>
     </div>
-    <div class="basket-actions">
-      <button class="basket-open" id="basketOpenBtn">
-        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="3"/></svg>
-        <span>バスケットを開く</span>
-      </button>
-    </div>
+    <button class="btn btn-primary btn-lg" id="basketOpenBtn">
+      <svg class="ic" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="3"/></svg>
+      バスケットを開く
+    </button>
   </div>
 </div>
 
-<div class="toast-stack" id="toastStack"></div>
+<!-- ============================================================
+     MOBILE NAV
+     ============================================================ -->
+<div class="mobile-nav" id="mobileNav">
+  <div class="mobile-nav-panel">
+    <div class="mobile-nav-head">
+      <span class="logo">
+        <div class="logo-mark">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v1.2a2.3 2.3 0 0 0 0 4.6V16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-1.2a2.3 2.3 0 0 0 0-4.6Z"/></svg>
+        </div>
+        <span class="logo-text">Tix<em>Nest</em></span>
+      </span>
+      <button class="icon-btn" id="mobileNavClose" aria-label="閉じる">
+        <svg class="ic" viewBox="0 0 24 24"><path d="M6.5 6.5 17.5 17.5M17.5 6.5 6.5 17.5"/></svg>
+      </button>
+    </div>
+    <button class="mobile-nav-link active" data-cat="all">
+      <svg class="ic" viewBox="0 0 24 24"><path d="M12 3.5 13.7 8.3 18.5 10 13.7 11.7 12 16.5 10.3 11.7 5.5 10 10.3 8.3Z"/></svg>
+      すべて
+    </button>
+    <button class="mobile-nav-link" data-cat="concert">
+      <svg class="ic" viewBox="0 0 24 24"><path d="M9 18V5.5l10-2V16"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></svg>
+      コンサート
+    </button>
+    <button class="mobile-nav-link" data-cat="festival">
+      <svg class="ic" viewBox="0 0 24 24"><path d="M12 3.5 3 20h18Z"/><path d="M12 3.5V20"/></svg>
+      フェス
+    </button>
+    <button class="mobile-nav-link" data-cat="sports">
+      <svg class="ic" viewBox="0 0 24 24"><path d="M7 4h10v4.5a5 5 0 0 1-10 0Z"/><path d="M7 5.5H4.5V7a3.5 3.5 0 0 0 3.5 3.5M17 5.5h2.5V7a3.5 3.5 0 0 1-3.5 3.5"/><path d="M12 13.5V17M9 20.5h6"/></svg>
+      スポーツ
+    </button>
+    <button class="mobile-nav-link" data-cat="party">
+      <svg class="ic" viewBox="0 0 24 24"><path d="M5 20 L9 10 L19 14 Z"/><path d="M12 4v4M18 6l-2 3M6 8l2 3"/></svg>
+      パーティー
+    </button>
+    <button class="mobile-nav-link" data-cat="transfer">
+      <svg class="ic" viewBox="0 0 24 24"><path d="M17 3.5 21 7.5 17 11.5"/><path d="M3 7.5h14"/><path d="M7 20.5 3 16.5 7 12.5"/><path d="M21 16.5H7"/></svg>
+      譲渡
+    </button>
+  </div>
+</div>
+
+<!-- ============================================================
+     TOAST
+     ============================================================ -->
+<div class="toast-stack" id="toastStack" aria-live="polite"></div>
 
 <script>
 /* =========================================================
-   CONFIG
-   ========================================================= */
-const TG_USER = 'Kaduskoh';
-const TG_URL  = 'https://t.me/' + TG_USER;
-
-/* =========================================================
-   ICON PATHS
+   ICONS
    ========================================================= */
 const ICON_PATHS = {
-  ticket:'<path d="M4 9a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v1.2a2.3 2.3 0 0 0 0 4.6V16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-1.2a2.3 2.3 0 0 0 0-4.6Z"/>',
   music:'<path d="M9 18V5.5l10-2V16"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/>',
   trophy:'<path d="M7 4h10v4.5a5 5 0 0 1-10 0Z"/><path d="M7 5.5H4.5V7a3.5 3.5 0 0 0 3.5 3.5M17 5.5h2.5V7a3.5 3.5 0 0 1-3.5 3.5"/><path d="M12 13.5V17M9 20.5h6"/>',
-  theater:'<path d="M3.5 4.5h8v5a4 4 0 0 1-8 0Z"/><path d="M12.5 8.5h8v5a4 4 0 0 1-8 0Z"/>',
-  mic:'<rect x="9" y="2.5" width="6" height="11" rx="3"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v3"/>',
   tent:'<path d="M12 3.5 3 20h18Z"/><path d="M12 3.5V20"/>',
   sparkles:'<path d="M12 3.5 13.7 8.3 18.5 10 13.7 11.7 12 16.5 10.3 11.7 5.5 10 10.3 8.3Z"/>',
   bolt:'<path d="M13.5 2.5 5 13.5h5.5L9.5 21.5 19 10.5h-5.8Z"/>',
@@ -994,14 +1248,12 @@ const ICON_PATHS = {
   trash:'<path d="M4 6.5h16M9.5 6.5V4.8A1.3 1.3 0 0 1 10.8 3.5h2.4a1.3 1.3 0 0 1 1.3 1.3v1.7"/><path d="M6.5 6.5 7.6 19.4a1.8 1.8 0 0 0 1.8 1.6h5.2a1.8 1.8 0 0 0 1.8-1.6L17.5 6.5"/>',
   eye:'<path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="3"/>',
   party:'<path d="M5 20 L9 10 L19 14 Z"/><path d="M12 4v4M18 6l-2 3M6 8l2 3"/>',
-  transfer:'<path d="M17 3.5 21 7.5 17 11.5"/><path d="M3 7.5h14"/><path d="M7 20.5 3 16.5 7 12.5"/><path d="M21 16.5H7"/>'
+  transfer:'<path d="M17 3.5 21 7.5 17 11.5"/><path d="M3 7.5h14"/><path d="M7 20.5 3 16.5 7 12.5"/><path d="M21 16.5H7"/>',
+  heart:'<path d="M20.8 6.6a5 5 0 0 0-7.1 0L12 8.3l-1.7-1.7a5 5 0 1 0-7.1 7.1l1.7 1.7L12 22l7.1-6.6 1.7-1.7a5 5 0 0 0 0-7.1Z"/>',
+  shield:'<path d="M12 2.5 4 6v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6Z"/><path d="m9 12 2 2 4-4"/>'
 };
-
-function ic(name){
-  return '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
-       + 'stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
-       + (ICON_PATHS[name] || '') + '</svg>';
-}
+function ic(name){ return '<svg class="ic" viewBox="0 0 24 24" aria-hidden="true">' + (ICON_PATHS[name]||'') + '</svg>'; }
+function icFill(name){ return '<svg class="ic fill" viewBox="0 0 24 24" aria-hidden="true">' + (ICON_PATHS[name]||'') + '</svg>'; }
 
 const CATEGORY_META = {
   concert:  { label:'コンサート', icon:'music' },
@@ -1012,126 +1264,59 @@ const CATEGORY_META = {
 };
 
 /* =========================================================
-   JAPANESE ARTWORK
+   ARTWORK — clean gradients (production would use real images)
    ========================================================= */
 const posterCache = new Map();
-
-function buildArt(e, u){
-  const t = e.art;
-  if (t === 'sakura'){
-    let petals = '';
-    for (let i = 0; i < 12; i++){
-      const x = 30 + i * 31, y = 40 + (i % 4) * 22;
-      petals += `<ellipse cx="${x}" cy="${y}" rx="5" ry="3" fill="#fda4af" opacity="${0.4 + (i%3)*0.15}" transform="rotate(${i*30} ${x} ${y})"/>`;
-    }
-    return `<svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-      <defs><linearGradient id="g${u}" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="#4c1d95"/><stop offset="0.55" stop-color="#be185d"/><stop offset="1" stop-color="#fda4af"/>
-      </linearGradient></defs>
-      <rect width="400" height="300" fill="url(#g${u})"/>
-      ${petals}
-      <path d="M0 240 Q100 200 200 240 T400 240 L400 300 L0 300Z" fill="#1e1b4b" opacity="0.8"/>
-      <circle cx="200" cy="130" r="50" fill="#fef3c7" opacity="0.9"/>
-      <path d="M0 270 Q100 240 200 270 T400 270 L400 300 L0 300Z" fill="#0f0a1e" opacity="0.9"/>
-    </svg>`;
-  }
-  if (t === 'neon'){
-    return `<svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-      <rect width="400" height="300" fill="#07070f"/>
-      <rect x="40" y="60" width="320" height="3" fill="#22d3ee" opacity="0.8"/>
-      <rect x="40" y="100" width="240" height="3" fill="#ec4899" opacity="0.8"/>
-      <rect x="40" y="140" width="300" height="3" fill="#8b5cf6" opacity="0.8"/>
-      <rect x="40" y="180" width="200" height="3" fill="#22d3ee" opacity="0.6"/>
-      <rect x="40" y="220" width="280" height="3" fill="#ec4899" opacity="0.6"/>
-      <circle cx="200" cy="150" r="70" fill="none" stroke="#8b5cf6" stroke-width="2" opacity="0.4"/>
-      <circle cx="200" cy="150" r="110" fill="none" stroke="#22d3ee" stroke-width="1" opacity="0.25"/>
-    </svg>`;
-  }
-  if (t === 'fuji'){
-    return `<svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-      <defs><linearGradient id="g${u}" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="#1e1b4b"/><stop offset="0.4" stop-color="#312e81"/><stop offset="1" stop-color="#f59e0b"/>
-      </linearGradient></defs>
-      <rect width="400" height="300" fill="url(#g${u})"/>
-      <circle cx="300" cy="80" r="30" fill="#fef3c7" opacity="0.9"/>
-      <path d="M0 220 L120 100 L200 180 L280 120 L400 200 L400 300 L0 300Z" fill="#1e293b" opacity="0.9"/>
-      <path d="M120 100 L160 150 L200 120 L240 160 L280 120 L320 160 L400 200 L400 300 L0 300 L0 220Z" fill="#0f172a"/>
-      <path d="M140 130 L160 150 L180 135 L200 155 L220 140 L240 160 L260 145 L280 165" fill="none" stroke="#fef3c7" stroke-width="3" opacity="0.7"/>
-      <path d="M0 260 Q100 230 200 260 T400 260 L400 300 L0 300Z" fill="#120a2e" opacity="0.95"/>
-    </svg>`;
-  }
-  if (t === 'torii'){
-    return `<svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-      <defs><linearGradient id="g${u}" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="#0f172a"/><stop offset="1" stop-color="#7c2d12"/>
-      </linearGradient></defs>
-      <rect width="400" height="300" fill="url(#g${u})"/>
-      <circle cx="200" cy="120" r="55" fill="#fbbf24" opacity="0.85"/>
-      <g fill="#ef4444" opacity="0.9">
-        <rect x="100" y="90" width="200" height="12" rx="3"/>
-        <rect x="90" y="80" width="220" height="8" rx="2"/>
-        <rect x="120" y="102" width="14" height="100" rx="2"/>
-        <rect x="266" y="102" width="14" height="100" rx="2"/>
-        <rect x="110" y="130" width="180" height="7" rx="2"/>
+function buildArt(e, uid){
+  const [c1,c2] = e.gradient;
+  const isTransfer = e.transferInfo;
+  // Clean, professional gradient card with subtle pattern + artist name
+  return `<svg viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="g${uid}" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="${c1}"/>
+        <stop offset="1" stop-color="${c2}"/>
+      </linearGradient>
+      <radialGradient id="r${uid}" cx="0.2" cy="0.1" r="0.9">
+        <stop offset="0" stop-color="rgba(255,255,255,.14)"/>
+        <stop offset="1" stop-color="rgba(255,255,255,0)"/>
+      </radialGradient>
+    </defs>
+    <rect width="400" height="400" fill="url(#g${uid})"/>
+    <rect width="400" height="400" fill="url(#r${uid})"/>
+    ${isTransfer ? `
+      <g opacity="0.08" stroke="#fff" stroke-width="1" fill="none">
+        <circle cx="320" cy="80" r="60"/>
+        <circle cx="320" cy="80" r="100"/>
+        <circle cx="80" cy="320" r="80"/>
       </g>
-      <path d="M0 240 Q100 215 200 240 T400 240 L400 300 L0 300Z" fill="#1e1b4b" opacity="0.9"/>
-    </svg>`;
-  }
-  if (t === 'stadium'){
-    return `<svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="g${u}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b1220"/><stop offset="1" stop-color="#1e1b4b"/></linearGradient>
-        <linearGradient id="h${u}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#15803d"/><stop offset="1" stop-color="#052e16"/></linearGradient>
-      </defs>
-      <rect width="400" height="300" fill="url(#g${u})"/>
-      <circle cx="60" cy="34" r="4" fill="#fef9c3"/><circle cx="340" cy="34" r="4" fill="#fef9c3"/>
-      <ellipse cx="200" cy="204" rx="230" ry="94" fill="#7f1d1d" opacity="0.6"/>
-      <rect x="30" y="172" width="340" height="118" rx="4" fill="url(#h${u})"/>
-      <g stroke="#fff" stroke-width="1.2" opacity="0.25">
-        <line x1="100" y1="172" x2="100" y2="290"/><line x1="170" y1="172" x2="170" y2="290"/>
-        <line x1="240" y1="172" x2="240" y2="290"/><line x1="310" y1="172" x2="310" y2="290"/>
+    ` : `
+      <g opacity="0.06" stroke="#fff" stroke-width="1" fill="none">
+        <line x1="0" y1="120" x2="400" y2="120"/>
+        <line x1="0" y1="200" x2="400" y2="200"/>
+        <line x1="0" y1="280" x2="400" y2="280"/>
       </g>
-      <rect x="30" y="172" width="24" height="118" fill="#991b1b" opacity="0.9"/>
-      <rect x="346" y="172" width="24" height="118" fill="#facc15" opacity="0.85"/>
-    </svg>`;
-  }
-  if (t === 'transfer'){
-    return `<svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-      <defs><linearGradient id="g${u}" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0" stop-color="#0f0c29"/><stop offset="0.5" stop-color="#302b63"/><stop offset="1" stop-color="#24243e"/>
-      </linearGradient></defs>
-      <rect width="400" height="300" fill="url(#g${u})"/>
-      <circle cx="100" cy="100" r="40" fill="none" stroke="#c084fc" stroke-width="2" opacity="0.5"/>
-      <circle cx="300" cy="200" r="50" fill="none" stroke="#f472b6" stroke-width="2" opacity="0.4"/>
-      <path d="M140 120 L260 180" stroke="#c084fc" stroke-width="2.5" stroke-dasharray="6 6" opacity="0.8"/>
-      <path d="M250 170 L270 185 L255 195" fill="none" stroke="#c084fc" stroke-width="2.5" opacity="0.8"/>
-      <text x="200" y="80" font-family="Times New Roman, serif" font-size="28" fill="#f5f0ff" text-anchor="middle" opacity="0.9" font-style="italic">譲渡</text>
-      <text x="200" y="250" font-family="Times New Roman, serif" font-size="18" fill="#d8c9ff" text-anchor="middle" opacity="0.8" letter-spacing="2">TRANSFER</text>
-    </svg>`;
-  }
-  return `<svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-    <defs><linearGradient id="g${u}" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="${e.gradient[0]}"/><stop offset="1" stop-color="${e.gradient[1]}"/>
-    </linearGradient></defs>
-    <rect width="400" height="300" fill="url(#g${u})"/>
-    <circle cx="310" cy="60" r="90" fill="rgba(255,255,255,.13)"/>
-    <circle cx="60" cy="250" r="110" fill="rgba(0,0,0,.15)"/>
-    <g transform="translate(200,150) scale(5) translate(-12,-12)" fill="none" stroke="rgba(255,255,255,.95)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">${ICON_PATHS[e.icon] || ICON_PATHS.ticket}</g>
+    `}
+    <text x="200" y="215" font-family="Inter, sans-serif" font-size="34" font-weight="800"
+          fill="rgba(255,255,255,0.95)" text-anchor="middle" letter-spacing="-1">
+      ${escapeXml(shortName(e))}
+    </text>
   </svg>`;
 }
-
+function shortName(e){
+  if (e.transferInfo) return '譲渡';
+  const t = e.title || e.artist || '';
+  return t.length > 14 ? t.slice(0,14) + '…' : t;
+}
+function escapeXml(s){ return String(s).replace(/[<>&"']/g, c=>({ '<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;',"'":'&#39;' }[c])); }
 function posterSVG(e, ctx){
-  const key = e.id + ':' + (ctx || 'c');
-  let svg = posterCache.get(key);
-  if (!svg){
-    svg = buildArt(e, key.replace(/[^a-z0-9]/gi, ''));
-    posterCache.set(key, svg);
-  }
-  return svg;
+  const key = e.id + ':' + (ctx||'c');
+  if (!posterCache.has(key)) posterCache.set(key, buildArt(e, key.replace(/[^a-z0-9]/gi,'')));
+  return posterCache.get(key);
 }
 
 /* =========================================================
-   JAPAN EVENT DATA
+   EVENT DATA
    ========================================================= */
 const JP_SELLERS = {
   primary:['チケットぴあ','ローソンチケット','e+'],
@@ -1139,450 +1324,197 @@ const JP_SELLERS = {
 };
 
 const EVENTS = [
-  // ============================================================
-  // TRANSFER TICKET — Touken Ranbu Musical
-  // English: [Transfer] Musical Touken Ranbu ～Shinken Ranbu Sai 2026～
-  // ============================================================
+  // ─── TRANSFER ───
   {
     id: 900,
-    title: "【譲渡】ミュージカル 刀剣乱舞 ～真剣乱舞祭2026～",
-    titleEn: "[Transfer] Musical Touken Ranbu ～Shinken Ranbu Sai 2026～",
-    artist: "刀ミュ / Toumyu Transfer",
+    title: "ミュージカル 刀剣乱舞 ～真剣乱舞祭2026～",
+    titleEn: "Musical Touken Ranbu ～Shinken Ranbu Sai 2026～",
+    artist: "刀ミュ / Toumyu",
     category: "transfer",
-    genre: "ミュージカル / Musical Transfer",
-    date: "2026-12-17",
-    time: "昼夜 / Day & Night",
-    venue: "神奈川 / 東京 (Kanagawa / Tokyo)",
-    city: "神奈川・東京",
+    genre: "ミュージカル / Musical",
+    date: "2026-12-17", time: "昼夜 / Day & Night",
+    venue: "神奈川 / 東京", city: "神奈川・東京",
     fromPrice: 0,
-    gradient: ["#1a1030", "#2d1b4e"],
-    icon: "transfer",
-    art: "transfer",
-    hot: true,
+    gradient: ["#4c1d95","#1e1b4b"],
+    icon: "transfer", art: "transfer", hot: true,
     pricing: [
-      { name: "Dec 17 — Kanagawa (Day)",    nameJp: "12月17日 昼 神奈川", price: 0, left: 1 },
-      { name: "Dec 17 — Kanagawa (Night)",  nameJp: "12月17日 夜 神奈川", price: 0, left: 1 },
-      { name: "Jan 31 — Tokyo (Day)",        nameJp: "1月31日 昼 東京",    price: 0, left: 1 },
-      { name: "Jan 31 — Tokyo (Night)",      nameJp: "1月31日 夜 東京",    price: 0, left: 1 }
+      { name:'12月17日 昼 神奈川', nameEn:'Dec 17 — Kanagawa (Day)',   price:0, left:1 },
+      { name:'12月17日 夜 神奈川', nameEn:'Dec 17 — Kanagawa (Night)', price:0, left:1 },
+      { name:'1月31日 昼 東京',    nameEn:'Jan 31 — Tokyo (Day)',      price:0, left:1 },
+      { name:'1月31日 夜 東京',    nameEn:'Jan 31 — Tokyo (Night)',    price:0, left:1 }
     ],
     sellers: {
-      primary: ["Face value + handling fees", "定価+手数料"],
-      secondary: ["+ shipping fee if mailed", "郵送の場合は送料"]
+      primary:['定価+手数料','Face value + fees'],
+      secondary:['郵送の場合は送料','+ shipping if mailed']
     },
-    desc: "【譲渡】ミュージカル 刀剣乱舞 ～真剣乱舞祭2026～ 刀ミュ チケット譲渡。\n\n【譲】12月17日 昼夜 神奈川 / 1月31日 東京 昼夜 — 全て各1枚。\n\n【求】定価+手数料（郵送の場合は送料）。\n\nお求めの方は「いいね」後、DMまでご連絡お願いします🙇‍♂️\n\n──────────────\n\n[Transfer] Musical Touken Ranbu ～Shinken Ranbu Sai 2026～ Toumyu Ticket Transfer Results/Announcements.\n\n[Offering]\n• Dec 17 - Kanagawa (Day & Night shows)\n• Jan 31 - Tokyo (Day & Night shows)\n• One ticket available for each show.\n\n[Request] Face value + handling fees (+ shipping fee if sending by mail).\n\nIf you are interested, please like the post and contact me via DM 🙇‍♂️",
-    contact: "いいね後DM / Like & DM",
+    desc: "【譲】12月17日 神奈川 昼夜 各1枚 / 1月31日 東京 昼夜 各1枚\n【求】定価+手数料（郵送の場合は送料）\n\nお求めの方は「いいね」後、DMまでご連絡お願いします🙇‍♂️\n\n──────────────\n\n[Offering] Dec 17 Kanagawa (Day & Night) / Jan 31 Tokyo (Day & Night) — 1 ticket each.\n[Request] Face value + handling fees (+ shipping if mailed).\n\nPlease like and DM if interested.",
     transferInfo: true
   },
 
-  // ——— Oct 6, 2026 ———
-  { id:601, title:"Post Malone", artist:"Post Malone",
-    category:"concert", genre:"Hip-Hop / Pop", date:"2026-10-06", time:"18:00",
-    venue:"K-Arena Yokohama", city:"神奈川", fromPrice:10000,
-    gradient:["#f59e0b","#8b5cf6"], icon:"music", art:"neon", hot:true,
-    pricing:[
-      { name:'一般', price:10000, left:400 },
-      { name:'プレミアム', price:12500, left:120 },
-      { name:'VIP', price:15000, left:40 }
-    ],
+  // ─── CONCERTS ───
+  { id:601, title:"Post Malone", artist:"Post Malone", category:"concert", genre:"Hip-Hop / Pop",
+    date:"2026-10-06", time:"18:00", venue:"K-Arena Yokohama", city:"神奈川", fromPrice:10000,
+    gradient:["#7c3aed","#1e1b4b"], icon:"music", art:"neon", hot:true,
+    pricing:[{name:'一般',price:10000,left:400},{name:'プレミアム',price:12500,left:120},{name:'VIP',price:15000,left:40}],
     sellers:JP_SELLERS,
-    desc:"グラミー賞ノミネートのポスト・マローンがKアリーナ横浜に登場。ヒップホップとポップを融合させた唯一無二のライブを体感しよう。" },
-
-  // ——— Oct 7–8, 2026 ———
-  { id:602, title:"Novelbright", artist:"Novelbright",
-    category:"concert", genre:"J-Rock / Pop", date:"2026-10-07", time:"18:30",
-    venue:"Pia Arena MM, Yokohama", city:"神奈川", fromPrice:8500,
-    gradient:["#0ea5e9","#f59e0b"], icon:"music", art:"sakura",
-    pricing:[
-      { name:'一般', price:8500, left:350 },
-      { name:'プレミアム', price:9500, left:100 },
-      { name:'VIP', price:10500, left:30 }
-    ],
+    desc:"グラミー賞ノミネートのポスト・マローンがKアリーナ横浜に登場。ヒップホップとポップを融合させた唯一無二のライブ。" },
+  { id:602, title:"Novelbright", artist:"Novelbright", category:"concert", genre:"J-Rock / Pop",
+    date:"2026-10-07", time:"18:30", venue:"Pia Arena MM, Yokohama", city:"神奈川", fromPrice:8500,
+    gradient:["#0ea5e9","#1e3a8a"], icon:"music", art:"neon",
+    pricing:[{name:'一般',price:8500,left:350},{name:'プレミアム',price:9500,left:100},{name:'VIP',price:10500,left:30}],
     sellers:JP_SELLERS,
     desc:"Novelbrightが横浜Pia Arena MMで2日間のライブを開催。爽やかなロックサウンドと心に響く歌詞で会場を包みます。" },
-
-  { id:603, title:"Zara Larsson", artist:"Zara Larsson",
-    category:"concert", genre:"Pop / Dance", date:"2026-10-07", time:"19:00",
-    venue:"Ebisu Garden Hall, Tokyo", city:"東京", fromPrice:9000,
-    gradient:["#ec4899","#8b5cf6"], icon:"music", art:"neon", hot:true,
-    pricing:[
-      { name:'一般', price:9000, left:300 },
-      { name:'プレミアム', price:10000, left:80 },
-      { name:'VIP', price:11000, left:20 }
-    ],
+  { id:603, title:"Zara Larsson", artist:"Zara Larsson", category:"concert", genre:"Pop / Dance",
+    date:"2026-10-07", time:"19:00", venue:"Ebisu Garden Hall, Tokyo", city:"東京", fromPrice:9000,
+    gradient:["#ec4899","#831843"], icon:"music", art:"neon", hot:true,
+    pricing:[{name:'一般',price:9000,left:300},{name:'プレミアム',price:10000,left:80},{name:'VIP',price:11000,left:20}],
     sellers:JP_SELLERS,
-    desc:"スウェーデンのポップスター、ザラ・ラーソンが恵比寿ガーデンホールで来日公演。ダンサブルなヒット曲の数々を披露。" },
-
-  // ——— Oct 9, 2026 ———
-  { id:604, title:"Tokyo Hanayome Tour", artist:"Tokyo Hanayome",
-    category:"concert", genre:"J-Rock / Alternative", date:"2026-10-09", time:"19:00",
-    venue:"Ikebukuro EDGE, Tokyo", city:"東京", fromPrice:10000,
-    gradient:["#7c3aed","#ec4899"], icon:"music", art:"torii",
-    pricing:[
-      { name:'一般', price:10000, left:200 },
-      { name:'最前・優先', price:10000, left:40 }
-    ],
-    sellers:JP_SELLERS,
-    desc:"Tokyo Hanayome Tourが池袋EDGEで開催。最前・優先エリアのチケットのみの限定販売。熱狂的なファン必見のステージ。" },
-
-  { id:605, title:"SAMURAI CAFE Live Show", artist:"SAMURAI CAFE",
-    category:"concert", genre:"Live Show / Entertainment", date:"2026-10-09", time:"19:00",
-    venue:"Samurai Cafe, Osaka", city:"大阪", fromPrice:10000,
-    gradient:["#dc2626","#f59e0b"], icon:"music", art:"sakura",
-    pricing:[
-      { name:'一般', price:10000, left:150 },
-      { name:'VIP', price:10000, left:30 }
-    ],
-    sellers:JP_SELLERS,
-    desc:"大阪・サムライカフェで繰り広げられるライブショー。和のテイストを取り入れたパフォーマンスと音楽の融合。" },
-
-  // ——— Oct 11, 2026 ———
-  { id:606, title:"Lorna Shore", artist:"Lorna Shore",
-    category:"concert", genre:"Deathcore / Metal", date:"2026-10-11", time:"18:30",
-    venue:"Namba Hatch, Osaka", city:"大阪", fromPrice:8500,
-    gradient:["#111827","#dc2626"], icon:"music", art:"neon",
-    pricing:[
-      { name:'一般', price:8500, left:300 },
-      { name:'プレミアム', price:9500, left:80 },
-      { name:'VIP', price:10000, left:20 }
-    ],
-    sellers:JP_SELLERS,
-    desc:"デスコア界の重鎮、ローナ・ショアが難波ハッチに登場。圧倒的なヘヴィネスとテクニカルな演奏で会場を圧倒する。" },
-
-  // ——— Oct 15, 2026 ———
-  { id:607, title:"Tokyo Hanayome Tour", artist:"Tokyo Hanayome",
-    category:"concert", genre:"J-Rock / Alternative", date:"2026-10-15", time:"19:00",
-    venue:"Osaka RUIDO, Osaka", city:"大阪", fromPrice:10000,
-    gradient:["#7c3aed","#ec4899"], icon:"music", art:"torii",
-    pricing:[
-      { name:'一般', price:10000, left:200 },
-      { name:'最前・優先', price:10000, left:40 }
-    ],
-    sellers:JP_SELLERS,
-    desc:"Tokyo Hanayome Tourが大阪RUIDOで開催。最前・優先エリアの限定チケット。関西のファン必見のライブ。" },
-
-  // ——— Oct 16, 2026 ———
-  { id:608, title:"Charlie Puth", artist:"Charlie Puth",
-    category:"concert", genre:"Pop / R&B", date:"2026-10-16", time:"19:00",
-    venue:"Pia Arena MM, Yokohama", city:"神奈川", fromPrice:10000,
-    gradient:["#0ea5e9","#8b5cf6"], icon:"music", art:"neon", hot:true,
-    pricing:[
-      { name:'一般', price:10000, left:400 },
-      { name:'プレミアム', price:12000, left:120 },
-      { name:'VIP', price:14000, left:40 }
-    ],
-    sellers:JP_SELLERS,
-    desc:"チャーリー・プースが横浜Pia Arena MMで来日公演。数々のヒット曲と卓越したピアノパフォーマンスを披露。" },
-
-  // ——— Oct 20, 2026 ———
-  { id:609, title:"Tokyo Hanayome Tour", artist:"Tokyo Hanayome",
-    category:"concert", genre:"J-Rock / Alternative", date:"2026-10-20", time:"19:00",
-    venue:"Fukuoka DRUM SON, Fukuoka", city:"福岡", fromPrice:10000,
-    gradient:["#7c3aed","#ec4899"], icon:"music", art:"torii",
-    pricing:[
-      { name:'一般', price:10000, left:150 },
-      { name:'最前・優先', price:10000, left:30 }
-    ],
-    sellers:JP_SELLERS,
-    desc:"Tokyo Hanayome Tourが福岡DRUM SONで開催。最前・優先エリアの限定チケット。九州のファン必見。" },
-
-  // ——— Oct 24–25, 2026 ———
-  { id:610, title:"YOASOBI", artist:"YOASOBI",
-    category:"concert", genre:"J-Pop / Anime", date:"2026-10-24", time:"18:00",
-    venue:"Kyocera Dome, Osaka", city:"大阪", fromPrice:10000,
+    desc:"スウェーデンのポップスター、ザラ・ラーソンが恵比寿ガーデンホールで来日公演。" },
+  { id:604, title:"Tokyo Hanayome Tour", artist:"Tokyo Hanayome", category:"concert", genre:"J-Rock",
+    date:"2026-10-09", time:"19:00", venue:"Ikebukuro EDGE, Tokyo", city:"東京", fromPrice:10000,
+    gradient:["#7c3aed","#4c1d95"], icon:"music", art:"torii",
+    pricing:[{name:'一般',price:10000,left:200},{name:'最前・優先',price:10000,left:40}],
+    sellers:JP_SELLERS, desc:"Tokyo Hanayome Tourが池袋EDGEで開催。最前・優先エリア限定販売。" },
+  { id:605, title:"SAMURAI CAFE Live Show", artist:"SAMURAI CAFE", category:"concert", genre:"Live Show",
+    date:"2026-10-09", time:"19:00", venue:"Samurai Cafe, Osaka", city:"大阪", fromPrice:10000,
+    gradient:["#dc2626","#7f1d1d"], icon:"music", art:"sakura",
+    pricing:[{name:'一般',price:10000,left:150},{name:'VIP',price:10000,left:30}],
+    sellers:JP_SELLERS, desc:"大阪・サムライカフェで繰り広げられるライブショー。" },
+  { id:606, title:"Lorna Shore", artist:"Lorna Shore", category:"concert", genre:"Deathcore",
+    date:"2026-10-11", time:"18:30", venue:"Namba Hatch, Osaka", city:"大阪", fromPrice:8500,
+    gradient:["#111827","#450a0a"], icon:"music", art:"neon",
+    pricing:[{name:'一般',price:8500,left:300},{name:'プレミアム',price:9500,left:80},{name:'VIP',price:10000,left:20}],
+    sellers:JP_SELLERS, desc:"デスコア界の重鎮ローナ・ショアが難波ハッチに登場。" },
+  { id:607, title:"Tokyo Hanayome Tour", artist:"Tokyo Hanayome", category:"concert", genre:"J-Rock",
+    date:"2026-10-15", time:"19:00", venue:"Osaka RUIDO, Osaka", city:"大阪", fromPrice:10000,
+    gradient:["#7c3aed","#4c1d95"], icon:"music", art:"torii",
+    pricing:[{name:'一般',price:10000,left:200},{name:'最前・優先',price:10000,left:40}],
+    sellers:JP_SELLERS, desc:"Tokyo Hanayome Tourが大阪RUIDOで開催。" },
+  { id:608, title:"Charlie Puth", artist:"Charlie Puth", category:"concert", genre:"Pop / R&B",
+    date:"2026-10-16", time:"19:00", venue:"Pia Arena MM, Yokohama", city:"神奈川", fromPrice:10000,
+    gradient:["#0ea5e9","#7c3aed"], icon:"music", art:"neon", hot:true,
+    pricing:[{name:'一般',price:10000,left:400},{name:'プレミアム',price:12000,left:120},{name:'VIP',price:14000,left:40}],
+    sellers:JP_SELLERS, desc:"チャーリー・プースが横浜Pia Arena MMで来日公演。" },
+  { id:609, title:"Tokyo Hanayome Tour", artist:"Tokyo Hanayome", category:"concert", genre:"J-Rock",
+    date:"2026-10-20", time:"19:00", venue:"Fukuoka DRUM SON", city:"福岡", fromPrice:10000,
+    gradient:["#7c3aed","#4c1d95"], icon:"music", art:"torii",
+    pricing:[{name:'一般',price:10000,left:150},{name:'最前・優先',price:10000,left:30}],
+    sellers:JP_SELLERS, desc:"Tokyo Hanayome Tourが福岡DRUM SONで開催。" },
+  { id:610, title:"YOASOBI", artist:"YOASOBI", category:"concert", genre:"J-Pop / Anime",
+    date:"2026-10-24", time:"18:00", venue:"Kyocera Dome, Osaka", city:"大阪", fromPrice:10000,
     gradient:["#4c1d95","#ec4899"], icon:"music", art:"neon", hot:true,
-    pricing:[
-      { name:'一般', price:10000, left:500 },
-      { name:'プレミアム', price:11000, left:150 },
-      { name:'VIP', price:12000, left:50 }
-    ],
-    sellers:JP_SELLERS,
-    desc:"YOASOBIが京セラドーム大阪で2日間のライブを開催。アニメ主題歌のヒット曲から最新曲まで、圧巻のステージ。" },
-
-  // ——— Oct 29, 2026 ———
-  { id:611, title:"Benson Boone", artist:"Benson Boone",
-    category:"concert", genre:"Pop / Rock", date:"2026-10-29", time:"19:00",
-    venue:"Toyota Arena Tokyo", city:"東京", fromPrice:10000,
-    gradient:["#f59e0b","#ec4899"], icon:"music", art:"neon",
-    pricing:[
-      { name:'一般', price:10000, left:400 },
-      { name:'プレミアム', price:11500, left:100 },
-      { name:'VIP', price:13000, left:30 }
-    ],
-    sellers:JP_SELLERS,
-    desc:"ベンソン・ブーンがトヨタアリーナ東京で来日公演。若き才能が放つポップとロックの融合サウンド。" },
-
-  // ——— Nov 1, 2026 ———
-  { id:612, title:"BAND-MAID", artist:"BAND-MAID",
-    category:"concert", genre:"Rock / Metal", date:"2026-11-01", time:"18:00",
-    venue:"Comtec Portbase, Nagoya", city:"愛知", fromPrice:8000,
+    pricing:[{name:'一般',price:10000,left:500},{name:'プレミアム',price:11000,left:150},{name:'VIP',price:12000,left:50}],
+    sellers:JP_SELLERS, desc:"YOASOBIが京セラドーム大阪で2日間のライブを開催。" },
+  { id:611, title:"Benson Boone", artist:"Benson Boone", category:"concert", genre:"Pop / Rock",
+    date:"2026-10-29", time:"19:00", venue:"Toyota Arena Tokyo", city:"東京", fromPrice:10000,
+    gradient:["#f59e0b","#7c3aed"], icon:"music", art:"neon",
+    pricing:[{name:'一般',price:10000,left:400},{name:'プレミアム',price:11500,left:100},{name:'VIP',price:13000,left:30}],
+    sellers:JP_SELLERS, desc:"ベンソン・ブーンがトヨタアリーナ東京で来日公演。" },
+  { id:612, title:"BAND-MAID", artist:"BAND-MAID", category:"concert", genre:"Rock / Metal",
+    date:"2026-11-01", time:"18:00", venue:"Comtec Portbase, Nagoya", city:"愛知", fromPrice:8000,
     gradient:["#dc2626","#111827"], icon:"music", art:"sakura",
-    pricing:[
-      { name:'一般', price:8000, left:300 },
-      { name:'プレミアム', price:9000, left:80 },
-      { name:'VIP', price:10000, left:20 }
-    ],
-    sellers:JP_SELLERS,
-    desc:"BAND-MAIDが名古屋Comtec Portbaseでライブ。メイド服で繰り広げるハードロックサウンドが世界を魅了。" },
-
-  // ——— Nov 6–8, 2026 ———
-  { id:613, title:"Stray Kids", artist:"Stray Kids",
-    category:"concert", genre:"K-Pop", date:"2026-11-06", time:"18:00",
-    venue:"Tokyo Dome", city:"東京", fromPrice:13000,
-    gradient:["#dc2626","#111827"], icon:"music", art:"sakura", hot:true,
-    pricing:[
-      { name:'一般', price:13000, left:380 },
-      { name:'プレミアム', price:14500, left:95 },
-      { name:'VIP', price:16000, left:25 }
-    ],
-    sellers:JP_SELLERS,
-    desc:"Stray Kidsが東京ドームで3日間のワールドツアー日本公演を開催。最新アルバムの楽曲を中心に迫力のステージ。" },
-
-  // ——— Nov 8, 2026 ———
-  { id:614, title:"Death Cab for Cutie", artist:"Death Cab for Cutie",
-    category:"concert", genre:"Indie Rock", date:"2026-11-08", time:"18:30",
-    venue:"Matsushita IMP Hall, Osaka", city:"大阪", fromPrice:9000,
-    gradient:["#0f766e","#f59e0b"], icon:"music", art:"neon",
-    pricing:[
-      { name:'一般', price:9000, left:250 },
-      { name:'プレミアム', price:10000, left:70 },
-      { name:'VIP', price:11000, left:20 }
-    ],
-    sellers:JP_SELLERS,
-    desc:"デス・キャブ・フォー・キューティーが松下IMPホールで来日公演。インディーロックの名曲の数々を披露。" },
-
-  // ——— Nov 10, 2026 ———
-  { id:615, title:"Jason Mraz", artist:"Jason Mraz",
-    category:"concert", genre:"Pop / Acoustic", date:"2026-11-10", time:"19:00",
-    venue:"Tokyo Garden Theater", city:"東京", fromPrice:10000,
+    pricing:[{name:'一般',price:8000,left:300},{name:'プレミアム',price:9000,left:80},{name:'VIP',price:10000,left:20}],
+    sellers:JP_SELLERS, desc:"BAND-MAIDが名古屋Comtec Portbaseでライブ。" },
+  { id:613, title:"Stray Kids", artist:"Stray Kids", category:"concert", genre:"K-Pop",
+    date:"2026-11-06", time:"18:00", venue:"Tokyo Dome", city:"東京", fromPrice:13000,
+    gradient:["#dc2626","#0f172a"], icon:"music", art:"sakura", hot:true,
+    pricing:[{name:'一般',price:13000,left:380},{name:'プレミアム',price:14500,left:95},{name:'VIP',price:16000,left:25}],
+    sellers:JP_SELLERS, desc:"Stray Kidsが東京ドームで3日間のワールドツアー日本公演を開催。" },
+  { id:614, title:"Death Cab for Cutie", artist:"Death Cab for Cutie", category:"concert", genre:"Indie Rock",
+    date:"2026-11-08", time:"18:30", venue:"Matsushita IMP Hall, Osaka", city:"大阪", fromPrice:9000,
+    gradient:["#0f766e","#1e1b4b"], icon:"music", art:"neon",
+    pricing:[{name:'一般',price:9000,left:250},{name:'プレミアム',price:10000,left:70},{name:'VIP',price:11000,left:20}],
+    sellers:JP_SELLERS, desc:"デス・キャブ・フォー・キューティーが松下IMPホールで来日公演。" },
+  { id:615, title:"Jason Mraz", artist:"Jason Mraz", category:"concert", genre:"Pop / Acoustic",
+    date:"2026-11-10", time:"19:00", venue:"Tokyo Garden Theater", city:"東京", fromPrice:10000,
     gradient:["#0ea5e9","#f59e0b"], icon:"music", art:"sakura",
-    pricing:[
-      { name:'一般', price:10000, left:300 },
-      { name:'プレミアム', price:11000, left:80 },
-      { name:'VIP', price:12500, left:30 }
-    ],
-    sellers:JP_SELLERS,
-    desc:"ジェイソン・ムラーズが東京ガーデンシアターで来日公演。アコースティックなサウンドと心温まる歌声を届けます。" },
-
-  // ——— Nov 18–19, 2026 ———
-  { id:616, title:"Tedeschi Trucks Band", artist:"Tedeschi Trucks Band",
-    category:"concert", genre:"Blues / Rock", date:"2026-11-18", time:"19:00",
-    venue:"SGC Hall Ariake, Tokyo", city:"東京", fromPrice:11000,
+    pricing:[{name:'一般',price:10000,left:300},{name:'プレミアム',price:11000,left:80},{name:'VIP',price:12500,left:30}],
+    sellers:JP_SELLERS, desc:"ジェイソン・ムラーズが東京ガーデンシアターで来日公演。" },
+  { id:616, title:"Tedeschi Trucks Band", artist:"Tedeschi Trucks Band", category:"concert", genre:"Blues / Rock",
+    date:"2026-11-18", time:"19:00", venue:"SGC Hall Ariake, Tokyo", city:"東京", fromPrice:11000,
     gradient:["#f59e0b","#111827"], icon:"music", art:"neon",
-    pricing:[
-      { name:'一般', price:11000, left:250 },
-      { name:'プレミアム', price:12500, left:70 },
-      { name:'VIP', price:14000, left:20 }
-    ],
-    sellers:JP_SELLERS,
-    desc:"テデスキ・トラックス・バンドが有明SGCホールで2日間のライブ。ブルースとロックの融合サウンドを堪能。" },
-
-  // ——— Nov 21–22, 2026 ———
-  { id:617, title:"5 Seconds of Summer", artist:"5 Seconds of Summer",
-    category:"concert", genre:"Pop Rock", date:"2026-11-21", time:"18:30",
-    venue:"SGC Hall Ariake, Tokyo", city:"東京", fromPrice:10000,
-    gradient:["#ec4899","#8b5cf6"], icon:"music", art:"neon", hot:true,
-    pricing:[
-      { name:'一般', price:10000, left:400 },
-      { name:'プレミアム', price:12000, left:100 },
-      { name:'VIP', price:13500, left:30 }
-    ],
-    sellers:JP_SELLERS,
-    desc:"5 Seconds of Summerが有明SGCホールで2日間の来日公演。ポップロックのヒット曲満載のステージ。" },
-
-  // ——— Nov 24–25, 2026 ———
-  { id:618, title:"Iron Maiden", artist:"Iron Maiden",
-    category:"concert", genre:"Heavy Metal", date:"2026-11-24", time:"19:00",
-    venue:"K-Arena Yokohama", city:"神奈川", fromPrice:10000,
-    gradient:["#111827","#dc2626"], icon:"music", art:"neon",
-    pricing:[
-      { name:'アリーナ / スタンドB標準', price:10000, left:500 },
-      { name:'アリーナS', price:15000, left:100 },
-      { name:'VIP', price:25000, left:20 }
-    ],
-    sellers:JP_SELLERS,
-    desc:"アイアン・メイデンがKアリーナ横浜で2日間の来日公演。ヘヴィメタルの伝説が最新ツアーで日本を熱狂させる。" },
-
-  // ——— Nov 26, 2026 ———
-  { id:619, title:"Queens of the Stone Age", artist:"Queens of the Stone Age",
-    category:"concert", genre:"Stoner Rock", date:"2026-11-26", time:"19:00",
-    venue:"Zepp Nagoya", city:"愛知", fromPrice:10000,
+    pricing:[{name:'一般',price:11000,left:250},{name:'プレミアム',price:12500,left:70},{name:'VIP',price:14000,left:20}],
+    sellers:JP_SELLERS, desc:"テデスキ・トラックス・バンドが有明SGCホールで2日間のライブ。" },
+  { id:617, title:"5 Seconds of Summer", artist:"5 Seconds of Summer", category:"concert", genre:"Pop Rock",
+    date:"2026-11-21", time:"18:30", venue:"SGC Hall Ariake, Tokyo", city:"東京", fromPrice:10000,
+    gradient:["#ec4899","#7c3aed"], icon:"music", art:"neon", hot:true,
+    pricing:[{name:'一般',price:10000,left:400},{name:'プレミアム',price:12000,left:100},{name:'VIP',price:13500,left:30}],
+    sellers:JP_SELLERS, desc:"5 Seconds of Summerが有明SGCホールで2日間の来日公演。" },
+  { id:618, title:"Iron Maiden", artist:"Iron Maiden", category:"concert", genre:"Heavy Metal",
+    date:"2026-11-24", time:"19:00", venue:"K-Arena Yokohama", city:"神奈川", fromPrice:10000,
+    gradient:["#111827","#7f1d1d"], icon:"music", art:"neon",
+    pricing:[{name:'アリーナ / スタンドB標準',price:10000,left:500},{name:'アリーナS',price:15000,left:100},{name:'VIP',price:25000,left:20}],
+    sellers:JP_SELLERS, desc:"アイアン・メイデンがKアリーナ横浜で2日間の来日公演。" },
+  { id:619, title:"Queens of the Stone Age", artist:"Queens of the Stone Age", category:"concert", genre:"Stoner Rock",
+    date:"2026-11-26", time:"19:00", venue:"Zepp Nagoya", city:"愛知", fromPrice:10000,
     gradient:["#dc2626","#111827"], icon:"music", art:"neon",
-    pricing:[
-      { name:'一般', price:10000, left:300 },
-      { name:'プレミアム', price:11000, left:80 },
-      { name:'VIP', price:12000, left:20 }
-    ],
-    sellers:JP_SELLERS,
-    desc:"クイーンズ・オブ・ザ・ストーン・エイジが名古屋Zeppでライブ。ヘヴィでサイケデリックなロックサウンド。" },
-
-  // ——— Nov 27, 2026 ———
-  { id:620, title:"Wave to Earth", artist:"Wave to Earth",
-    category:"concert", genre:"Indie / Bedroom Pop", date:"2026-11-27", time:"19:00",
-    venue:"Zepp DiverCity, Tokyo", city:"東京", fromPrice:8500,
-    gradient:["#0ea5e9","#8b5cf6"], icon:"music", art:"neon",
-    pricing:[
-      { name:'一般', price:8500, left:250 },
-      { name:'プレミアム', price:9500, left:70 },
-      { name:'VIP', price:10500, left:20 }
-    ],
-    sellers:JP_SELLERS,
-    desc:"韓国のインディーバンド、ウェイヴ・トゥ・アースがZepp DiverCityで来日公演。心地よいサウンドと透明感のある歌声。" },
-
-  // ——— Nov 29, 2026 ———
-  { id:621, title:"YOASOBI", artist:"YOASOBI",
-    category:"concert", genre:"J-Pop / Anime", date:"2026-11-29", time:"18:00",
-    venue:"Mizuho PayPay Dome, Fukuoka", city:"福岡", fromPrice:10000,
+    pricing:[{name:'一般',price:10000,left:300},{name:'プレミアム',price:11000,left:80},{name:'VIP',price:12000,left:20}],
+    sellers:JP_SELLERS, desc:"クイーンズ・オブ・ザ・ストーン・エイジが名古屋Zeppでライブ。" },
+  { id:620, title:"Wave to Earth", artist:"Wave to Earth", category:"concert", genre:"Indie / Bedroom Pop",
+    date:"2026-11-27", time:"19:00", venue:"Zepp DiverCity, Tokyo", city:"東京", fromPrice:8500,
+    gradient:["#0ea5e9","#7c3aed"], icon:"music", art:"neon",
+    pricing:[{name:'一般',price:8500,left:250},{name:'プレミアム',price:9500,left:70},{name:'VIP',price:10500,left:20}],
+    sellers:JP_SELLERS, desc:"韓国のインディーバンド、ウェイヴ・トゥ・アースがZepp DiverCityで来日公演。" },
+  { id:621, title:"YOASOBI", artist:"YOASOBI", category:"concert", genre:"J-Pop / Anime",
+    date:"2026-11-29", time:"18:00", venue:"Mizuho PayPay Dome, Fukuoka", city:"福岡", fromPrice:10000,
     gradient:["#4c1d95","#ec4899"], icon:"music", art:"neon", hot:true,
-    pricing:[
-      { name:'一般', price:10000, left:500 },
-      { name:'プレミアム', price:11000, left:150 },
-      { name:'VIP', price:12000, left:50 }
-    ],
-    sellers:JP_SELLERS,
-    desc:"YOASOBIが福岡PayPayドームでライブ。アニメ主題歌のヒット曲の数々をドーム規模で披露。" },
-
-  // ——— Nov 30, 2026 ———
-  { id:622, title:"Two Door Cinema Club", artist:"Two Door Cinema Club",
-    category:"concert", genre:"Indie Rock / Electronic", date:"2026-11-30", time:"19:00",
-    venue:"SGC Hall Ariake, Tokyo", city:"東京", fromPrice:9500,
+    pricing:[{name:'一般',price:10000,left:500},{name:'プレミアム',price:11000,left:150},{name:'VIP',price:12000,left:50}],
+    sellers:JP_SELLERS, desc:"YOASOBIが福岡PayPayドームでライブ。" },
+  { id:622, title:"Two Door Cinema Club", artist:"Two Door Cinema Club", category:"concert", genre:"Indie Rock / Electronic",
+    date:"2026-11-30", time:"19:00", venue:"SGC Hall Ariake, Tokyo", city:"東京", fromPrice:9500,
     gradient:["#0ea5e9","#f59e0b"], icon:"music", art:"neon",
-    pricing:[
-      { name:'一般', price:9500, left:300 },
-      { name:'プレミアム', price:10500, left:80 },
-      { name:'VIP', price:11500, left:20 }
-    ],
-    sellers:JP_SELLERS,
-    desc:"トゥー・ドア・シネマ・クラブが有明SGCホールで来日公演。ダンサブルなインディーロックサウンド。" },
-
-  // ——— Dec 1, 2026 ———
-  { id:623, title:"Evanescence", artist:"Evanescence",
-    category:"concert", genre:"Alternative Metal / Rock", date:"2026-12-01", time:"19:00",
-    venue:"SGC Hall Ariake, Tokyo", city:"東京", fromPrice:10500,
+    pricing:[{name:'一般',price:9500,left:300},{name:'プレミアム',price:10500,left:80},{name:'VIP',price:11500,left:20}],
+    sellers:JP_SELLERS, desc:"トゥー・ドア・シネマ・クラブが有明SGCホールで来日公演。" },
+  { id:623, title:"Evanescence", artist:"Evanescence", category:"concert", genre:"Alt Metal / Rock",
+    date:"2026-12-01", time:"19:00", venue:"SGC Hall Ariake, Tokyo", city:"東京", fromPrice:10500,
     gradient:["#7c3aed","#111827"], icon:"music", art:"neon",
-    pricing:[
-      { name:'一般', price:10500, left:300 },
-      { name:'プレミアム', price:12000, left:80 },
-      { name:'VIP', price:13000, left:20 }
-    ],
-    sellers:JP_SELLERS,
-    desc:"エヴァネッセンスが有明SGCホールで来日公演。圧倒的な歌声とヘヴィなロックサウンドで会場を魅了。" },
-
-  // ——— Dec 1–2, 2026 ———
-  { id:624, title:"ENHYPEN", artist:"ENHYPEN",
-    category:"concert", genre:"K-Pop", date:"2026-12-01", time:"18:30",
-    venue:"Tokyo Dome", city:"東京", fromPrice:13000,
+    pricing:[{name:'一般',price:10500,left:300},{name:'プレミアム',price:12000,left:80},{name:'VIP',price:13000,left:20}],
+    sellers:JP_SELLERS, desc:"エヴァネッセンスが有明SGCホールで来日公演。" },
+  { id:624, title:"ENHYPEN", artist:"ENHYPEN", category:"concert", genre:"K-Pop",
+    date:"2026-12-01", time:"18:30", venue:"Tokyo Dome", city:"東京", fromPrice:13000,
     gradient:["#be185d","#0f172a"], icon:"music", art:"sakura", hot:true,
-    pricing:[
-      { name:'一般', price:13000, left:360 },
-      { name:'プレミアム', price:14500, left:100 },
-      { name:'VIP', price:16000, left:30 }
-    ],
-    sellers:JP_SELLERS,
-    desc:"ENHYPENが東京ドームで2日間のワールドツアー日本公演。ダークでスタイリッシュなパフォーマンス。" },
-
-  // ——— Dec 5, 2026 ———
-  { id:625, title:"Ryokuoushoku Shakai", artist:"Ryokuoushoku Shakai",
-    category:"concert", genre:"J-Pop / Rock", date:"2026-12-05", time:"18:00",
-    venue:"Yokohama Arena", city:"神奈川", fromPrice:9000,
+    pricing:[{name:'一般',price:13000,left:360},{name:'プレミアム',price:14500,left:100},{name:'VIP',price:16000,left:30}],
+    sellers:JP_SELLERS, desc:"ENHYPENが東京ドームで2日間のワールドツアー日本公演。" },
+  { id:625, title:"Ryokuoushoku Shakai", artist:"Ryokuoushoku Shakai", category:"concert", genre:"J-Pop / Rock",
+    date:"2026-12-05", time:"18:00", venue:"Yokohama Arena", city:"神奈川", fromPrice:9000,
     gradient:["#0ea5e9","#f59e0b"], icon:"music", art:"sakura",
-    pricing:[
-      { name:'一般', price:9000, left:400 },
-      { name:'プレミアム', price:10000, left:100 },
-      { name:'VIP', price:11000, left:30 }
-    ],
-    sellers:JP_SELLERS,
-    desc:"緑黄色社会が横浜アリーナでライブ。ポップでキャッチーなサウンドと力強い歌声で会場を魅了。" },
-
-  // ——— Dec 5–6, 2026 ———
-  { id:626, title:"YOASOBI", artist:"YOASOBI",
-    category:"concert", genre:"J-Pop / Anime", date:"2026-12-05", time:"18:00",
-    venue:"Tokyo Dome", city:"東京", fromPrice:10000,
+    pricing:[{name:'一般',price:9000,left:400},{name:'プレミアム',price:10000,left:100},{name:'VIP',price:11000,left:30}],
+    sellers:JP_SELLERS, desc:"緑黄色社会が横浜アリーナでライブ。" },
+  { id:626, title:"YOASOBI", artist:"YOASOBI", category:"concert", genre:"J-Pop / Anime",
+    date:"2026-12-05", time:"18:00", venue:"Tokyo Dome", city:"東京", fromPrice:10000,
     gradient:["#4c1d95","#ec4899"], icon:"music", art:"neon", hot:true,
-    pricing:[
-      { name:'一般', price:10000, left:500 },
-      { name:'プレミアム', price:11000, left:150 },
-      { name:'VIP', price:12000, left:50 }
-    ],
-    sellers:JP_SELLERS,
-    desc:"YOASOBIが東京ドームで2日間のライブを開催。アニメ主題歌のヒット曲の数々をドーム規模で披露。" },
-
-  // ——— Dec 13, 2026 ———
-  { id:627, title:"Salon Orchestra Japan", artist:"Salon Orchestra Japan",
-    category:"concert", genre:"Classical / Orchestra", date:"2026-12-13", time:"14:00",
-    venue:"Harmony Hall, Chiba", city:"千葉", fromPrice:2000,
-    gradient:["#8b5cf6","#f59e0b"], icon:"music", art:"sakura",
-    pricing:[
-      { name:'一般', price:2000, left:600 },
-      { name:'プレミアム', price:3500, left:150 },
-      { name:'VIP', price:5000, left:50 }
-    ],
-    sellers:JP_SELLERS,
-    desc:"サロン・オーケストラ・ジャパンが千葉ハーモニーホールでコンサート。クラシックの名曲をサロン形式でお届け。" },
-
-  { id:628, title:"Fujii Kaze", artist:"Fujii Kaze",
-    category:"concert", genre:"J-Pop / Piano", date:"2026-12-13", time:"18:00",
-    venue:"Kyocera Dome, Osaka", city:"大阪", fromPrice:11000,
+    pricing:[{name:'一般',price:10000,left:500},{name:'プレミアム',price:11000,left:150},{name:'VIP',price:12000,left:50}],
+    sellers:JP_SELLERS, desc:"YOASOBIが東京ドームで2日間のライブを開催。" },
+  { id:627, title:"Salon Orchestra Japan", artist:"Salon Orchestra Japan", category:"concert", genre:"Classical",
+    date:"2026-12-13", time:"14:00", venue:"Harmony Hall, Chiba", city:"千葉", fromPrice:2000,
+    gradient:["#7c3aed","#f59e0b"], icon:"music", art:"sakura",
+    pricing:[{name:'一般',price:2000,left:600},{name:'プレミアム',price:3500,left:150},{name:'VIP',price:5000,left:50}],
+    sellers:JP_SELLERS, desc:"サロン・オーケストラ・ジャパンが千葉ハーモニーホールでコンサート。" },
+  { id:628, title:"Fujii Kaze", artist:"Fujii Kaze", category:"concert", genre:"J-Pop / Piano",
+    date:"2026-12-13", time:"18:00", venue:"Kyocera Dome, Osaka", city:"大阪", fromPrice:11000,
     gradient:["#4c1d95","#f59e0b"], icon:"music", art:"fuji", hot:true,
-    pricing:[
-      { name:'一般', price:11000, left:500 },
-      { name:'プレミアム', price:12000, left:150 },
-      { name:'VIP', price:13000, left:40 }
-    ],
-    sellers:JP_SELLERS,
-    desc:"藤井風が京セラドーム大阪でライブ。ピアノと歌声で魅せる唯一無二のステージ。" },
-
-  // ——— Dec 15, 2026 ———
-  { id:629, title:"A Perfect Circle w/ Puscifer", artist:"A Perfect Circle / Puscifer",
-    category:"concert", genre:"Alternative Rock / Metal", date:"2026-12-15", time:"19:00",
-    venue:"Zepp DiverCity, Tokyo", city:"東京", fromPrice:10000,
-    gradient:["#111827","#8b5cf6"], icon:"music", art:"neon",
-    pricing:[
-      { name:'一般', price:10000, left:300 },
-      { name:'プレミアム', price:11000, left:80 },
-      { name:'VIP', price:12000, left:20 }
-    ],
-    sellers:JP_SELLERS,
-    desc:"ア・パーフェクト・サークルとプシファーのジョイント来日公演。オルタナティブロックの名曲の数々を披露。" },
-
-  // ——— Dec 16, 2026 ———
-  { id:630, title:"New Japan Philharmonic (Beethoven No. 9)", artist:"New Japan Philharmonic",
-    category:"concert", genre:"Classical", date:"2026-12-16", time:"19:00",
-    venue:"Minato Mirai Hall, Yokohama", city:"神奈川", fromPrice:5000,
-    gradient:["#0ea5e9","#8b5cf6"], icon:"music", art:"sakura",
-    pricing:[
-      { name:'一般', price:5000, left:400 },
-      { name:'プレミアム', price:7500, left:100 },
-      { name:'VIP', price:10000, left:30 }
-    ],
-    sellers:JP_SELLERS,
-    desc:"新日本フィルハーモニー交響楽団がみなとみらいホールでベートーヴェン交響曲第9番を演奏。年末の定番コンサート。" },
-
-  // ——— Dec 17–20, 2026 ———
-  { id:631, title:"Kodo 45th Anniversary Taiko", artist:"Kodo",
-    category:"concert", genre:"Traditional / Taiko", date:"2026-12-17", time:"19:00",
-    venue:"Bunkyo Civic Hall, Tokyo", city:"東京", fromPrice:7800,
+    pricing:[{name:'一般',price:11000,left:500},{name:'プレミアム',price:12000,left:150},{name:'VIP',price:13000,left:40}],
+    sellers:JP_SELLERS, desc:"藤井風が京セラドーム大阪でライブ。" },
+  { id:629, title:"A Perfect Circle w/ Puscifer", artist:"A Perfect Circle / Puscifer", category:"concert", genre:"Alt Rock / Metal",
+    date:"2026-12-15", time:"19:00", venue:"Zepp DiverCity, Tokyo", city:"東京", fromPrice:10000,
+    gradient:["#111827","#7c3aed"], icon:"music", art:"neon",
+    pricing:[{name:'一般',price:10000,left:300},{name:'プレミアム',price:11000,left:80},{name:'VIP',price:12000,left:20}],
+    sellers:JP_SELLERS, desc:"ア・パーフェクト・サークルとプシファーのジョイント来日公演。" },
+  { id:630, title:"New Japan Philharmonic (Beethoven No. 9)", artist:"New Japan Philharmonic", category:"concert", genre:"Classical",
+    date:"2026-12-16", time:"19:00", venue:"Minato Mirai Hall, Yokohama", city:"神奈川", fromPrice:5000,
+    gradient:["#0ea5e9","#7c3aed"], icon:"music", art:"sakura",
+    pricing:[{name:'一般',price:5000,left:400},{name:'プレミアム',price:7500,left:100},{name:'VIP',price:10000,left:30}],
+    sellers:JP_SELLERS, desc:"新日本フィルハーモニー交響楽団がみなとみらいホールでベートーヴェン交響曲第9番を演奏。" },
+  { id:631, title:"Kodo 45th Anniversary Taiko", artist:"Kodo", category:"concert", genre:"Traditional / Taiko",
+    date:"2026-12-17", time:"19:00", venue:"Bunkyo Civic Hall, Tokyo", city:"東京", fromPrice:7800,
     gradient:["#dc2626","#f59e0b"], icon:"music", art:"torii",
-    pricing:[
-      { name:'一般', price:7800, left:300 },
-      { name:'プレミアム', price:8900, left:80 },
-      { name:'VIP', price:10000, left:20 }
-    ],
-    sellers:JP_SELLERS,
-    desc:"鼓童の45周年記念太鼓コンサートが文京シビックホールで4日間開催。魂を揺さぶる和太鼓の響きを体感。" },
-
-  // ——— Dec 2026 (TBD) ———
-  { id:632, title:"Zelda 40th Anniversary", artist:"The Legend of Zelda Orchestra",
-    category:"concert", genre:"Game Music / Orchestra", date:"2026-12-20", time:"18:00",
-    venue:"K-Arena Yokohama", city:"神奈川", fromPrice:11000,
-    gradient:["#f59e0b","#15803d"], icon:"music", art:"neon", hot:true,
-    pricing:[
-      { name:'ティアA', price:11000, left:400 },
-      { name:'ティアS', price:15000, left:100 },
-      { name:'VIP', price:25000, left:30 }
-    ],
-    sellers:JP_SELLERS,
-    desc:"ゼルダの伝説40周年記念オーケストラコンサートがKアリーナ横浜で開催。名曲の数々をオーケストラで堪能。" }
-
+    pricing:[{name:'一般',price:7800,left:300},{name:'プレミアム',price:8900,left:80},{name:'VIP',price:10000,left:20}],
+    sellers:JP_SELLERS, desc:"鼓童の45周年記念太鼓コンサートが文京シビックホールで4日間開催。" },
+  { id:632, title:"Zelda 40th Anniversary", artist:"The Legend of Zelda Orchestra", category:"concert", genre:"Game Music / Orchestra",
+    date:"2026-12-20", time:"18:00", venue:"K-Arena Yokohama", city:"神奈川", fromPrice:11000,
+    gradient:["#f59e0b","#166534"], icon:"music", art:"neon", hot:true,
+    pricing:[{name:'ティアA',price:11000,left:400},{name:'ティアS',price:15000,left:100},{name:'VIP',price:25000,left:30}],
+    sellers:JP_SELLERS, desc:"ゼルダの伝説40周年記念オーケストラコンサートがKアリーナ横浜で開催。" }
 ];
 
 /* =========================================================
@@ -1590,65 +1522,27 @@ const EVENTS = [
    ========================================================= */
 const state = {
   category:'all', query:'', city:'all', sort:'date',
-  cart:[], currentEvent:null, currentTiers:[], selection:{}
+  cart:[], currentEvent:null, currentTiers:[], selection:{},
+  wishlist:new Set()
 };
 
 const $ = id => document.getElementById(id);
 const money = n => '¥' + n.toLocaleString('ja-JP');
 
-function seededRand(seed){
-  const x = Math.sin(seed * 127.1 + 311.7) * 43758.5453;
-  return x - Math.floor(x);
-}
-function fmtDate(iso){
-  return new Date(iso + 'T12:00:00').toLocaleDateString('ja-JP', { year:'numeric', month:'long', day:'numeric', weekday:'long' });
-}
-function fmtShort(iso){
-  return new Date(iso + 'T12:00:00').toLocaleDateString('ja-JP', { month:'short', day:'numeric', weekday:'short' });
-}
-function monthAbbr(iso){
-  return new Date(iso + 'T12:00:00').toLocaleDateString('ja-JP', { month:'short' });
-}
-function dayNum(iso){
-  return new Date(iso + 'T12:00:00').getDate();
-}
+function fmtDate(iso){ return new Date(iso+'T12:00:00').toLocaleDateString('ja-JP',{year:'numeric',month:'long',day:'numeric',weekday:'long'}); }
+function fmtShort(iso){ return new Date(iso+'T12:00:00').toLocaleDateString('ja-JP',{month:'short',day:'numeric',weekday:'short'}); }
+function monthAbbr(iso){ return new Date(iso+'T12:00:00').toLocaleDateString('ja-JP',{month:'short'}); }
+function dayNum(iso){ return new Date(iso+'T12:00:00').getDate(); }
 function tierBadgeClass(name){
   const n = name.toLowerCase();
-  if (n.includes('vvip') || n.includes('vip')) return 'vip';
-  if (n.includes('プレミアム') || n.includes('プラチナム') || n.includes('ティア')) return 'vvip';
+  if (n.includes('vip')) return 'vip';
+  if (n.includes('プレミアム') || n.includes('ティア')) return 'vvip';
   return 'reg';
 }
 
 function tiersFor(event){
-  if (event.pricing) return event.pricing.map(p => ({ ...p }));
-  const presets = {
-    concert: [
-      { name:'一般',       mult:1,   range:[200,600] },
-      { name:'プレミアム', mult:1.8, range:[80,200]  },
-      { name:'VIP',        mult:3.2, range:[20,60]   }
-    ],
-    festival: [
-      { name:'1DAY', mult:1,   range:[500,1200] },
-      { name:'3DAY', mult:2.8, range:[150,500]  },
-      { name:'VIP',  mult:5.5, range:[30,100]   }
-    ],
-    sports: [
-      { name:'一般',       mult:1,   range:[400,1000] },
-      { name:'プレミアム', mult:1.9, range:[100,300]  },
-      { name:'VIP',        mult:4.0, range:[20,80]    }
-    ],
-    party: [
-      { name:'一般', mult:1,   range:[300,800] },
-      { name:'VIP',  mult:3.0, range:[30,120]  }
-    ],
-    transfer: [
-      { name:'譲渡チケット', mult:0, range:[1,1] }
-    ]
-  }[event.category];
-  return presets.map((p, i) => {
-    const r = seededRand(event.id * 10 + i);
-    return { name:p.name, price:Math.round(event.fromPrice * p.mult), left:Math.round(p.range[0] + r * (p.range[1] - p.range[0])) };
-  });
+  if (event.pricing) return event.pricing.map(p => ({...p}));
+  return [];
 }
 
 const cartQty = () => state.cart.reduce((s,i) => s + i.qty, 0);
@@ -1656,91 +1550,49 @@ const cartSub = () => state.cart.reduce((s,i) => s + i.qty * i.price, 0);
 
 function toast(msg, iconName, variant){
   const el = document.createElement('div');
-  el.className = 'toast ' + (variant || '');
-  el.innerHTML = ic(iconName || 'check') + '<span>' + msg + '</span>';
+  el.className = 'toast ' + (variant||'');
+  el.innerHTML = ic(iconName||'check') + '<span>' + msg + '</span>';
   $('toastStack').appendChild(el);
-  setTimeout(() => {
-    el.classList.add('out');
-    setTimeout(() => el.remove(), 250);
-  }, 3000);
+  setTimeout(() => { el.classList.add('out'); setTimeout(() => el.remove(), 250); }, 3000);
 }
 
-/* =========================================================
-   TELEGRAM (basket checkout only)
-   ========================================================= */
 function copyText(text){
   if (navigator.clipboard && window.isSecureContext){
-    navigator.clipboard.writeText(text).catch(() => {
-      const ta = document.createElement('textarea');
-      ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
-      document.body.appendChild(ta); ta.select();
-      try { document.execCommand('copy'); } catch(e){}
-      ta.remove();
-    });
-  } else {
-    const ta = document.createElement('textarea');
-    ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
-    document.body.appendChild(ta); ta.select();
-    try { document.execCommand('copy'); } catch(e){}
-    ta.remove();
-  }
+    navigator.clipboard.writeText(text).catch(fallbackCopy(text));
+  } else fallbackCopy(text);
 }
-
-function checkoutBasketOnTelegram(){
-  if (!state.cart.length) return;
-  const DIV = '------------------------------------';
-  const lines = ['チケットリクエスト — TixNest Japan', DIV,
-    'アイテム数: ' + state.cart.length + '   チケット枚数: ' + cartQty(), ''];
-  let grand = 0;
-  state.cart.forEach((item, i) => {
-    const e = EVENTS.find(x => x.id === item.eventId);
-    const lineTotal = item.price * item.qty;
-    grand += lineTotal;
-    lines.push((i+1) + '. ' + e.title);
-    lines.push('   日付: ' + fmtDate(e.date) + ' ' + e.time);
-    lines.push('   会場: ' + e.venue + '（' + e.city + '）');
-    lines.push('   ' + item.tier + ' x ' + item.qty + '  =  ' + money(lineTotal));
-    lines.push('');
-  });
-  lines.push(DIV);
-  lines.push('合計: ' + money(grand));
-  lines.push('');
-  lines.push('空席状況と支払い方法をご確認ください。よろしくお願いいたします。');
-  const msg = lines.join('\n');
-
-  copyText(msg);
-  toast('バスケットの内容をコピーしました — Telegramに貼り付けてください', 'check', 'ok');
-  setTimeout(() => window.open(TG_URL, '_blank', 'noopener,noreferrer'), 400);
+function fallbackCopy(text){
+  const ta = document.createElement('textarea');
+  ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+  document.body.appendChild(ta); ta.select();
+  try { document.execCommand('copy'); } catch(e){}
+  ta.remove();
 }
 
 /* =========================================================
-   CITY FILTER
+   INIT CITY FILTER
    ========================================================= */
 (function(){
-  const cities = [...new Set(EVENTS.map(e => e.city))].sort();
+  const cities = [...new Set(EVENTS.map(e => e.city).filter(Boolean))].sort();
   const sel = $('cityFilter');
-  cities.forEach(c => {
-    const o = document.createElement('option');
-    o.value = c; o.textContent = c;
-    sel.appendChild(o);
-  });
+  cities.forEach(c => { const o = document.createElement('option'); o.value = c; o.textContent = c; sel.appendChild(o); });
 })();
 
 /* =========================================================
-   GRID
+   RENDER GRID
    ========================================================= */
 function visibleEvents(){
-  let list = EVENTS;
+  let list = EVENTS.slice();
   if (state.category !== 'all') list = list.filter(e => e.category === state.category);
-  if (state.city !== 'all')     list = list.filter(e => e.city === state.city || (e.transferInfo && (state.city === '神奈川' || state.city === '東京')));
+  if (state.city !== 'all') list = list.filter(e => e.city === state.city || (e.transferInfo && (state.city === '神奈川' || state.city === '東京')));
   if (state.query){
     const q = state.query;
     list = list.filter(e =>
-      (e.title + ' ' + e.artist + ' ' + e.venue + ' ' + e.city + ' ' + e.genre + ' ' + (CATEGORY_META[e.category]?.label || '') + ' ' + (e.titleEn || '')).toLowerCase().includes(q)
+      (e.title + ' ' + (e.titleEn||'') + ' ' + (e.artist||'') + ' ' + e.venue + ' ' + e.city + ' ' + (e.genre||'') + ' ' + (CATEGORY_META[e.category]?.label||''))
+        .toLowerCase().includes(q)
     );
   }
-  list = list.slice();
-  switch (state.sort){
+  switch(state.sort){
     case 'date':       list.sort((a,b) => new Date(a.date) - new Date(b.date)); break;
     case 'price-asc':  list.sort((a,b) => a.fromPrice - b.fromPrice); break;
     case 'price-desc': list.sort((a,b) => b.fromPrice - a.fromPrice); break;
@@ -1751,25 +1603,37 @@ function visibleEvents(){
 
 function cardHTML(e){
   const meta = CATEGORY_META[e.category];
-  const isTransfer = e.transferInfo;
-  return `<article class="card" data-open="${e.id}" ${isTransfer ? 'style="border-color:rgba(192,132,252,0.4);"' : ''}>
+  const isTransfer = !!e.transferInfo;
+  const isHot = !!e.hot;
+  const wished = state.wishlist.has(e.id);
+  return `<article class="card" data-open="${e.id}" role="listitem" tabindex="0">
     <div class="poster">
       <div class="poster-art">${posterSVG(e,'c')}</div>
-      <div class="date-badge"><span>${isTransfer ? '譲渡' : monthAbbr(e.date)}</span><strong>${isTransfer ? '刀ミュ' : dayNum(e.date)}</strong></div>
-      <span class="cat-chip">${ic(meta.icon)}${meta.label}</span>
-      ${e.hot ? '<span class="hot-chip">' + ic('bolt') + '注目</span>' : ''}
-      <div class="poster-sub">${isTransfer ? '刀剣乱舞 / Touken Ranbu' : e.artist}</div>
+      <div class="poster-overlay"></div>
+      <div class="badge badge-date">
+        ${isTransfer
+          ? '<strong>譲</strong><span>TRANSFER</span>'
+          : `<strong>${dayNum(e.date)}</strong><span>${monthAbbr(e.date)}</span>`}
+      </div>
+      <span class="badge badge-cat">${ic(meta.icon)}${meta.label}</span>
+      ${isHot ? `<span class="badge badge-hot">${ic('bolt')}注目</span>` : ''}
+      <button class="wishlist ${wished?'active':''}" data-wish="${e.id}" aria-label="お気に入り" aria-pressed="${wished}">
+        ${icFill('heart')}
+      </button>
+      <div class="poster-label">${isTransfer ? '刀剣乱舞 / Touken Ranbu' : e.artist}</div>
     </div>
     <div class="card-body">
-      <h3>${e.title}</h3>
-      <p class="venue">${ic('pin')}<span>${isTransfer ? '神奈川 / 東京' : e.venue}</span></p>
-      <p class="when">${ic('calendar')}<span>${isTransfer ? '12/17・1/31' : fmtShort(e.date)} &middot; ${isTransfer ? '昼夜' : e.time}</span></p>
+      <h3 class="card-title">${e.title}</h3>
+      <p class="card-meta">${ic('pin')}<span>${isTransfer ? '神奈川 / 東京' : e.venue}</span></p>
+      <p class="card-meta">${ic('calendar')}<span>${isTransfer ? '12/17・1/31 · 昼夜' : fmtShort(e.date)+' · '+e.time}</span></p>
       <div class="card-foot">
-        <div class="price" data-price="1" aria-hidden="true">
-          <span>${isTransfer ? '条件' : '最安'}</span><strong>${isTransfer ? '定価+手数料' : money(e.fromPrice)}</strong>
+        <div class="price-block">
+          <span class="price-label">${isTransfer ? '条件' : '最安'}</span>
+          <span class="price-value">${isTransfer ? '定価+' : money(e.fromPrice)}</span>
         </div>
-        <button class="btn-buy" data-add="${e.id}" style="${isTransfer ? 'background:linear-gradient(135deg,#7c3aed,#c026d3);' : ''}">
-          ${ic(isTransfer ? 'send' : 'cart')}<span>${isTransfer ? 'DMで問合せ' : 'バスケットに追加'}</span>
+        <button class="btn ${isTransfer?'btn-transfer':'btn-primary'}" data-add="${e.id}" aria-label="${isTransfer?'DMで問い合わせる':'バスケットに追加'}">
+          ${ic(isTransfer?'send':'cart')}
+          <span>${isTransfer?'DMで問合せ':'追加'}</span>
         </button>
       </div>
     </div>
@@ -1780,43 +1644,53 @@ function renderEvents(){
   const list = visibleEvents();
   const grid = $('eventGrid');
   $('resultCount').textContent = list.length + '件のイベント';
-
-  const titles = { all:'すべてのイベント', concert:'コンサート', festival:'フェス', sports:'スポーツ', party:'パーティー', transfer:'チケット譲渡' };
-  $('sectionTitle').textContent = state.query ? '「' + state.query + '」の検索結果' : (titles[state.category] || 'すべてのイベント');
+  const titles = { all:'すべてのイベント', concert:'コンサート', festival:'フェス', sports:'スポーツ', party:'パーティー', transfer:'チケット譲渡・リセール' };
+  $('sectionTitle').textContent = state.query ? `「${state.query}」の検索結果` : (titles[state.category] || 'すべてのイベント');
+  $('transferNotice').style.display = state.category === 'transfer' ? 'block' : 'none';
 
   if (!list.length){
-    grid.innerHTML = '<div class="empty"><div class="big">' + ic('search') + '</div><h3>該当するイベントがありません</h3><p>キーワードを変更するか、フィルターをクリアしてください。</p></div>';
+    grid.innerHTML = `<div class="empty">
+      <div class="empty-icon">${ic('search')}</div>
+      <h3>該当するイベントがありません</h3>
+      <p>キーワードを変更するか、フィルターをクリアしてください。</p>
+    </div>`;
     return;
   }
   grid.innerHTML = list.map(cardHTML).join('');
 }
 
 /* =========================================================
-   CATEGORY FILTERING
+   FILTERS
    ========================================================= */
 function setCategory(cat){
   state.category = cat;
   document.querySelectorAll('#catStrip .cat').forEach(b => b.classList.toggle('active', b.dataset.cat === cat));
-  document.querySelectorAll('#mainNav button').forEach(b => b.classList.toggle('active', b.dataset.cat === cat));
+  document.querySelectorAll('#mainNav .nav-link').forEach(b => b.classList.toggle('active', b.dataset.cat === cat));
+  document.querySelectorAll('.mobile-nav-link').forEach(b => b.classList.toggle('active', b.dataset.cat === cat));
   renderEvents();
 }
 document.querySelectorAll('#catStrip .cat').forEach(b => b.addEventListener('click', () => setCategory(b.dataset.cat)));
-document.querySelectorAll('#mainNav button').forEach(b => b.addEventListener('click', () => setCategory(b.dataset.cat)));
-document.querySelectorAll('.foot-col a[data-cat]').forEach(a => a.addEventListener('click', () => {
+document.querySelectorAll('#mainNav .nav-link').forEach(b => b.addEventListener('click', () => setCategory(b.dataset.cat)));
+document.querySelectorAll('.mobile-nav-link').forEach(b => b.addEventListener('click', () => {
+  setCategory(b.dataset.cat);
+  closeMobileNav();
+}));
+document.querySelectorAll('.footer-col a[data-cat]').forEach(a => a.addEventListener('click', () => {
   setCategory(a.dataset.cat);
   window.scrollTo({ top: 400, behavior:'smooth' });
 }));
 
 /* =========================================================
-   SEARCH + SORT
+   SEARCH
    ========================================================= */
 let searchTimer;
 $('headerSearch').addEventListener('input', e => {
   const v = e.target.value.trim().toLowerCase();
   clearTimeout(searchTimer);
-  searchTimer = setTimeout(() => { state.query = v; renderEvents(); }, 150);
+  searchTimer = setTimeout(() => { state.query = v; renderEvents(); }, 180);
 });
-$('heroGo').addEventListener('click', () => {
+$('heroSearchForm').addEventListener('submit', e => {
+  e.preventDefault();
   state.city = $('cityFilter').value;
   state.query = $('headerSearch').value.trim().toLowerCase();
   renderEvents();
@@ -1825,6 +1699,27 @@ $('heroGo').addEventListener('click', () => {
 });
 $('cityFilter').addEventListener('change', e => { state.city = e.target.value; renderEvents(); });
 $('sortSelect').addEventListener('change', e => { state.sort = e.target.value; renderEvents(); });
+
+/* =========================================================
+   TOPBAR
+   ========================================================= */
+$('topbarClose').addEventListener('click', () => $('topbar').classList.add('hidden'));
+
+/* =========================================================
+   MOBILE NAV
+   ========================================================= */
+function openMobileNav(){ $('mobileNav').classList.add('open'); document.body.style.overflow = 'hidden'; }
+function closeMobileNav(){ $('mobileNav').classList.remove('open'); if (!$('eventModal').classList.contains('open') && !$('cartDrawer').classList.contains('open')) document.body.style.overflow=''; }
+$('mobileMenuBtn').addEventListener('click', openMobileNav);
+$('mobileNavClose').addEventListener('click', closeMobileNav);
+$('mobileNav').addEventListener('click', e => { if (e.target === $('mobileNav')) closeMobileNav(); });
+
+/* =========================================================
+   HEADER SCROLL
+   ========================================================= */
+window.addEventListener('scroll', () => {
+  $('header').classList.toggle('scrolled', window.scrollY > 10);
+}, { passive:true });
 
 /* =========================================================
    EVENT MODAL
@@ -1844,77 +1739,129 @@ function openEvent(id){
 function renderEventModal(){
   const e = state.currentEvent;
   const meta = CATEGORY_META[e.category];
-  const isTransfer = e.transferInfo;
+  const isTransfer = !!e.transferInfo;
 
-  const tiersHTML = state.currentTiers.map((t, i) => {
+  const tiersHTML = state.currentTiers.map((t,i) => {
     const qty = state.selection[t.name] || 0;
     const low = t.left < 25;
     const bc = tierBadgeClass(t.name);
     const badgeLabel = bc === 'vvip' ? 'VIP' : bc === 'vip' ? 'VIP' : (isTransfer ? '譲渡' : '一般');
-    return `<div class="tier ${qty > 0 ? 'selected' : ''}" data-tier="${i}">
+    return `<div class="tier ${qty>0?'selected':''}" data-tier="${i}">
       <div class="tier-info">
         <div class="tier-name"><span class="tier-badge ${bc}">${badgeLabel}</span>${t.name}</div>
-        <div class="tier-note ${low ? 'low' : ''}">${low ? '残り' + t.left + '枚' : '空席あり'}</div>
+        <div class="tier-note ${low?'low':''}">${low ? '残り'+t.left+'枚' : '空席あり'}</div>
       </div>
-      <div class="tier-price" data-price="1" aria-hidden="true">${isTransfer ? '定価+手数料' : money(t.price)}</div>
+      <div class="tier-price">${isTransfer ? '定価+' : money(t.price)}</div>
       <div class="stepper">
-        <button data-step="-1" data-idx="${i}" ${qty === 0 ? 'disabled' : ''} aria-label="減らす">&minus;</button>
+        <button data-step="-1" data-idx="${i}" ${qty===0?'disabled':''} aria-label="減らす">−</button>
         <span class="qty">${qty}</span>
-        <button data-step="1" data-idx="${i}" ${qty >= 8 ? 'disabled' : ''} aria-label="増やす">+</button>
+        <button data-step="1" data-idx="${i}" ${qty>=8?'disabled':''} aria-label="増やす">+</button>
       </div>
     </div>`;
   }).join('');
 
-  const sellersHTML = e.sellers ? `<div class="sellers">
-    <h6>${ic('cart')} ${isTransfer ? '取引条件 / Deal Terms' : 'チケット販売サイト'}</h6>
-    <div class="seller-row"><span class="lbl">${isTransfer ? '求め / Request' : '正規販売'}</span><span class="val">${e.sellers.primary.map(s => '<span class="seller-tag">' + s + '</span>').join('')}</span></div>
-    <div class="seller-row"><span class="lbl">${isTransfer ? '備考 / Notes' : 'リセール'}</span><span class="val">${e.sellers.secondary.map(s => '<span class="seller-tag">' + s + '</span>').join('')}</span></div>
-  </div>` : '';
+  // Transfer structured fields
+  const transferFields = isTransfer ? `
+    <div class="transfer-fields">
+      <div class="transfer-row">
+        <span>${ic('calendar')}</span>
+        <div style="flex:1">
+          <div class="transfer-row-label">公演 / Performances</div>
+          <div class="transfer-chips">
+            <span class="chip">12/17 神奈川 昼</span>
+            <span class="chip">12/17 神奈川 夜</span>
+            <span class="chip">1/31 東京 昼</span>
+            <span class="chip">1/31 東京 夜</span>
+          </div>
+        </div>
+      </div>
+      <div class="transfer-row">
+        <span>${ic('seats')}</span>
+        <div style="flex:1">
+          <div class="transfer-row-label">チケット / Ticket</div>
+          <div class="transfer-row-value">各公演 1枚ずつ（合計4枚）</div>
+        </div>
+      </div>
+      <div class="transfer-row">
+        <span>${ic('sparkles')}</span>
+        <div style="flex:1">
+          <div class="transfer-row-label">条件 / Request</div>
+          <div class="transfer-row-value">定価 + 手数料（郵送の場合は送料別途）</div>
+        </div>
+      </div>
+      <div class="transfer-row">
+        <span>${ic('send')}</span>
+        <div style="flex:1">
+          <div class="transfer-row-label">連絡 / Contact</div>
+          <div class="transfer-row-value">「いいね」後に DM にてご連絡ください</div>
+        </div>
+      </div>
+    </div>` : '';
+
+  const sellerBox = e.sellers ? `
+    <div class="seller-box">
+      <h6>${ic('cart')} ${isTransfer ? '取引情報 / Deal' : '販売サイト / Sellers'}</h6>
+      <div class="seller-row"><span class="lbl">${isTransfer?'求め':'正規'}</span><span class="val">${e.sellers.primary.map(s=>`<span class="seller-tag">${s}</span>`).join('')}</span></div>
+      <div class="seller-row"><span class="lbl">${isTransfer?'備考':'リセール'}</span><span class="val">${e.sellers.secondary.map(s=>`<span class="seller-tag">${s}</span>`).join('')}</span></div>
+    </div>` : '';
 
   $('eventModalContent').innerHTML = `
     <div class="modal-hero">
-      <div class="m-art">${posterSVG(e,'m')}</div>
+      <div class="modal-hero-art">${posterSVG(e,'m')}</div>
       <button class="modal-close" id="closeEventModal" aria-label="閉じる">${ic('close')}</button>
-      <div class="m-info">
-        <span class="m-tag">${ic(meta.icon)}${meta.label} &middot; ${e.genre}</span>
-        <h2>${isTransfer ? (e.titleEn || e.title) : e.title}</h2>
-        <div class="m-sub">${isTransfer ? '刀剣乱舞 / Touken Ranbu Musical' : e.artist}</div>
+      <div class="modal-hero-info">
+        <span class="modal-tag">${ic(meta.icon)} ${meta.label} · ${e.genre}</span>
+        <h2 id="modalTitle">${isTransfer ? (e.titleEn || e.title) : e.title}</h2>
+        <div class="modal-hero-sub">${isTransfer ? '刀剣乱舞 / Touken Ranbu Musical' : e.artist}</div>
       </div>
     </div>
     <div class="modal-body">
       <div class="meta-grid">
-        <div class="meta-item"><span class="mi">${ic('calendar')}</span><div><div class="ml">日時 / Dates</div><div class="mv">${isTransfer ? 'Dec 17 — Kanagawa<br>Jan 31 — Tokyo' : fmtDate(e.date)}<br>${isTransfer ? '昼夜 / Day & Night' : e.time}</div></div></div>
-        <div class="meta-item"><span class="mi">${ic('pin')}</span><div><div class="ml">会場 / Venue</div><div class="mv">${isTransfer ? '神奈川 / 東京<br>Kanagawa / Tokyo' : e.venue}<br>${isTransfer ? '' : e.city}</div></div></div>
-        <div class="meta-item"><span class="mi">${ic('seats')}</span><div><div class="ml">${isTransfer ? '枚数 / Tickets' : '空席状況'}</div><div class="mv">${isTransfer ? '各1枚 / 1 each' : state.currentTiers.reduce((s,t)=>s+t.left,0) + '席'}<br>${isTransfer ? '4 performances' : state.currentTiers.length + '種類'}</div></div></div>
+        <div class="meta-item">${ic('calendar')}<div>
+          <div class="meta-label">日時 / When</div>
+          <div class="meta-value">${isTransfer ? '12月17日 – 1月31日' : fmtDate(e.date)}<br>${isTransfer ? '昼夜 / Day & Night' : e.time}</div>
+        </div></div>
+        <div class="meta-item">${ic('pin')}<div>
+          <div class="meta-label">会場 / Venue</div>
+          <div class="meta-value">${isTransfer ? '神奈川 / 東京' : e.venue}<br>${isTransfer ? '' : e.city}</div>
+        </div></div>
+        <div class="meta-item">${ic('seats')}<div>
+          <div class="meta-label">${isTransfer ? '枚数 / Qty' : '空席 / Availability'}</div>
+          <div class="meta-value">${isTransfer ? '各1枚 (4公演)' : state.currentTiers.reduce((s,t)=>s+t.left,0) + '席'}</div>
+        </div></div>
       </div>
-      <p class="desc" style="${isTransfer ? 'white-space:pre-line;' : ''}">${e.desc.replace(/\n/g,'<br>')}</p>
-      ${sellersHTML}
-      ${isTransfer ? '' : '<div class="section-title">チケットを選択</div>'}
-      <div id="tierList">${tiersHTML}</div>
-      <div class="live-total">
+
+      ${isTransfer ? transferFields : ''}
+      <p class="desc">${e.desc.replace(/\n/g,'<br>')}</p>
+      ${sellerBox}
+
+      ${isTransfer ? '' : '<div class="section-label">チケットを選択</div>'}
+      <div class="tier-list" id="tierList">${tiersHTML}</div>
+
+      <div class="summary-box">
         <div>
-          <div class="lt-label">${isTransfer ? '条件 / Terms' : '選択中の合計'}</div>
-          <div class="lt-value" id="liveTotal">${isTransfer ? '定価+手数料' : '¥0'}</div>
-          <div class="lt-sub" id="liveQty">${isTransfer ? '各1枚 / 1 each' : '未選択'}</div>
+          <div class="summary-label">${isTransfer ? '条件 / Terms' : '選択中 / Selected'}</div>
+          <div class="summary-value" id="liveTotal">${isTransfer ? '定価+手数料' : '¥0'}</div>
+          <div class="summary-sub" id="liveQty">${isTransfer ? '各1枚 / 1 each' : '未選択'}</div>
         </div>
         <div style="text-align:right">
-          <div class="lt-label">バスケット内</div>
-          <div class="lt-value" id="liveBasketTotal">${money(cartSub())}</div>
-          <div class="lt-sub" id="liveBasketQty">${cartQty()}枚</div>
+          <div class="summary-label">バスケット内</div>
+          <div class="summary-value" id="liveBasketTotal">${money(cartSub())}</div>
+          <div class="summary-sub" id="liveBasketQty">${cartQty()}枚</div>
         </div>
       </div>
     </div>
-    <div class="modal-footer">
-      <div class="total-box">
-        <div class="tl">${isTransfer ? '希望枚数 / Qty' : '選択中'}</div>
-        <div class="tv" id="modalTotal">${isTransfer ? '各1枚' : '¥0'}</div>
-        <div class="tn" id="modalQty">${isTransfer ? '1 each' : '未選択'}</div>
+    <div class="modal-foot">
+      <div>
+        <div class="foot-total-label">${isTransfer ? '希望枚数' : '合計'}</div>
+        <div class="foot-total-value" id="modalTotal">${isTransfer ? '各1枚' : '¥0'}</div>
+        <div class="foot-total-sub" id="modalQty">${isTransfer ? '1 each' : '未選択'}</div>
       </div>
-      <div class="footer-actions">
+      <div class="foot-actions">
         ${isTransfer
-          ? '<button class="btn-buy" id="dmTransferBtn" style="background:linear-gradient(135deg,#7c3aed,#c026d3);">' + ic('send') + 'DMで問い合わせる / DM to Inquire</button>'
-          : '<button class="btn-ghost" id="addToCartBtn" disabled>' + ic('cart') + 'バスケットに追加</button>'
-            + '<button class="btn-buy" id="addViewBtn" disabled>' + ic('eye') + '追加して開く</button>'
+          ? `<button class="btn btn-transfer btn-lg" id="dmTransferBtn">${ic('send')} DMで問い合わせる</button>`
+          : `<button class="btn btn-secondary btn-lg" id="addToCartBtn" disabled>${ic('cart')} バスケットに追加</button>
+             <button class="btn btn-primary btn-lg" id="addViewBtn" disabled>${ic('eye')} 追加して開く</button>`
         }
       </div>
     </div>`;
@@ -1932,39 +1879,28 @@ function renderEventModal(){
       state.selection[tier.name] = next;
       refreshModalTotals();
     });
-
     $('addToCartBtn').addEventListener('click', () => commitSelection(false));
     $('addViewBtn').addEventListener('click', () => commitSelection(true));
   } else {
-    const dmBtn = $('dmTransferBtn');
-    if (dmBtn) {
-      dmBtn.addEventListener('click', () => {
-        const msg = '【譲渡】ミュージカル 刀剣乱舞 ～真剣乱舞祭2026～\n\n[Transfer] Musical Touken Ranbu ～Shinken Ranbu Sai 2026～\n\n【譲】12月17日 神奈川 昼夜 各1枚 / 1月31日 東京 昼夜 各1枚\n[Offering] Dec 17 Kanagawa (Day & Night) / Jan 31 Tokyo (Day & Night) — 1 ticket each.\n\n【求】定価+手数料（郵送の場合は送料）\n[Request] Face value + handling fees (+ shipping if mailed).\n\nお手数ですがDMにてご連絡ください🙇‍♂️\nIf interested, please like and DM.';
-        copyText(msg);
-        toast('DM用のメッセージをコピーしました / DM message copied', 'send', 'ok');
-        setTimeout(() => window.open(TG_URL, '_blank', 'noopener,noreferrer'), 400);
-      });
-    }
-
+    $('dmTransferBtn').addEventListener('click', () => {
+      const msg = '【譲渡】ミュージカル 刀剣乱舞 ～真剣乱舞祭2026～\n\n[Transfer] Musical Touken Ranbu ～Shinken Ranbu Sai 2026～\n\n【譲】12月17日 神奈川 昼夜 各1枚 / 1月31日 東京 昼夜 各1枚\n[Offering] Dec 17 Kanagawa (Day & Night) / Jan 31 Tokyo (Day & Night) — 1 ticket each.\n\n【求】定価+手数料（郵送の場合は送料）\n[Request] Face value + handling fees (+ shipping if mailed).\n\nお手数ですがDMにてご連絡ください🙇‍♂️\nPlease like and DM if interested.';
+      copyText(msg);
+      toast('DM用メッセージをコピーしました', 'send', 'ok');
+      setTimeout(() => window.open('https://t.me/Kaduskoh', '_blank', 'noopener,noreferrer'), 500);
+    });
     $('tierList').addEventListener('click', ev => {
       const btn = ev.target.closest('button[data-step]');
       if (!btn) return;
       ev.preventDefault();
-      toast('譲渡チケットはDMにてお問い合わせください / Please DM for transfer', 'send', 'warn');
+      toast('譲渡チケットはDMにてお問い合わせください', 'send', 'warn');
     });
   }
 
   $('closeEventModal').addEventListener('click', closeEventModal);
 }
 
-function currentSelectionTiers(){
-  return state.currentTiers
-    .filter(t => (state.selection[t.name] || 0) > 0)
-    .map(t => ({ name:t.name, price:t.price, qty:state.selection[t.name] }));
-}
-
 function refreshModalTotals(){
-  document.querySelectorAll('#tierList .tier').forEach((row, i) => {
+  document.querySelectorAll('#tierList .tier').forEach((row,i) => {
     const tier = state.currentTiers[i];
     const qty = state.selection[tier.name] || 0;
     row.classList.toggle('selected', qty > 0);
@@ -1973,25 +1909,26 @@ function refreshModalTotals(){
     btns[0].disabled = qty === 0;
     btns[1].disabled = qty >= 8;
   });
-
-  const total = state.currentTiers.reduce((s,t) => s + (state.selection[t.name] || 0) * t.price, 0);
-  const qty = Object.values(state.selection).reduce((s,q) => s + q, 0);
-
+  const total = state.currentTiers.reduce((s,t) => s + (state.selection[t.name]||0)*t.price, 0);
+  const qty = Object.values(state.selection).reduce((s,q) => s+q, 0);
   $('modalTotal').textContent = money(total);
-  $('modalQty').textContent = qty === 0 ? '未選択' : qty + '枚選択中';
+  $('modalQty').textContent = qty === 0 ? '未選択' : qty+'枚選択中';
   $('liveTotal').textContent = money(total);
-  $('liveQty').textContent = qty === 0 ? '未選択' : qty + '枚選択中';
+  $('liveQty').textContent = qty === 0 ? '未選択' : qty+'枚選択中';
   $('liveBasketTotal').textContent = money(cartSub());
-  const cq = cartQty();
-  $('liveBasketQty').textContent = cq + '枚';
-
+  $('liveBasketQty').textContent = cartQty()+'枚';
   if ($('addToCartBtn')) $('addToCartBtn').disabled = qty === 0;
   if ($('addViewBtn')) $('addViewBtn').disabled = qty === 0;
 }
 
 function closeEventModal(){
   $('eventModal').classList.remove('open');
-  document.body.style.overflow = '';
+  if (!$('cartDrawer').classList.contains('open') && !$('mobileNav').classList.contains('open')) document.body.style.overflow = '';
+}
+
+function currentSelectionTiers(){
+  return state.currentTiers.filter(t => (state.selection[t.name]||0) > 0)
+    .map(t => ({ name:t.name, price:t.price, qty:state.selection[t.name] }));
 }
 
 function commitSelection(openBasketAfter){
@@ -2001,11 +1938,8 @@ function commitSelection(openBasketAfter){
   const added = addToBasket(e, tiers);
   closeEventModal();
   renderCart();
-  if (openBasketAfter){
-    openDrawer();
-  } else {
-    toast(added + '枚をバスケットに追加しました', 'cart', 'ok');
-  }
+  if (openBasketAfter) openDrawer();
+  else toast(added + '枚をバスケットに追加しました', 'cart', 'ok');
 }
 
 function addToBasket(e, tiers){
@@ -2021,62 +1955,60 @@ function addToBasket(e, tiers){
 }
 
 /* =========================================================
-   CART RENDER
+   CART
    ========================================================= */
 function renderCart(){
   const qty = cartQty();
   const sub = cartSub();
-
   $('cartCount').textContent = qty;
   $('drawerCount').textContent = qty + '枚';
   $('basketBubble').textContent = qty;
-  $('basketCount').textContent = qty + '枚のチケット';
+  $('basketCount').textContent = qty === 0 ? 'バスケットは空です' : qty + '枚のチケット';
   $('basketTotal').textContent = money(sub);
-
   if (state.cart.length){
-    const names = state.cart.slice(0, 2).map(i => EVENTS.find(x => x.id === i.eventId).title);
-    const more = state.cart.length > 2 ? ' ほか' + (state.cart.length - 2) + '件' : '';
+    const names = state.cart.slice(0,2).map(i => EVENTS.find(x => x.id === i.eventId).title);
+    const more = state.cart.length > 2 ? ' ほか' + (state.cart.length-2) + '件' : '';
     $('basketItems').textContent = names.join(' · ') + more;
-  } else {
-    $('basketItems').textContent = '';
-  }
-
+  } else $('basketItems').textContent = '';
   $('basketBar').classList.toggle('show', qty > 0);
   $('toastStack').classList.toggle('raised', qty > 0);
 
   const body = $('cartItems');
   const foot = $('cartFoot');
-
   if (!state.cart.length){
-    body.innerHTML = '<div class="cart-empty"><div class="big">' + ic('cart') + '</div><h4>バスケットは空です</h4><p>イベントを探してチケットを追加してください。</p></div>';
-    foot.innerHTML = '<button class="checkout-btn" disabled>' + ic('send') + 'Telegramで注文する</button><div class="secure-note">ご注文は <b style="color:#7dd3fc">@' + TG_USER + '</b> にて確認されます。</div>';
+    body.innerHTML = `<div class="cart-empty">
+      <div class="cart-empty-icon">${ic('cart')}</div>
+      <h4>バスケットは空です</h4>
+      <p>イベントを探してチケットを追加してください。</p>
+    </div>`;
+    foot.innerHTML = `<button class="btn-checkout" disabled>${ic('send')} Telegramで注文する</button>
+      <div class="secure-note">ご注文は <b style="color:#a78bfa">@Kaduskoh</b> にて最終確認されます。</div>`;
     return;
   }
 
   body.innerHTML = state.cart.map(item => {
     const e = EVENTS.find(x => x.id === item.eventId);
     return `<div class="cart-item">
-      <div class="ci-poster" style="background:linear-gradient(135deg,${e.gradient[0]},${e.gradient[1]})">${ic(e.icon)}</div>
+      <div class="ci-art" style="background:linear-gradient(135deg,${e.gradient[0]},${e.gradient[1]})">${ic(e.icon)}</div>
       <div class="ci-info">
         <div class="ci-title">${e.title}</div>
         <div class="ci-tier">${item.tier}</div>
-        <div class="ci-meta">${fmtShort(e.date)} &middot; ${e.time} &middot; ${e.venue}</div>
+        <div class="ci-meta">${fmtShort(e.date)} · ${e.time} · ${e.venue}</div>
       </div>
       <div class="ci-right">
         <div class="ci-price">${money(item.price * item.qty)}</div>
-        <div class="ci-meta">${item.qty} &times; ${money(item.price)}</div>
-        <button class="ci-remove" data-remove="${item.key}">${ic('trash')}削除</button>
+        <div class="ci-qty">${item.qty} × ${money(item.price)}</div>
+        <button class="ci-remove" data-remove="${item.key}">${ic('trash')} 削除</button>
       </div>
     </div>`;
   }).join('');
 
-  foot.innerHTML = '<div class="sum-row"><span>小計（' + qty + '枚）</span><span>' + money(sub) + '</span></div>'
-    + '<div class="sum-row total"><span>合計</span><span>' + money(sub) + '</span></div>'
-    + '<button class="checkout-btn" id="goTelegram">' + ic('send') + 'Telegramで注文する</button>'
-    + '<div class="secure-note">このボタンのみ <b style="color:#7dd3fc">@' + TG_USER + '</b> に注文を送信します。</div>';
+  foot.innerHTML = `<div class="sum-row"><span>小計（${qty}枚）</span><span>${money(sub)}</span></div>
+    <div class="sum-row total"><span>合計</span><span>${money(sub)}</span></div>
+    <button class="btn-checkout" id="goTelegram">${ic('send')} Telegramで注文する</button>
+    <div class="secure-note">このボタンで <b style="color:#a78bfa">@Kaduskoh</b> に注文内容を送信します。<br>※現在、決済はTelegram上で行われます。</div>`;
 
   $('goTelegram').addEventListener('click', checkoutBasketOnTelegram);
-
   body.querySelectorAll('[data-remove]').forEach(btn => {
     btn.addEventListener('click', () => {
       state.cart = state.cart.filter(i => i.key !== btn.dataset.remove);
@@ -2084,6 +2016,31 @@ function renderCart(){
       toast('チケットを削除しました', 'trash', 'warn');
     });
   });
+}
+
+function checkoutBasketOnTelegram(){
+  if (!state.cart.length) return;
+  const DIV = '──────────────────';
+  const lines = ['チケットリクエスト — TixNest Japan', DIV,
+    `アイテム数: ${state.cart.length}  チケット枚数: ${cartQty()}`, ''];
+  let grand = 0;
+  state.cart.forEach((item,i) => {
+    const e = EVENTS.find(x => x.id === item.eventId);
+    const lineTotal = item.price * item.qty;
+    grand += lineTotal;
+    lines.push(`${i+1}. ${e.title}`);
+    lines.push(`   日付: ${fmtDate(e.date)} ${e.time}`);
+    lines.push(`   会場: ${e.venue}（${e.city}）`);
+    lines.push(`   ${item.tier} × ${item.qty} = ${money(lineTotal)}`);
+    lines.push('');
+  });
+  lines.push(DIV);
+  lines.push(`合計: ${money(grand)}`);
+  lines.push('');
+  lines.push('空席状況と支払い方法をご確認ください。よろしくお願いいたします。');
+  copyText(lines.join('\n'));
+  toast('バスケット内容をコピーしました — Telegramに貼り付けてください', 'check', 'ok');
+  setTimeout(() => window.open('https://t.me/Kaduskoh', '_blank', 'noopener,noreferrer'), 500);
 }
 
 /* =========================================================
@@ -2097,7 +2054,7 @@ function openDrawer(){
 function closeDrawer(){
   $('cartDrawer').classList.remove('open');
   $('drawerBackdrop').classList.remove('open');
-  if (!$('eventModal').classList.contains('open')) document.body.style.overflow = '';
+  if (!$('eventModal').classList.contains('open') && !$('mobileNav').classList.contains('open')) document.body.style.overflow = '';
 }
 $('cartBtn').addEventListener('click', openDrawer);
 $('closeDrawer').addEventListener('click', closeDrawer);
@@ -2105,41 +2062,45 @@ $('drawerBackdrop').addEventListener('click', closeDrawer);
 $('basketOpenBtn').addEventListener('click', openDrawer);
 
 /* =========================================================
-   GLOBAL CLICK
+   GLOBAL CLICKS
    ========================================================= */
 $('eventGrid').addEventListener('click', ev => {
-  if (ev.target.closest('.price')){
-    ev.preventDefault();
+  if (ev.target.closest('.price-block')) return;
+  const wishBtn = ev.target.closest('[data-wish]');
+  if (wishBtn){
     ev.stopPropagation();
+    const id = +wishBtn.dataset.wish;
+    if (state.wishlist.has(id)) state.wishlist.delete(id);
+    else { state.wishlist.add(id); toast('お気に入りに追加しました', 'check', 'ok'); }
+    renderEvents();
     return;
   }
-
   const add = ev.target.closest('[data-add]');
   if (add){
     ev.stopPropagation();
     const e = EVENTS.find(x => x.id === +add.dataset.add);
     if (!e) return;
-    if (e.transferInfo) {
-      openEvent(e.id);
-      return;
-    }
+    if (e.transferInfo){ openEvent(e.id); return; }
     const base = tiersFor(e)[0];
+    if (!base) return;
     addToBasket(e, [{ name:base.name, price:base.price, qty:1 }]);
     renderCart();
     toast('1枚をバスケットに追加しました', 'cart', 'ok');
     return;
   }
-
   const open = ev.target.closest('[data-open]');
   if (open) openEvent(+open.dataset.open);
 });
 
-$('eventModal').addEventListener('click', ev => {
-  if (ev.target.closest('.tier-price')){
-    ev.preventDefault();
-    ev.stopPropagation();
-    return;
+$('eventGrid').addEventListener('keydown', ev => {
+  if (ev.key === 'Enter' || ev.key === ' '){
+    const card = ev.target.closest('[data-open]');
+    if (card){ ev.preventDefault(); openEvent(+card.dataset.open); }
   }
+});
+
+$('eventModal').addEventListener('click', ev => {
+  if (ev.target.closest('.tier-price')) return;
   if (ev.target === $('eventModal')) closeEventModal();
 });
 
@@ -2147,6 +2108,7 @@ document.addEventListener('keydown', ev => {
   if (ev.key !== 'Escape') return;
   if ($('eventModal').classList.contains('open')) closeEventModal();
   else if ($('cartDrawer').classList.contains('open')) closeDrawer();
+  else if ($('mobileNav').classList.contains('open')) closeMobileNav();
 });
 
 /* =========================================================
