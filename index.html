@@ -685,6 +685,7 @@
       <button data-cat="festival">フェス</button>
       <button data-cat="sports">スポーツ</button>
       <button data-cat="party">パーティー</button>
+      <button data-cat="transfer">譲渡</button>
     </nav>
     <div class="header-search">
       <span class="s-icon">
@@ -860,6 +861,7 @@
   <button class="cat" data-cat="festival"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5 3 20h18Z"/><path d="M12 3.5V20"/></svg>フェス</button>
   <button class="cat" data-cat="sports"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4h10v4.5a5 5 0 0 1-10 0Z"/><path d="M7 5.5H4.5V7a3.5 3.5 0 0 0 3.5 3.5M17 5.5h2.5V7a3.5 3.5 0 0 1-3.5 3.5"/><path d="M12 13.5V17M9 20.5h6"/></svg>スポーツ</button>
   <button class="cat" data-cat="party"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20 L9 10 L19 14 Z"/><path d="M12 4v4M18 6l-2 3M6 8l2 3"/></svg>パーティー</button>
+  <button class="cat" data-cat="transfer"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3.5 21 7.5 17 11.5"/><path d="M3 7.5h14"/><path d="M7 20.5 3 16.5 7 12.5"/><path d="M21 16.5H7"/></svg>譲渡</button>
 </div>
 
 <div class="toolbar">
@@ -896,6 +898,7 @@
         <a data-cat="festival">フェス</a>
         <a data-cat="sports">スポーツ</a>
         <a data-cat="party">パーティー</a>
+        <a data-cat="transfer">譲渡</a>
       </div>
       <div class="foot-col">
         <h5>サポート</h5>
@@ -990,7 +993,8 @@ const ICON_PATHS = {
   send:'<path d="M21.6 3.4 2.9 10.5a.6.6 0 0 0 .03 1.13l4.6 1.5 1.75 5.2a.6.6 0 0 0 1.02.2l2.5-2.7 4.6 3.4a.6.6 0 0 0 .95-.33L22.6 4.3a.6.6 0 0 0-1-.9Z"/>',
   trash:'<path d="M4 6.5h16M9.5 6.5V4.8A1.3 1.3 0 0 1 10.8 3.5h2.4a1.3 1.3 0 0 1 1.3 1.3v1.7"/><path d="M6.5 6.5 7.6 19.4a1.8 1.8 0 0 0 1.8 1.6h5.2a1.8 1.8 0 0 0 1.8-1.6L17.5 6.5"/>',
   eye:'<path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="3"/>',
-  party:'<path d="M5 20 L9 10 L19 14 Z"/><path d="M12 4v4M18 6l-2 3M6 8l2 3"/>'
+  party:'<path d="M5 20 L9 10 L19 14 Z"/><path d="M12 4v4M18 6l-2 3M6 8l2 3"/>',
+  transfer:'<path d="M17 3.5 21 7.5 17 11.5"/><path d="M3 7.5h14"/><path d="M7 20.5 3 16.5 7 12.5"/><path d="M21 16.5H7"/>'
 };
 
 function ic(name){
@@ -1003,7 +1007,8 @@ const CATEGORY_META = {
   concert:  { label:'コンサート', icon:'music' },
   festival: { label:'フェス',     icon:'tent' },
   sports:   { label:'スポーツ',   icon:'trophy' },
-  party:    { label:'パーティー', icon:'party' }
+  party:    { label:'パーティー', icon:'party' },
+  transfer: { label:'譲渡',       icon:'transfer' }
 };
 
 /* =========================================================
@@ -1090,6 +1095,20 @@ function buildArt(e, u){
       <rect x="346" y="172" width="24" height="118" fill="#facc15" opacity="0.85"/>
     </svg>`;
   }
+  if (t === 'transfer'){
+    return `<svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs><linearGradient id="g${u}" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#0f0c29"/><stop offset="0.5" stop-color="#302b63"/><stop offset="1" stop-color="#24243e"/>
+      </linearGradient></defs>
+      <rect width="400" height="300" fill="url(#g${u})"/>
+      <circle cx="100" cy="100" r="40" fill="none" stroke="#c084fc" stroke-width="2" opacity="0.5"/>
+      <circle cx="300" cy="200" r="50" fill="none" stroke="#f472b6" stroke-width="2" opacity="0.4"/>
+      <path d="M140 120 L260 180" stroke="#c084fc" stroke-width="2.5" stroke-dasharray="6 6" opacity="0.8"/>
+      <path d="M250 170 L270 185 L255 195" fill="none" stroke="#c084fc" stroke-width="2.5" opacity="0.8"/>
+      <text x="200" y="80" font-family="Times New Roman, serif" font-size="28" fill="#f5f0ff" text-anchor="middle" opacity="0.9" font-style="italic">譲渡</text>
+      <text x="200" y="250" font-family="Times New Roman, serif" font-size="18" fill="#d8c9ff" text-anchor="middle" opacity="0.8" letter-spacing="2">TRANSFER</text>
+    </svg>`;
+  }
   return `<svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
     <defs><linearGradient id="g${u}" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="${e.gradient[0]}"/><stop offset="1" stop-color="${e.gradient[1]}"/>
@@ -1112,7 +1131,7 @@ function posterSVG(e, ctx){
 }
 
 /* =========================================================
-   JAPAN EVENT DATA — UPDATED WITH PROVIDED LIST
+   JAPAN EVENT DATA
    ========================================================= */
 const JP_SELLERS = {
   primary:['チケットぴあ','ローソンチケット','e+'],
@@ -1120,6 +1139,41 @@ const JP_SELLERS = {
 };
 
 const EVENTS = [
+  // ============================================================
+  // TRANSFER TICKET — Touken Ranbu Musical
+  // English: [Transfer] Musical Touken Ranbu ～Shinken Ranbu Sai 2026～
+  // ============================================================
+  {
+    id: 900,
+    title: "【譲渡】ミュージカル 刀剣乱舞 ～真剣乱舞祭2026～",
+    titleEn: "[Transfer] Musical Touken Ranbu ～Shinken Ranbu Sai 2026～",
+    artist: "刀ミュ / Toumyu Transfer",
+    category: "transfer",
+    genre: "ミュージカル / Musical Transfer",
+    date: "2026-12-17",
+    time: "昼夜 / Day & Night",
+    venue: "神奈川 / 東京 (Kanagawa / Tokyo)",
+    city: "神奈川・東京",
+    fromPrice: 0,
+    gradient: ["#1a1030", "#2d1b4e"],
+    icon: "transfer",
+    art: "transfer",
+    hot: true,
+    pricing: [
+      { name: "Dec 17 — Kanagawa (Day)",    nameJp: "12月17日 昼 神奈川", price: 0, left: 1 },
+      { name: "Dec 17 — Kanagawa (Night)",  nameJp: "12月17日 夜 神奈川", price: 0, left: 1 },
+      { name: "Jan 31 — Tokyo (Day)",        nameJp: "1月31日 昼 東京",    price: 0, left: 1 },
+      { name: "Jan 31 — Tokyo (Night)",      nameJp: "1月31日 夜 東京",    price: 0, left: 1 }
+    ],
+    sellers: {
+      primary: ["Face value + handling fees", "定価+手数料"],
+      secondary: ["+ shipping fee if mailed", "郵送の場合は送料"]
+    },
+    desc: "【譲渡】ミュージカル 刀剣乱舞 ～真剣乱舞祭2026～ 刀ミュ チケット譲渡。\n\n【譲】12月17日 昼夜 神奈川 / 1月31日 東京 昼夜 — 全て各1枚。\n\n【求】定価+手数料（郵送の場合は送料）。\n\nお求めの方は「いいね」後、DMまでご連絡お願いします🙇‍♂️\n\n──────────────\n\n[Transfer] Musical Touken Ranbu ～Shinken Ranbu Sai 2026～ Toumyu Ticket Transfer Results/Announcements.\n\n[Offering]\n• Dec 17 - Kanagawa (Day & Night shows)\n• Jan 31 - Tokyo (Day & Night shows)\n• One ticket available for each show.\n\n[Request] Face value + handling fees (+ shipping fee if sending by mail).\n\nIf you are interested, please like the post and contact me via DM 🙇‍♂️",
+    contact: "いいね後DM / Like & DM",
+    transferInfo: true
+  },
+
   // ——— Oct 6, 2026 ———
   { id:601, title:"Post Malone", artist:"Post Malone",
     category:"concert", genre:"Hip-Hop / Pop", date:"2026-10-06", time:"18:00",
@@ -1586,6 +1640,9 @@ function tiersFor(event){
     party: [
       { name:'一般', mult:1,   range:[300,800] },
       { name:'VIP',  mult:3.0, range:[30,120]  }
+    ],
+    transfer: [
+      { name:'譲渡チケット', mult:0, range:[1,1] }
     ]
   }[event.category];
   return presets.map((p, i) => {
@@ -1675,12 +1732,11 @@ function checkoutBasketOnTelegram(){
 function visibleEvents(){
   let list = EVENTS;
   if (state.category !== 'all') list = list.filter(e => e.category === state.category);
-  if (state.city !== 'all')     list = list.filter(e => e.city === state.city);
+  if (state.city !== 'all')     list = list.filter(e => e.city === state.city || (e.transferInfo && (state.city === '神奈川' || state.city === '東京')));
   if (state.query){
     const q = state.query;
     list = list.filter(e =>
-      (e.title + ' ' + e.artist + ' ' + e.venue + ' ' + e.city + ' ' + e.genre + ' ' + CATEGORY_META[e.category].label)
-        .toLowerCase().includes(q)
+      (e.title + ' ' + e.artist + ' ' + e.venue + ' ' + e.city + ' ' + e.genre + ' ' + (CATEGORY_META[e.category]?.label || '') + ' ' + (e.titleEn || '')).toLowerCase().includes(q)
     );
   }
   list = list.slice();
@@ -1695,24 +1751,25 @@ function visibleEvents(){
 
 function cardHTML(e){
   const meta = CATEGORY_META[e.category];
-  return `<article class="card" data-open="${e.id}">
+  const isTransfer = e.transferInfo;
+  return `<article class="card" data-open="${e.id}" ${isTransfer ? 'style="border-color:rgba(192,132,252,0.4);"' : ''}>
     <div class="poster">
       <div class="poster-art">${posterSVG(e,'c')}</div>
-      <div class="date-badge"><span>${monthAbbr(e.date)}</span><strong>${dayNum(e.date)}</strong></div>
+      <div class="date-badge"><span>${isTransfer ? '譲渡' : monthAbbr(e.date)}</span><strong>${isTransfer ? '刀ミュ' : dayNum(e.date)}</strong></div>
       <span class="cat-chip">${ic(meta.icon)}${meta.label}</span>
-      ${e.hot ? '<span class="hot-chip">' + ic('bolt') + '人気</span>' : ''}
-      <div class="poster-sub">${e.artist}</div>
+      ${e.hot ? '<span class="hot-chip">' + ic('bolt') + '注目</span>' : ''}
+      <div class="poster-sub">${isTransfer ? '刀剣乱舞 / Touken Ranbu' : e.artist}</div>
     </div>
     <div class="card-body">
       <h3>${e.title}</h3>
-      <p class="venue">${ic('pin')}<span>${e.venue}</span></p>
-      <p class="when">${ic('calendar')}<span>${fmtShort(e.date)} &middot; ${e.time}</span></p>
+      <p class="venue">${ic('pin')}<span>${isTransfer ? '神奈川 / 東京' : e.venue}</span></p>
+      <p class="when">${ic('calendar')}<span>${isTransfer ? '12/17・1/31' : fmtShort(e.date)} &middot; ${isTransfer ? '昼夜' : e.time}</span></p>
       <div class="card-foot">
         <div class="price" data-price="1" aria-hidden="true">
-          <span>最安</span><strong>${money(e.fromPrice)}</strong>
+          <span>${isTransfer ? '条件' : '最安'}</span><strong>${isTransfer ? '定価+手数料' : money(e.fromPrice)}</strong>
         </div>
-        <button class="btn-buy" data-add="${e.id}">
-          ${ic('cart')}<span>バスケットに追加</span>
+        <button class="btn-buy" data-add="${e.id}" style="${isTransfer ? 'background:linear-gradient(135deg,#7c3aed,#c026d3);' : ''}">
+          ${ic(isTransfer ? 'send' : 'cart')}<span>${isTransfer ? 'DMで問合せ' : 'バスケットに追加'}</span>
         </button>
       </div>
     </div>
@@ -1724,8 +1781,8 @@ function renderEvents(){
   const grid = $('eventGrid');
   $('resultCount').textContent = list.length + '件のイベント';
 
-  const titles = { all:'すべてのイベント', concert:'コンサート', festival:'フェス', sports:'スポーツ', party:'パーティー' };
-  $('sectionTitle').textContent = state.query ? '「' + state.query + '」の検索結果' : titles[state.category];
+  const titles = { all:'すべてのイベント', concert:'コンサート', festival:'フェス', sports:'スポーツ', party:'パーティー', transfer:'チケット譲渡' };
+  $('sectionTitle').textContent = state.query ? '「' + state.query + '」の検索結果' : (titles[state.category] || 'すべてのイベント');
 
   if (!list.length){
     grid.innerHTML = '<div class="empty"><div class="big">' + ic('search') + '</div><h3>該当するイベントがありません</h3><p>キーワードを変更するか、フィルターをクリアしてください。</p></div>';
@@ -1787,18 +1844,19 @@ function openEvent(id){
 function renderEventModal(){
   const e = state.currentEvent;
   const meta = CATEGORY_META[e.category];
+  const isTransfer = e.transferInfo;
 
   const tiersHTML = state.currentTiers.map((t, i) => {
     const qty = state.selection[t.name] || 0;
     const low = t.left < 25;
     const bc = tierBadgeClass(t.name);
-    const badgeLabel = bc === 'vvip' ? 'VIP' : bc === 'vip' ? 'VIP' : '一般';
+    const badgeLabel = bc === 'vvip' ? 'VIP' : bc === 'vip' ? 'VIP' : (isTransfer ? '譲渡' : '一般');
     return `<div class="tier ${qty > 0 ? 'selected' : ''}" data-tier="${i}">
       <div class="tier-info">
         <div class="tier-name"><span class="tier-badge ${bc}">${badgeLabel}</span>${t.name}</div>
         <div class="tier-note ${low ? 'low' : ''}">${low ? '残り' + t.left + '枚' : '空席あり'}</div>
       </div>
-      <div class="tier-price" data-price="1" aria-hidden="true">${money(t.price)}</div>
+      <div class="tier-price" data-price="1" aria-hidden="true">${isTransfer ? '定価+手数料' : money(t.price)}</div>
       <div class="stepper">
         <button data-step="-1" data-idx="${i}" ${qty === 0 ? 'disabled' : ''} aria-label="減らす">&minus;</button>
         <span class="qty">${qty}</span>
@@ -1808,9 +1866,9 @@ function renderEventModal(){
   }).join('');
 
   const sellersHTML = e.sellers ? `<div class="sellers">
-    <h6>${ic('cart')} チケット販売サイト</h6>
-    <div class="seller-row"><span class="lbl">正規販売</span><span class="val">${e.sellers.primary.map(s => '<span class="seller-tag">' + s + '</span>').join('')}</span></div>
-    <div class="seller-row"><span class="lbl">リセール</span><span class="val">${e.sellers.secondary.map(s => '<span class="seller-tag">' + s + '</span>').join('')}</span></div>
+    <h6>${ic('cart')} ${isTransfer ? '取引条件 / Deal Terms' : 'チケット販売サイト'}</h6>
+    <div class="seller-row"><span class="lbl">${isTransfer ? '求め / Request' : '正規販売'}</span><span class="val">${e.sellers.primary.map(s => '<span class="seller-tag">' + s + '</span>').join('')}</span></div>
+    <div class="seller-row"><span class="lbl">${isTransfer ? '備考 / Notes' : 'リセール'}</span><span class="val">${e.sellers.secondary.map(s => '<span class="seller-tag">' + s + '</span>').join('')}</span></div>
   </div>` : '';
 
   $('eventModalContent').innerHTML = `
@@ -1819,25 +1877,25 @@ function renderEventModal(){
       <button class="modal-close" id="closeEventModal" aria-label="閉じる">${ic('close')}</button>
       <div class="m-info">
         <span class="m-tag">${ic(meta.icon)}${meta.label} &middot; ${e.genre}</span>
-        <h2>${e.title}</h2>
-        <div class="m-sub">${e.artist}</div>
+        <h2>${isTransfer ? (e.titleEn || e.title) : e.title}</h2>
+        <div class="m-sub">${isTransfer ? '刀剣乱舞 / Touken Ranbu Musical' : e.artist}</div>
       </div>
     </div>
     <div class="modal-body">
       <div class="meta-grid">
-        <div class="meta-item"><span class="mi">${ic('calendar')}</span><div><div class="ml">日時</div><div class="mv">${fmtDate(e.date)}<br>${e.time}</div></div></div>
-        <div class="meta-item"><span class="mi">${ic('pin')}</span><div><div class="ml">会場</div><div class="mv">${e.venue}<br>${e.city}</div></div></div>
-        <div class="meta-item"><span class="mi">${ic('seats')}</span><div><div class="ml">空席状況</div><div class="mv">${state.currentTiers.reduce((s,t)=>s+t.left,0)}席<br>${state.currentTiers.length}種類</div></div></div>
+        <div class="meta-item"><span class="mi">${ic('calendar')}</span><div><div class="ml">日時 / Dates</div><div class="mv">${isTransfer ? 'Dec 17 — Kanagawa<br>Jan 31 — Tokyo' : fmtDate(e.date)}<br>${isTransfer ? '昼夜 / Day & Night' : e.time}</div></div></div>
+        <div class="meta-item"><span class="mi">${ic('pin')}</span><div><div class="ml">会場 / Venue</div><div class="mv">${isTransfer ? '神奈川 / 東京<br>Kanagawa / Tokyo' : e.venue}<br>${isTransfer ? '' : e.city}</div></div></div>
+        <div class="meta-item"><span class="mi">${ic('seats')}</span><div><div class="ml">${isTransfer ? '枚数 / Tickets' : '空席状況'}</div><div class="mv">${isTransfer ? '各1枚 / 1 each' : state.currentTiers.reduce((s,t)=>s+t.left,0) + '席'}<br>${isTransfer ? '4 performances' : state.currentTiers.length + '種類'}</div></div></div>
       </div>
-      <p class="desc">${e.desc}</p>
+      <p class="desc" style="${isTransfer ? 'white-space:pre-line;' : ''}">${e.desc.replace(/\n/g,'<br>')}</p>
       ${sellersHTML}
-      <div class="section-title">チケットを選択</div>
+      ${isTransfer ? '' : '<div class="section-title">チケットを選択</div>'}
       <div id="tierList">${tiersHTML}</div>
       <div class="live-total">
         <div>
-          <div class="lt-label">選択中の合計</div>
-          <div class="lt-value" id="liveTotal">¥0</div>
-          <div class="lt-sub" id="liveQty">未選択</div>
+          <div class="lt-label">${isTransfer ? '条件 / Terms' : '選択中の合計'}</div>
+          <div class="lt-value" id="liveTotal">${isTransfer ? '定価+手数料' : '¥0'}</div>
+          <div class="lt-sub" id="liveQty">${isTransfer ? '各1枚 / 1 each' : '未選択'}</div>
         </div>
         <div style="text-align:right">
           <div class="lt-label">バスケット内</div>
@@ -1848,32 +1906,55 @@ function renderEventModal(){
     </div>
     <div class="modal-footer">
       <div class="total-box">
-        <div class="tl">選択中</div>
-        <div class="tv" id="modalTotal">¥0</div>
-        <div class="tn" id="modalQty">未選択</div>
+        <div class="tl">${isTransfer ? '希望枚数 / Qty' : '選択中'}</div>
+        <div class="tv" id="modalTotal">${isTransfer ? '各1枚' : '¥0'}</div>
+        <div class="tn" id="modalQty">${isTransfer ? '1 each' : '未選択'}</div>
       </div>
       <div class="footer-actions">
-        <button class="btn-ghost" id="addToCartBtn" disabled>${ic('cart')}バスケットに追加</button>
-        <button class="btn-buy" id="addViewBtn" disabled>${ic('eye')}追加して開く</button>
+        ${isTransfer
+          ? '<button class="btn-buy" id="dmTransferBtn" style="background:linear-gradient(135deg,#7c3aed,#c026d3);">' + ic('send') + 'DMで問い合わせる / DM to Inquire</button>'
+          : '<button class="btn-ghost" id="addToCartBtn" disabled>' + ic('cart') + 'バスケットに追加</button>'
+            + '<button class="btn-buy" id="addViewBtn" disabled>' + ic('eye') + '追加して開く</button>'
+        }
       </div>
     </div>`;
 
-  $('tierList').addEventListener('click', ev => {
-    const btn = ev.target.closest('button[data-step]');
-    if (!btn) return;
-    const idx = +btn.dataset.idx;
-    const delta = +btn.dataset.step;
-    const tier = state.currentTiers[idx];
-    const current = state.selection[tier.name] || 0;
-    const next = Math.max(0, Math.min(8, current + delta));
-    if (next === current) return;
-    state.selection[tier.name] = next;
-    refreshModalTotals();
-  });
+  if (!isTransfer) {
+    $('tierList').addEventListener('click', ev => {
+      const btn = ev.target.closest('button[data-step]');
+      if (!btn) return;
+      const idx = +btn.dataset.idx;
+      const delta = +btn.dataset.step;
+      const tier = state.currentTiers[idx];
+      const current = state.selection[tier.name] || 0;
+      const next = Math.max(0, Math.min(8, current + delta));
+      if (next === current) return;
+      state.selection[tier.name] = next;
+      refreshModalTotals();
+    });
+
+    $('addToCartBtn').addEventListener('click', () => commitSelection(false));
+    $('addViewBtn').addEventListener('click', () => commitSelection(true));
+  } else {
+    const dmBtn = $('dmTransferBtn');
+    if (dmBtn) {
+      dmBtn.addEventListener('click', () => {
+        const msg = '【譲渡】ミュージカル 刀剣乱舞 ～真剣乱舞祭2026～\n\n[Transfer] Musical Touken Ranbu ～Shinken Ranbu Sai 2026～\n\n【譲】12月17日 神奈川 昼夜 各1枚 / 1月31日 東京 昼夜 各1枚\n[Offering] Dec 17 Kanagawa (Day & Night) / Jan 31 Tokyo (Day & Night) — 1 ticket each.\n\n【求】定価+手数料（郵送の場合は送料）\n[Request] Face value + handling fees (+ shipping if mailed).\n\nお手数ですがDMにてご連絡ください🙇‍♂️\nIf interested, please like and DM.';
+        copyText(msg);
+        toast('DM用のメッセージをコピーしました / DM message copied', 'send', 'ok');
+        setTimeout(() => window.open(TG_URL, '_blank', 'noopener,noreferrer'), 400);
+      });
+    }
+
+    $('tierList').addEventListener('click', ev => {
+      const btn = ev.target.closest('button[data-step]');
+      if (!btn) return;
+      ev.preventDefault();
+      toast('譲渡チケットはDMにてお問い合わせください / Please DM for transfer', 'send', 'warn');
+    });
+  }
 
   $('closeEventModal').addEventListener('click', closeEventModal);
-  $('addToCartBtn').addEventListener('click', () => commitSelection(false));
-  $('addViewBtn').addEventListener('click', () => commitSelection(true));
 }
 
 function currentSelectionTiers(){
@@ -1904,8 +1985,8 @@ function refreshModalTotals(){
   const cq = cartQty();
   $('liveBasketQty').textContent = cq + '枚';
 
-  $('addToCartBtn').disabled = qty === 0;
-  $('addViewBtn').disabled = qty === 0;
+  if ($('addToCartBtn')) $('addToCartBtn').disabled = qty === 0;
+  if ($('addViewBtn')) $('addViewBtn').disabled = qty === 0;
 }
 
 function closeEventModal(){
@@ -2038,6 +2119,10 @@ $('eventGrid').addEventListener('click', ev => {
     ev.stopPropagation();
     const e = EVENTS.find(x => x.id === +add.dataset.add);
     if (!e) return;
+    if (e.transferInfo) {
+      openEvent(e.id);
+      return;
+    }
     const base = tiersFor(e)[0];
     addToBasket(e, [{ name:base.name, price:base.price, qty:1 }]);
     renderCart();
