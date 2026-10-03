@@ -80,9 +80,7 @@
   .skip-link{position:absolute;top:-100px;left:var(--s-4);z-index:9999;background:var(--brand);color:#fff;padding:var(--s-3) var(--s-5);border-radius:var(--r-sm);font-weight:600;transition:top .2s}
   .skip-link:focus{top:var(--s-4)}
 
-  /* ============================================================
-     HEADER
-     ============================================================ */
+  /* HEADER */
   .header{position:sticky;top:0;z-index:60;background:rgba(10,10,18,.85);backdrop-filter:saturate(180%) blur(16px);-webkit-backdrop-filter:saturate(180%) blur(16px);border-bottom:1px solid var(--border);transition:background .2s,border-color .2s}
   .header.scrolled{background:rgba(10,10,18,.96);border-color:var(--border-2)}
   .header-inner{max-width:var(--max);margin:0 auto;padding:0 var(--s-5);height:var(--header-h);display:flex;align-items:center;gap:var(--s-5)}
@@ -109,9 +107,7 @@
   .cart-count{background:rgba(255,255,255,.2);border-radius:var(--r-full);padding:0 8px;font-size:12px;font-weight:700;min-width:20px;height:20px;display:grid;place-items:center;font-variant-numeric:tabular-nums}
   .mobile-menu-btn{display:none}
 
-  /* ============================================================
-     TOP BAR
-     ============================================================ */
+  /* TOPBAR */
   .topbar{background:linear-gradient(90deg,rgba(124,58,237,.1),rgba(59,130,246,.08));border-bottom:1px solid var(--border);padding:10px var(--s-5);font-size:13px;color:var(--text-2);display:flex;align-items:center;justify-content:center;gap:var(--s-2);position:relative;text-align:center}
   .topbar strong{color:var(--text);font-weight:600}
   .topbar code{background:var(--surface-2);border:1px solid var(--border);padding:2px 8px;border-radius:var(--r-sm);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;color:var(--text)}
@@ -119,9 +115,7 @@
   .topbar-close:hover{color:var(--text);background:var(--surface-2)}
   .topbar.hidden{display:none}
 
-  /* ============================================================
-     HERO
-     ============================================================ */
+  /* HERO */
   .hero{position:relative;padding:var(--s-8) var(--s-5) var(--s-7);overflow:hidden;border-bottom:1px solid var(--border)}
   .hero::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 60% at 20% 0%, rgba(124,58,237,.18), transparent 60%),radial-gradient(ellipse 50% 50% at 90% 10%, rgba(59,130,246,.1), transparent 60%)}
   .hero-inner{position:relative;max-width:var(--max);margin:0 auto}
@@ -141,25 +135,16 @@
   .trust-item{display:flex;align-items:center;gap:var(--s-2)}
   .trust-item .ic{color:var(--success);font-size:16px}
 
-  /* ============================================================
-     SECTION
-     ============================================================ */
+  /* SECTION */
   .section{max-width:var(--max);margin:0 auto;padding:var(--s-7) var(--s-5);width:100%}
-  .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:var(--s-4);margin-bottom:var(--s-5);flex-wrap:wrap}
   .section-title{font-size:var(--fs-2xl);font-weight:700;letter-spacing:-.02em;line-height:1.15}
-  .section-link{font-size:var(--fs-sm);color:var(--brand);font-weight:600;display:inline-flex;align-items:center;gap:6px;transition:gap .15s}
-  .section-link:hover{gap:10px}
 
-  /* ============================================================
-     NOTICE
-     ============================================================ */
+  /* NOTICE */
   .notice{display:flex;gap:var(--s-3);padding:var(--s-4);background:var(--warning-bg);border:1px solid rgba(245,158,11,.28);border-radius:var(--r-md);margin-bottom:var(--s-5);font-size:var(--fs-sm);color:var(--text-2);line-height:1.55}
   .notice .ic{color:var(--warning);font-size:18px;flex-shrink:0;margin-top:2px}
   .notice strong{color:var(--text)}
 
-  /* ============================================================
-     CATEGORIES
-     ============================================================ */
+  /* CATEGORIES */
   .cats{display:flex;gap:var(--s-2);overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding-bottom:2px}
   .cats::-webkit-scrollbar{display:none}
   .cat{display:flex;align-items:center;gap:var(--s-2);padding:9px var(--s-4);border-radius:var(--r-full);background:var(--surface);border:1px solid var(--border);font-size:var(--fs-sm);font-weight:500;color:var(--text-2);white-space:nowrap;transition:all .15s}
@@ -167,9 +152,7 @@
   .cat.active{background:var(--brand);border-color:var(--brand);color:#fff}
   .cat .ic{font-size:15px}
 
-  /* ============================================================
-     TOOLBAR
-     ============================================================ */
+  /* TOOLBAR */
   .toolbar{display:flex;align-items:center;gap:var(--s-3);margin-top:var(--s-5);flex-wrap:wrap}
   .toolbar-title{font-size:var(--fs-lg);font-weight:700;letter-spacing:-.01em}
   .toolbar-count{font-size:var(--fs-sm);color:var(--text-2)}
@@ -179,9 +162,7 @@
   .sort-select:hover{border-color:var(--border-2)}
   .sort-wrap::after{content:"";position:absolute;right:14px;top:50%;width:8px;height:8px;border-right:2px solid var(--text-3);border-bottom:2px solid var(--text-3);transform:translateY(-70%) rotate(45deg);pointer-events:none}
 
-  /* ============================================================
-     EVENT GRID
-     ============================================================ */
+  /* GRID */
   .grid{display:grid;gap:var(--s-5);margin-top:var(--s-5);grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
   .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);overflow:hidden;cursor:pointer;display:flex;flex-direction:column;transition:transform .18s cubic-bezier(.4,0,.2,1),border-color .18s,box-shadow .18s;position:relative}
   .card:hover{transform:translateY(-3px);border-color:var(--border-2);box-shadow:var(--shadow-3)}
@@ -215,8 +196,6 @@
   .btn-primary:hover{background:var(--brand-hover)}
   .btn-secondary{background:var(--surface-2);color:var(--text);border:1px solid var(--border)}
   .btn-secondary:hover{border-color:var(--border-2);background:var(--surface-3)}
-  .btn-transfer{background:var(--info);color:#fff}
-  .btn-transfer:hover{background:#2563eb}
   .btn-lg{padding:13px 20px;font-size:15px;border-radius:var(--r-md)}
   .btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
   .empty{grid-column:1/-1;text-align:center;padding:var(--s-8) var(--s-5);color:var(--text-2)}
@@ -224,9 +203,7 @@
   .empty h3{color:var(--text);font-size:var(--fs-lg);margin-bottom:var(--s-2)}
   .empty p{font-size:var(--fs-sm)}
 
-  /* ============================================================
-     MODAL
-     ============================================================ */
+  /* MODAL */
   .modal-wrap{position:fixed;inset:0;z-index:110;display:grid;place-items:center;padding:var(--s-5);opacity:0;pointer-events:none;transition:opacity .2s}
   .modal-wrap.open{opacity:1;pointer-events:auto}
   .modal{width:100%;max-width:840px;max-height:90vh;overflow-y:auto;background:var(--surface);border:1px solid var(--border-2);border-radius:var(--r-xl);box-shadow:var(--shadow-4);display:flex;flex-direction:column;transform:translateY(8px);transition:transform .22s}
@@ -248,13 +225,6 @@
   .meta-label{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--text-3);font-weight:600;margin-bottom:2px}
   .meta-value{font-size:var(--fs-sm);color:var(--text);line-height:1.45}
   .desc{font-size:var(--fs-sm);line-height:1.7;color:var(--text-2);margin-bottom:var(--s-5);white-space:pre-line}
-  .transfer-fields{display:flex;flex-direction:column;gap:var(--s-3);margin-bottom:var(--s-5)}
-  .transfer-row{display:flex;align-items:flex-start;gap:var(--s-3);padding:var(--s-3) var(--s-4);background:var(--surface-2);border:1px solid var(--border);border-radius:var(--r-md)}
-  .transfer-row .ic{color:var(--text-3);font-size:16px;margin-top:3px}
-  .transfer-row-label{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--text-3);font-weight:600;margin-bottom:3px}
-  .transfer-row-value{font-size:var(--fs-sm);color:var(--text);line-height:1.5}
-  .transfer-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
-  .chip{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:var(--r-sm);background:var(--surface-3);border:1px solid var(--border);font-size:12px;font-weight:500;color:var(--text)}
   .seller-box{padding:var(--s-4);border-radius:var(--r-md);background:var(--info-bg);border:1px solid rgba(59,130,246,.24);margin-bottom:var(--s-5)}
   .seller-box h6{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#93c5fd;font-weight:700;margin-bottom:var(--s-3);display:flex;align-items:center;gap:6px}
   .seller-row{display:flex;gap:var(--s-3);font-size:var(--fs-sm);line-height:1.5;margin-bottom:var(--s-2)}
@@ -292,9 +262,7 @@
   .foot-total-sub{font-size:13px;color:var(--text-2);margin-top:2px}
   .foot-actions{display:flex;gap:var(--s-2);flex-wrap:wrap}
 
-  /* ============================================================
-     DRAWER
-     ============================================================ */
+  /* DRAWER */
   .backdrop{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity .22s;z-index:100}
   .backdrop.open{opacity:1;pointer-events:auto}
   .drawer{position:fixed;top:0;right:0;bottom:0;width:min(420px,100%);z-index:120;background:var(--surface);border-left:1px solid var(--border-2);display:flex;flex-direction:column;transform:translateX(102%);transition:transform .28s cubic-bezier(.4,0,.2,1)}
@@ -306,7 +274,7 @@
   .cart-item{display:flex;gap:var(--s-3);padding:var(--s-4) 0;border-bottom:1px solid var(--border)}
   .cart-item:first-child{padding-top:0}
   .cart-item:last-child{border-bottom:none}
-  .ci-art{width:52px;height:52px;border-radius:var(--r-sm);flex-shrink:0;display:grid;place-items:center;color:#fff;font-size:22px;overflow:hidden}
+  .ci-art{width:52px;height:52px;border-radius:var(--r-sm);flex-shrink:0;display:grid;place-items:center;color:#fff;font-size:22px;overflow:hidden;position:relative}
   .ci-art svg{width:100%;height:100%;display:block}
   .ci-info{flex:1;min-width:0}
   .ci-title{font-size:var(--fs-sm);font-weight:600;line-height:1.3;margin-bottom:3px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
@@ -330,9 +298,7 @@
   .btn-checkout:hover{background:var(--brand-hover)}
   .btn-checkout:disabled{opacity:.4;cursor:not-allowed}
 
-  /* ============================================================
-     STICKY BASKET
-     ============================================================ */
+  /* STICKY BASKET */
   .basket-bar{position:fixed;left:0;right:0;bottom:0;z-index:95;background:rgba(17,17,28,.98);backdrop-filter:blur(16px);border-top:1px solid var(--border-2);padding:var(--s-3) var(--s-5) calc(var(--s-3) + env(safe-area-inset-bottom));transform:translateY(110%);transition:transform .28s cubic-bezier(.4,0,.2,1);box-shadow:0 -8px 24px rgba(0,0,0,.4)}
   .basket-bar.show{transform:none}
   .basket-inner{max-width:var(--max);margin:0 auto;display:flex;align-items:center;gap:var(--s-4)}
@@ -343,9 +309,7 @@
   .basket-total{font-size:var(--fs-xl);font-weight:800;line-height:1.1;font-variant-numeric:tabular-nums}
   .basket-items{font-size:12px;color:var(--text-3);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
-  /* ============================================================
-     TOAST
-     ============================================================ */
+  /* TOAST */
   .toast-stack{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);z-index:200;display:flex;flex-direction:column;gap:var(--s-2);align-items:center;pointer-events:none;width:max-content;max-width:92vw;transition:bottom .3s}
   .toast-stack.raised{bottom:150px}
   .toast{padding:12px 18px;border-radius:var(--r-md);font-size:var(--fs-sm);font-weight:500;background:var(--surface-2);border:1px solid var(--border-2);color:var(--text);display:flex;align-items:center;gap:var(--s-2);box-shadow:var(--shadow-3);animation:toastIn .3s cubic-bezier(.4,0,.2,1)}
@@ -356,9 +320,7 @@
   .toast.out{animation:toastOut .25s forwards}
   @keyframes toastOut{to{opacity:0;transform:translateY(-8px)}}
 
-  /* ============================================================
-     FOOTER
-     ============================================================ */
+  /* FOOTER */
   .footer{margin-top:auto;background:var(--surface);border-top:1px solid var(--border);padding:var(--s-8) var(--s-5) var(--s-5)}
   .footer-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:var(--s-7)}
   .footer-brand{max-width:340px}
@@ -377,9 +339,7 @@
   .footer-bottom-links a{cursor:pointer;transition:color .15s}
   .footer-bottom-links a:hover{color:var(--text-2)}
 
-  /* ============================================================
-     MOBILE NAV
-     ============================================================ */
+  /* MOBILE NAV */
   .mobile-nav{position:fixed;inset:0;z-index:130;background:rgba(0,0,0,.6);backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:opacity .22s}
   .mobile-nav.open{opacity:1;pointer-events:auto}
   .mobile-nav-panel{position:absolute;top:0;left:0;bottom:0;width:min(320px,80%);background:var(--surface);border-right:1px solid var(--border-2);padding:var(--s-5);transform:translateX(-102%);transition:transform .28s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;gap:var(--s-2);overflow-y:auto}
@@ -390,9 +350,7 @@
   .mobile-nav-link .ic{font-size:18px;color:var(--text-3)}
   .mobile-nav-link.active .ic{color:var(--brand)}
 
-  /* ============================================================
-     RESPONSIVE
-     ============================================================ */
+  /* RESPONSIVE */
   @media (max-width:1024px){
     .main-nav{display:none}
     .mobile-menu-btn{display:grid}
@@ -782,7 +740,7 @@ const CATEGORY_META = {
 };
 
 /* =========================================================
-   POSTER ART GENERATOR — auto-generates unique event images
+   POSTER ART GENERATOR
    ========================================================= */
 const posterCache = new Map();
 
@@ -791,8 +749,6 @@ function buildArt(e, uid){
   const dark = shade(c1, -0.55);
   const light = shade(c1, 0.25);
   const meta = CATEGORY_META[e.category];
-  const isTransfer = !!e.transferInfo;
-
   const renderers = {
     neon: renderNeon,
     sakura: renderSakura,
@@ -803,7 +759,7 @@ function buildArt(e, uid){
     concert: renderConcert
   };
   const render = renderers[e.art] || renderConcert;
-  return render(e, uid, c1, c2, dark, light, meta, isTransfer);
+  return render(e, uid, c1, c2, dark, light, meta);
 }
 
 function shade(hex, amt){
@@ -856,13 +812,13 @@ function titleBlock(e, opts){
 }
 
 function artistLabel(e){
-  const label = e.transferInfo ? 'Touken Ranbu Musical' : (e.artist || '');
+  const label = e.artist || '';
   return `<text x="44" y="376" font-family="Inter,Helvetica,sans-serif"
     font-size="14" font-weight="600" letter-spacing="0.3"
     fill="rgba(255,255,255,0.85)">${escapeXml(label.slice(0, 28))}</text>`;
 }
 
-/* ───────── NEON ───────── */
+/* NEON */
 function renderNeon(e, uid, c1, c2, dark, light, meta){
   return `<svg viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
     <defs>
@@ -898,7 +854,7 @@ function renderNeon(e, uid, c1, c2, dark, light, meta){
   </svg>`;
 }
 
-/* ───────── SAKURA ───────── */
+/* SAKURA */
 function renderSakura(e, uid, c1, c2, dark, light){
   let petals = '';
   for (let i = 0; i < 18; i++){
@@ -934,7 +890,7 @@ function renderSakura(e, uid, c1, c2, dark, light){
   </svg>`;
 }
 
-/* ───────── FUJI ───────── */
+/* FUJI */
 function renderFuji(e, uid, c1, c2, dark, light){
   return `<svg viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
     <defs>
@@ -964,7 +920,7 @@ function renderFuji(e, uid, c1, c2, dark, light){
   </svg>`;
 }
 
-/* ───────── TORII ───────── */
+/* TORII */
 function renderTorii(e, uid, c1, c2, dark, light){
   return `<svg viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
     <defs>
@@ -997,7 +953,7 @@ function renderTorii(e, uid, c1, c2, dark, light){
   </svg>`;
 }
 
-/* ───────── STADIUM ───────── */
+/* STADIUM */
 function renderStadium(e, uid, c1, c2, dark, light){
   return `<svg viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
     <defs>
@@ -1035,56 +991,42 @@ function renderStadium(e, uid, c1, c2, dark, light){
   </svg>`;
 }
 
-/* ───────── TRANSFER ───────── */
-function renderTransfer(e, uid, c1, c2, dark, light){
+/* TRANSFER — styled identically to other tickets, just uses transfer theme */
+function renderTransfer(e, uid, c1, c2, dark, light, meta){
   return `<svg viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <linearGradient id="bg${uid}" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0" stop-color="#1e1b4b"/>
-        <stop offset="0.5" stop-color="${c1}"/>
-        <stop offset="1" stop-color="#0f0c29"/>
+        <stop offset="0" stop-color="${c1}"/>
+        <stop offset="0.55" stop-color="${shade(c1,-0.3)}"/>
+        <stop offset="1" stop-color="${dark}"/>
       </linearGradient>
-      <radialGradient id="halo${uid}" cx="0.5" cy="0.3" r="0.5">
-        <stop offset="0" stop-color="#c084fc" stop-opacity="0.35"/>
-        <stop offset="1" stop-color="#c084fc" stop-opacity="0"/>
+      <radialGradient id="glow${uid}" cx="0.5" cy="0.15" r="0.6">
+        <stop offset="0" stop-color="${light}" stop-opacity="0.55"/>
+        <stop offset="1" stop-color="${c1}" stop-opacity="0"/>
       </radialGradient>
     </defs>
     <rect width="400" height="400" fill="url(#bg${uid})"/>
-    <circle cx="200" cy="130" r="140" fill="url(#halo${uid})"/>
-    <g opacity="0.28" fill="#f9a8d4">
-      <circle cx="70" cy="70" r="4"/>
-      <circle cx="340" cy="90" r="5"/>
-      <circle cx="60" cy="330" r="5"/>
-      <circle cx="350" cy="340" r="4"/>
-      <circle cx="200" cy="60" r="3"/>
+    <rect width="400" height="400" fill="url(#glow${uid})"/>
+
+    <!-- Subtle decorative circles -->
+    <g opacity="0.25">
+      <circle cx="320" cy="80" r="70" fill="none" stroke="${light}" stroke-width="0.8"/>
+      <circle cx="320" cy="80" r="110" fill="none" stroke="${light}" stroke-width="0.5"/>
+      <circle cx="60" cy="320" r="90" fill="none" stroke="${light}" stroke-width="0.6"/>
     </g>
-    <text x="200" y="200" font-family="Noto Sans JP, Inter, sans-serif"
-          font-size="110" font-weight="800" fill="#ffffff" opacity="0.09"
-          text-anchor="middle">譲</text>
-    <g transform="translate(200,140)" fill="none" stroke="#e9d5ff" stroke-width="3"
-       stroke-linecap="round" stroke-linejoin="round" opacity="0.7">
-      <path d="M-50 -12 L50 -12"/>
-      <path d="M30 -22 L50 -12 L30 -2"/>
-      <path d="M50 12 L-50 12"/>
-      <path d="M-30 2 L-50 12 L-30 22"/>
+
+    <!-- Big category icon watermark -->
+    <g transform="translate(320,300) scale(2.2)" opacity="0.08"
+       fill="none" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+      ${ICON_PATHS[meta.icon] || ICON_PATHS.transfer}
     </g>
-    <g transform="translate(200,240)">
-      <rect x="-58" y="-14" width="116" height="28" rx="14"
-            fill="#ffffff" opacity="0.14"/>
-      <rect x="-58" y="-14" width="116" height="28" rx="14"
-            fill="none" stroke="#e9d5ff" stroke-width="1" opacity="0.55"/>
-      <text x="0" y="5" font-family="Inter, sans-serif" font-size="13"
-            font-weight="700" fill="#f5f3ff" text-anchor="middle"
-            letter-spacing="2.5">TRANSFER</text>
-    </g>
-    <text x="200" y="285" font-family="Inter, sans-serif" font-size="12"
-          font-weight="500" fill="rgba(255,255,255,0.65)" text-anchor="middle"
-          letter-spacing="0.5">公式譲渡 / Official Resale</text>
+
+    ${titleBlock(e, { startY: 240 })}
     ${artistLabel(e)}
   </svg>`;
 }
 
-/* ───────── CONCERT (fallback) ───────── */
+/* CONCERT fallback */
 function renderConcert(e, uid, c1, c2, dark, light, meta){
   return `<svg viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
     <defs>
@@ -1120,7 +1062,7 @@ function posterSVG(e, ctx){
 }
 
 /* =========================================================
-   EVENT DATA
+   EVENT DATA — Transfer treated same as any other ticket
    ========================================================= */
 const JP_SELLERS = {
   primary:['チケットぴあ','ローソンチケット','e+'],
@@ -1128,26 +1070,24 @@ const JP_SELLERS = {
 };
 
 const EVENTS = [
-  // ─── TRANSFER ───
+  // ─── TRANSFER — Touken Ranbu ¥10,000 (structured like any concert) ───
   { id: 900,
     title: "ミュージカル 刀剣乱舞 ～真剣乱舞祭2026～",
-    titleEn: "Musical Touken Ranbu ～Shinken Ranbu Sai 2026～",
-    artist: "刀ミュ / Toumyu",
+    artist: "刀ミュ / Touken Ranbu",
     category: "transfer", genre: "ミュージカル / Musical",
-    date: "2026-12-17", time: "昼夜 / Day & Night",
-    venue: "神奈川 / 東京", city: "神奈川・東京",
-    fromPrice: 0,
-    gradient: ["#4c1d95","#1e1b4b"],
-    icon: "transfer", art: "transfer", hot: true,
+    date: "2026-12-17", time: "18:00",
+    venue: "K-Arena Yokohama", city: "神奈川",
+    fromPrice: 10000,
+    gradient: ["#4c1d95","#7c3aed"],
+    icon: "transfer", art: "neon", hot: true,
     pricing: [
-      { name:'12月17日 昼 神奈川', price:0, left:1 },
-      { name:'12月17日 夜 神奈川', price:0, left:1 },
-      { name:'1月31日 昼 東京',    price:0, left:1 },
-      { name:'1月31日 夜 東京',    price:0, left:1 }
+      { name:'12月17日 昼 神奈川', price:10000, left:1 },
+      { name:'12月17日 夜 神奈川', price:10000, left:1 },
+      { name:'1月31日 昼 東京',    price:10000, left:1 },
+      { name:'1月31日 夜 東京',    price:10000, left:1 }
     ],
-    sellers: { primary:['定価+手数料','Face value + fees'], secondary:['郵送の場合は送料','+ shipping if mailed'] },
-    desc: "【譲】12月17日 神奈川 昼夜 各1枚 / 1月31日 東京 昼夜 各1枚\n【求】定価+手数料（郵送の場合は送料）\n\nお求めの方は「いいね」後、DMまでご連絡お願いします🙇‍♂️\n\n──────────────\n\n[Offering] Dec 17 Kanagawa (Day & Night) / Jan 31 Tokyo (Day & Night) — 1 ticket each.\n[Request] Face value + handling fees (+ shipping if mailed).\n\nPlease like and DM if interested.",
-    transferInfo: true },
+    sellers: JP_SELLERS,
+    desc: "【譲】12月17日 神奈川 昼夜 各1枚 / 1月31日 東京 昼夜 各1枚\n\n【求】定価 ¥10,000 + 手数料（郵送の場合は送料）\n\nお求めの方は「いいね」後、DMまでご連絡お願いします🙇‍♂️\n\n──────────────\n\n[Offering] Dec 17 Kanagawa (Day & Night) / Jan 31 Tokyo (Day & Night) — 1 ticket each.\n[Request] Face value ¥10,000 + handling fees (+ shipping if mailed).\n\nPlease like and DM if interested." },
 
   // ─── CONCERTS ───
   { id:601, title:"Post Malone", artist:"Post Malone", category:"concert", genre:"Hip-Hop / Pop",
@@ -1360,26 +1300,22 @@ function fallbackCopy(text){
   ta.remove();
 }
 
-/* =========================================================
-   INIT CITY FILTER
-   ========================================================= */
+/* INIT CITY FILTER */
 (function(){
   const cities = [...new Set(EVENTS.map(e => e.city).filter(Boolean))].sort();
   const sel = $('cityFilter');
   cities.forEach(c => { const o = document.createElement('option'); o.value = c; o.textContent = c; sel.appendChild(o); });
 })();
 
-/* =========================================================
-   RENDER
-   ========================================================= */
+/* RENDER */
 function visibleEvents(){
   let list = EVENTS.slice();
   if (state.category !== 'all') list = list.filter(e => e.category === state.category);
-  if (state.city !== 'all') list = list.filter(e => e.city === state.city || (e.transferInfo && (state.city === '神奈川' || state.city === '東京')));
+  if (state.city !== 'all') list = list.filter(e => e.city === state.city);
   if (state.query){
     const q = state.query;
     list = list.filter(e =>
-      (e.title + ' ' + (e.titleEn||'') + ' ' + (e.artist||'') + ' ' + e.venue + ' ' + e.city + ' ' + (e.genre||'') + ' ' + (CATEGORY_META[e.category]?.label||''))
+      (e.title + ' ' + (e.artist||'') + ' ' + e.venue + ' ' + e.city + ' ' + (e.genre||'') + ' ' + (CATEGORY_META[e.category]?.label||''))
         .toLowerCase().includes(q)
     );
   }
@@ -1394,7 +1330,6 @@ function visibleEvents(){
 
 function cardHTML(e){
   const meta = CATEGORY_META[e.category];
-  const isTransfer = !!e.transferInfo;
   const isHot = !!e.hot;
   const wished = state.wishlist.has(e.id);
   return `<article class="card" data-open="${e.id}" role="listitem" tabindex="0">
@@ -1402,29 +1337,27 @@ function cardHTML(e){
       <div class="poster-art">${posterSVG(e,'c')}</div>
       <div class="poster-overlay"></div>
       <div class="badge badge-date">
-        ${isTransfer
-          ? '<strong>譲</strong><span>TRANSFER</span>'
-          : `<strong>${dayNum(e.date)}</strong><span>${monthAbbr(e.date)}</span>`}
+        <strong>${dayNum(e.date)}</strong><span>${monthAbbr(e.date)}</span>
       </div>
       <span class="badge badge-cat">${ic(meta.icon)}${meta.label}</span>
       ${isHot ? `<span class="badge badge-hot">${ic('bolt')}注目</span>` : ''}
       <button class="wishlist ${wished?'active':''}" data-wish="${e.id}" aria-label="お気に入り" aria-pressed="${wished}">
         ${icFill('heart')}
       </button>
-      <div class="poster-label">${isTransfer ? '刀剣乱舞 / Touken Ranbu' : e.artist}</div>
+      <div class="poster-label">${e.artist}</div>
     </div>
     <div class="card-body">
       <h3 class="card-title">${e.title}</h3>
-      <p class="card-meta">${ic('pin')}<span>${isTransfer ? '神奈川 / 東京' : e.venue}</span></p>
-      <p class="card-meta">${ic('calendar')}<span>${isTransfer ? '12/17・1/31 · 昼夜' : fmtShort(e.date)+' · '+e.time}</span></p>
+      <p class="card-meta">${ic('pin')}<span>${e.venue}</span></p>
+      <p class="card-meta">${ic('calendar')}<span>${fmtShort(e.date)} · ${e.time}</span></p>
       <div class="card-foot">
         <div class="price-block">
-          <span class="price-label">${isTransfer ? '条件' : '最安'}</span>
-          <span class="price-value">${isTransfer ? '定価+' : money(e.fromPrice)}</span>
+          <span class="price-label">最安</span>
+          <span class="price-value">${money(e.fromPrice)}</span>
         </div>
-        <button class="btn ${isTransfer?'btn-transfer':'btn-primary'}" data-add="${e.id}" aria-label="${isTransfer?'DMで問い合わせる':'バスケットに追加'}">
-          ${ic(isTransfer?'send':'cart')}
-          <span>${isTransfer?'DMで問合せ':'追加'}</span>
+        <button class="btn btn-primary" data-add="${e.id}" aria-label="バスケットに追加">
+          ${ic('cart')}
+          <span>追加</span>
         </button>
       </div>
     </div>
@@ -1445,9 +1378,7 @@ function renderEvents(){
   grid.innerHTML = list.map(cardHTML).join('');
 }
 
-/* =========================================================
-   FILTERS
-   ========================================================= */
+/* FILTERS */
 function setCategory(cat){
   state.category = cat;
   document.querySelectorAll('#catStrip .cat').forEach(b => b.classList.toggle('active', b.dataset.cat === cat));
@@ -1460,9 +1391,7 @@ document.querySelectorAll('#mainNav .nav-link').forEach(b => b.addEventListener(
 document.querySelectorAll('.mobile-nav-link').forEach(b => b.addEventListener('click', () => { setCategory(b.dataset.cat); closeMobileNav(); }));
 document.querySelectorAll('.footer-col a[data-cat]').forEach(a => a.addEventListener('click', () => { setCategory(a.dataset.cat); window.scrollTo({ top: 400, behavior:'smooth' }); }));
 
-/* =========================================================
-   SEARCH
-   ========================================================= */
+/* SEARCH */
 let searchTimer;
 $('headerSearch').addEventListener('input', e => {
   const v = e.target.value.trim().toLowerCase();
@@ -1480,9 +1409,7 @@ $('heroSearchForm').addEventListener('submit', e => {
 $('cityFilter').addEventListener('change', e => { state.city = e.target.value; renderEvents(); });
 $('sortSelect').addEventListener('change', e => { state.sort = e.target.value; renderEvents(); });
 
-/* =========================================================
-   TOPBAR + HEADER SCROLL + MOBILE NAV
-   ========================================================= */
+/* TOPBAR / MOBILE NAV / SCROLL */
 $('topbarClose').addEventListener('click', () => $('topbar').classList.add('hidden'));
 function openMobileNav(){ $('mobileNav').classList.add('open'); document.body.style.overflow = 'hidden'; }
 function closeMobileNav(){ $('mobileNav').classList.remove('open'); if (!$('eventModal').classList.contains('open') && !$('cartDrawer').classList.contains('open')) document.body.style.overflow=''; }
@@ -1491,9 +1418,7 @@ $('mobileNavClose').addEventListener('click', closeMobileNav);
 $('mobileNav').addEventListener('click', e => { if (e.target === $('mobileNav')) closeMobileNav(); });
 window.addEventListener('scroll', () => $('header').classList.toggle('scrolled', window.scrollY > 10), { passive:true });
 
-/* =========================================================
-   EVENT MODAL
-   ========================================================= */
+/* EVENT MODAL */
 function openEvent(id){
   const e = EVENTS.find(x => x.id === id);
   if (!e) return;
@@ -1509,19 +1434,18 @@ function openEvent(id){
 function renderEventModal(){
   const e = state.currentEvent;
   const meta = CATEGORY_META[e.category];
-  const isTransfer = !!e.transferInfo;
 
   const tiersHTML = state.currentTiers.map((t,i) => {
     const qty = state.selection[t.name] || 0;
     const low = t.left < 25;
     const bc = tierBadgeClass(t.name);
-    const badgeLabel = bc === 'vvip' ? 'VIP' : bc === 'vip' ? 'VIP' : (isTransfer ? '譲渡' : '一般');
+    const badgeLabel = bc === 'vvip' ? 'VIP' : bc === 'vip' ? 'VIP' : '一般';
     return `<div class="tier ${qty>0?'selected':''}" data-tier="${i}">
       <div class="tier-info">
         <div class="tier-name"><span class="tier-badge ${bc}">${badgeLabel}</span>${t.name}</div>
         <div class="tier-note ${low?'low':''}">${low ? '残り'+t.left+'枚' : '空席あり'}</div>
       </div>
-      <div class="tier-price">${isTransfer ? '定価+' : money(t.price)}</div>
+      <div class="tier-price">${money(t.price)}</div>
       <div class="stepper">
         <button data-step="-1" data-idx="${i}" ${qty===0?'disabled':''} aria-label="減らす">−</button>
         <span class="qty">${qty}</span>
@@ -1530,48 +1454,11 @@ function renderEventModal(){
     </div>`;
   }).join('');
 
-  const transferFields = isTransfer ? `
-    <div class="transfer-fields">
-      <div class="transfer-row">
-        <span>${ic('calendar')}</span>
-        <div style="flex:1">
-          <div class="transfer-row-label">公演 / Performances</div>
-          <div class="transfer-chips">
-            <span class="chip">12/17 神奈川 昼</span>
-            <span class="chip">12/17 神奈川 夜</span>
-            <span class="chip">1/31 東京 昼</span>
-            <span class="chip">1/31 東京 夜</span>
-          </div>
-        </div>
-      </div>
-      <div class="transfer-row">
-        <span>${ic('seats')}</span>
-        <div style="flex:1">
-          <div class="transfer-row-label">チケット / Ticket</div>
-          <div class="transfer-row-value">各公演 1枚ずつ（合計4枚）</div>
-        </div>
-      </div>
-      <div class="transfer-row">
-        <span>${ic('bolt')}</span>
-        <div style="flex:1">
-          <div class="transfer-row-label">条件 / Request</div>
-          <div class="transfer-row-value">定価 + 手数料（郵送の場合は送料別途）</div>
-        </div>
-      </div>
-      <div class="transfer-row">
-        <span>${ic('send')}</span>
-        <div style="flex:1">
-          <div class="transfer-row-label">連絡 / Contact</div>
-          <div class="transfer-row-value">「いいね」後に DM にてご連絡ください</div>
-        </div>
-      </div>
-    </div>` : '';
-
   const sellerBox = e.sellers ? `
     <div class="seller-box">
-      <h6>${ic('cart')} ${isTransfer ? '取引情報 / Deal' : '販売サイト / Sellers'}</h6>
-      <div class="seller-row"><span class="lbl">${isTransfer?'求め':'正規'}</span><span class="val">${e.sellers.primary.map(s=>`<span class="seller-tag">${s}</span>`).join('')}</span></div>
-      <div class="seller-row"><span class="lbl">${isTransfer?'備考':'リセール'}</span><span class="val">${e.sellers.secondary.map(s=>`<span class="seller-tag">${s}</span>`).join('')}</span></div>
+      <h6>${ic('cart')} 販売サイト / Sellers</h6>
+      <div class="seller-row"><span class="lbl">正規</span><span class="val">${e.sellers.primary.map(s=>`<span class="seller-tag">${s}</span>`).join('')}</span></div>
+      <div class="seller-row"><span class="lbl">リセール</span><span class="val">${e.sellers.secondary.map(s=>`<span class="seller-tag">${s}</span>`).join('')}</span></div>
     </div>` : '';
 
   $('eventModalContent').innerHTML = `
@@ -1580,26 +1467,25 @@ function renderEventModal(){
       <button class="modal-close" id="closeEventModal" aria-label="閉じる">${ic('close')}</button>
       <div class="modal-hero-info">
         <span class="modal-tag">${ic(meta.icon)} ${meta.label} · ${e.genre}</span>
-        <h2 id="modalTitle">${isTransfer ? (e.titleEn || e.title) : e.title}</h2>
-        <div class="modal-hero-sub">${isTransfer ? '刀剣乱舞 / Touken Ranbu Musical' : e.artist}</div>
+        <h2 id="modalTitle">${e.title}</h2>
+        <div class="modal-hero-sub">${e.artist}</div>
       </div>
     </div>
     <div class="modal-body">
       <div class="meta-grid">
-        <div class="meta-item">${ic('calendar')}<div><div class="meta-label">日時 / When</div><div class="meta-value">${isTransfer ? '12月17日 – 1月31日' : fmtDate(e.date)}<br>${isTransfer ? '昼夜 / Day & Night' : e.time}</div></div></div>
-        <div class="meta-item">${ic('pin')}<div><div class="meta-label">会場 / Venue</div><div class="meta-value">${isTransfer ? '神奈川 / 東京' : e.venue}<br>${isTransfer ? '' : e.city}</div></div></div>
-        <div class="meta-item">${ic('seats')}<div><div class="meta-label">${isTransfer ? '枚数 / Qty' : '空席 / Availability'}</div><div class="meta-value">${isTransfer ? '各1枚 (4公演)' : state.currentTiers.reduce((s,t)=>s+t.left,0) + '席'}</div></div></div>
+        <div class="meta-item">${ic('calendar')}<div><div class="meta-label">日時 / When</div><div class="meta-value">${fmtDate(e.date)}<br>${e.time}</div></div></div>
+        <div class="meta-item">${ic('pin')}<div><div class="meta-label">会場 / Venue</div><div class="meta-value">${e.venue}<br>${e.city}</div></div></div>
+        <div class="meta-item">${ic('seats')}<div><div class="meta-label">空席 / Availability</div><div class="meta-value">${state.currentTiers.reduce((s,t)=>s+t.left,0)}席</div></div></div>
       </div>
-      ${isTransfer ? transferFields : ''}
       <p class="desc">${e.desc.replace(/\n/g,'<br>')}</p>
       ${sellerBox}
-      ${isTransfer ? '' : '<div class="section-label">チケットを選択</div>'}
+      <div class="section-label">チケットを選択</div>
       <div class="tier-list" id="tierList">${tiersHTML}</div>
       <div class="summary-box">
         <div>
-          <div class="summary-label">${isTransfer ? '条件 / Terms' : '選択中 / Selected'}</div>
-          <div class="summary-value" id="liveTotal">${isTransfer ? '定価+手数料' : '¥0'}</div>
-          <div class="summary-sub" id="liveQty">${isTransfer ? '各1枚 / 1 each' : '未選択'}</div>
+          <div class="summary-label">選択中 / Selected</div>
+          <div class="summary-value" id="liveTotal">¥0</div>
+          <div class="summary-sub" id="liveQty">未選択</div>
         </div>
         <div style="text-align:right">
           <div class="summary-label">バスケット内</div>
@@ -1610,48 +1496,30 @@ function renderEventModal(){
     </div>
     <div class="modal-foot">
       <div>
-        <div class="foot-total-label">${isTransfer ? '希望枚数' : '合計'}</div>
-        <div class="foot-total-value" id="modalTotal">${isTransfer ? '各1枚' : '¥0'}</div>
-        <div class="foot-total-sub" id="modalQty">${isTransfer ? '1 each' : '未選択'}</div>
+        <div class="foot-total-label">合計</div>
+        <div class="foot-total-value" id="modalTotal">¥0</div>
+        <div class="foot-total-sub" id="modalQty">未選択</div>
       </div>
       <div class="foot-actions">
-        ${isTransfer
-          ? `<button class="btn btn-transfer btn-lg" id="dmTransferBtn">${ic('send')} DMで問い合わせる</button>`
-          : `<button class="btn btn-secondary btn-lg" id="addToCartBtn" disabled>${ic('cart')} バスケットに追加</button>
-             <button class="btn btn-primary btn-lg" id="addViewBtn" disabled>${ic('eye')} 追加して開く</button>`}
+        <button class="btn btn-secondary btn-lg" id="addToCartBtn" disabled>${ic('cart')} バスケットに追加</button>
+        <button class="btn btn-primary btn-lg" id="addViewBtn" disabled>${ic('eye')} 追加して開く</button>
       </div>
     </div>`;
 
-  if (!isTransfer) {
-    $('tierList').addEventListener('click', ev => {
-      const btn = ev.target.closest('button[data-step]');
-      if (!btn) return;
-      const idx = +btn.dataset.idx;
-      const delta = +btn.dataset.step;
-      const tier = state.currentTiers[idx];
-      const current = state.selection[tier.name] || 0;
-      const next = Math.max(0, Math.min(8, current + delta));
-      if (next === current) return;
-      state.selection[tier.name] = next;
-      refreshModalTotals();
-    });
-    $('addToCartBtn').addEventListener('click', () => commitSelection(false));
-    $('addViewBtn').addEventListener('click', () => commitSelection(true));
-  } else {
-    $('dmTransferBtn').addEventListener('click', () => {
-      const msg = '【譲渡】ミュージカル 刀剣乱舞 ～真剣乱舞祭2026～\n\n[Transfer] Musical Touken Ranbu ～Shinken Ranbu Sai 2026～\n\n【譲】12月17日 神奈川 昼夜 各1枚 / 1月31日 東京 昼夜 各1枚\n[Offering] Dec 17 Kanagawa (Day & Night) / Jan 31 Tokyo (Day & Night) — 1 ticket each.\n\n【求】定価+手数料（郵送の場合は送料）\n[Request] Face value + handling fees (+ shipping if mailed).\n\nお手数ですがDMにてご連絡ください🙇‍♂️\nPlease like and DM if interested.';
-      copyText(msg);
-      toast('DM用メッセージをコピーしました', 'send', 'ok');
-      setTimeout(() => window.open('https://t.me/Kaduskoh', '_blank', 'noopener,noreferrer'), 500);
-    });
-    $('tierList').addEventListener('click', ev => {
-      const btn = ev.target.closest('button[data-step]');
-      if (!btn) return;
-      ev.preventDefault();
-      toast('譲渡チケットはDMにてお問い合わせください', 'send', 'warn');
-    });
-  }
-
+  $('tierList').addEventListener('click', ev => {
+    const btn = ev.target.closest('button[data-step]');
+    if (!btn) return;
+    const idx = +btn.dataset.idx;
+    const delta = +btn.dataset.step;
+    const tier = state.currentTiers[idx];
+    const current = state.selection[tier.name] || 0;
+    const next = Math.max(0, Math.min(8, current + delta));
+    if (next === current) return;
+    state.selection[tier.name] = next;
+    refreshModalTotals();
+  });
+  $('addToCartBtn').addEventListener('click', () => commitSelection(false));
+  $('addViewBtn').addEventListener('click', () => commitSelection(true));
   $('closeEventModal').addEventListener('click', closeEventModal);
 }
 
@@ -1706,9 +1574,7 @@ function addToBasket(e, tiers){
   return added;
 }
 
-/* =========================================================
-   CART
-   ========================================================= */
+/* CART */
 function renderCart(){
   const qty = cartQty();
   const sub = cartSub();
@@ -1789,9 +1655,7 @@ function checkoutBasketOnTelegram(){
   setTimeout(() => window.open('https://t.me/Kaduskoh', '_blank', 'noopener,noreferrer'), 500);
 }
 
-/* =========================================================
-   DRAWER
-   ========================================================= */
+/* DRAWER */
 function openDrawer(){ $('cartDrawer').classList.add('open'); $('drawerBackdrop').classList.add('open'); document.body.style.overflow = 'hidden'; }
 function closeDrawer(){ $('cartDrawer').classList.remove('open'); $('drawerBackdrop').classList.remove('open'); if (!$('eventModal').classList.contains('open') && !$('mobileNav').classList.contains('open')) document.body.style.overflow = ''; }
 $('cartBtn').addEventListener('click', openDrawer);
@@ -1799,9 +1663,7 @@ $('closeDrawer').addEventListener('click', closeDrawer);
 $('drawerBackdrop').addEventListener('click', closeDrawer);
 $('basketOpenBtn').addEventListener('click', openDrawer);
 
-/* =========================================================
-   GLOBAL CLICKS
-   ========================================================= */
+/* GRID CLICKS */
 $('eventGrid').addEventListener('click', ev => {
   if (ev.target.closest('.price-block')) return;
   const wishBtn = ev.target.closest('[data-wish]');
@@ -1818,7 +1680,6 @@ $('eventGrid').addEventListener('click', ev => {
     ev.stopPropagation();
     const e = EVENTS.find(x => x.id === +add.dataset.add);
     if (!e) return;
-    if (e.transferInfo){ openEvent(e.id); return; }
     const base = tiersFor(e)[0];
     if (!base) return;
     addToBasket(e, [{ name:base.name, price:base.price, qty:1 }]);
@@ -1849,9 +1710,7 @@ document.addEventListener('keydown', ev => {
   else if ($('mobileNav').classList.contains('open')) closeMobileNav();
 });
 
-/* =========================================================
-   INIT
-   ========================================================= */
+/* INIT */
 renderEvents();
 renderCart();
 </script>
